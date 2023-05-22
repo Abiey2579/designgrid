@@ -4,6 +4,7 @@ import Hero from "./Hero";
 import Docs from "./Docs";
 import Design from "./Design";
 import Resource from "./Resource";
+import CTA from "./CTA";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <Docs />
       <Design />
       <Resource />
+      <CTA />
     </React.Fragment>
   );
 };

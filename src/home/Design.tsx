@@ -7,7 +7,7 @@ const Design = () => {
     <div className="px-24 min-h-screen flex justify-around items-center">
       <img src={DesignImage} alt="DesignImage" />
       <div className="max-w-md">
-        <h2 className="text-dgDarkPurple text-5xl mb-6">
+        <h2 className="text-dgDarkPurple font-bold text-5xl mb-6">
           Modern Web UI Design Project
         </h2>
         <p className="text-dgDarkPurple text-base mb-6">
