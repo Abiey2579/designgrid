@@ -1,0 +1,25 @@
+.navbar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+}
+
+@media (min-width: 1024px) {
+  .navbar {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 640px) {
+  .navbar {
+    flex-direction: row;
+  }
+}
