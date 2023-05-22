@@ -17,7 +17,12 @@ const Hero = () => {
       </p>
       <div className="max-w-[700px] flex gap-5 m-auto justify-center">
         <Button name="Get Started" />
-        <Button name="Explore Resources" />
+        <a
+          href="/"
+          className="bg-dgLightPurple border border-dgDarkPurple px-10 py-4 font-normal text-dgDarkPurple rounded-full text-base"
+        >
+          Explore Resources
+        </a>
       </div>
       <div className="flex justify-evenly bg-dgPurple rounded-3xl mt-16 max-w-4xl m-auto">
         <div className="flex py-11">
