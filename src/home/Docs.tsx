@@ -1,5 +1,5 @@
 import * as React from "react";
-import DocsImage from "../assets/svgs/Docs.svg";
+import DocsImage from "../assets/svgs/DocsImage.svg";
 import Button from "../components/Button";
 
 const Docs = () => {
@@ -15,7 +15,7 @@ const Docs = () => {
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
           aliquip ex ea commodo consequat.
         </p>
-        <Button name="Explore Documentation" />
+        <Button name="Explore Documentation" className="block w-fit" />
       </div>
       <img src={DocsImage} alt="DocsImage" />
     </div>
