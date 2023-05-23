@@ -12,7 +12,7 @@ const Sidebar = () => {
     { title: "Tools and Platform", active: false },
   ];
   return (
-    <div className="max-w-[340px] border-r border-slate-300 h-screen pl-10 pr-5">
+    <div className="max-w-[340px] border-r border-slate-300 min-h-screen max-h-full pl-10 pr-5">
       <div className="flex items-center justify-between py-7 mb-10">
         <h1 className="text-dgDarkPurple text-xl font-bold">Documentation</h1>
         <button className="w-20 py-2 bg-dgPurple outline-0 text-dgLightPurple rounded-full flex items-center justify-center">

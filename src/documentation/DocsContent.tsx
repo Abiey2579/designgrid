@@ -3,7 +3,7 @@ import DocsDirectionalButton from "../components/DocsDirectionalButton";
 
 const DocsContent = () => {
   return (
-    <div className="pr-20 pl-16 mt-16">
+    <div className="pr-20 pl-16 mt-16 overflow-y-scroll">
       <div className="mb-6">
         <h2 className="mb-3 text-2xl font-bold text-dgDarkPurple">
           👋 Hi there, Yahaya
