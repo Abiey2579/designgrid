@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <SignUp />
+    <LogIn />
   </React.StrictMode>
 );
 
