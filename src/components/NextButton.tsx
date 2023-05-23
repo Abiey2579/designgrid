@@ -1,7 +1,7 @@
 import * as React from "react";
 import AngleDoubleRight from "../assets/svgs/angle-dobule-right.svg";
 
-const DocsDirectionalButton = (props: {
+const NextButton = (props: {
   name: string;
   className?: string;
   outlined?: boolean;
@@ -19,4 +19,4 @@ const DocsDirectionalButton = (props: {
   );
 };
 
-export default DocsDirectionalButton;
+export default NextButton;

@@ -1,17 +1,17 @@
 import * as React from "react";
 import Sidebar from "./Sidebar";
 import Topnav from "../components/Topnav";
-import DocsContent from "./DocsContent";
+import ResourceContent from "./ResourceContent";
 import SmartScroll from "./SmartScroll";
 
-const Documentation = () => {
+const Resource = () => {
   return (
     <div className="flex">
       <Sidebar />
       <div className="w-full">
         <Topnav />
-        <div className="flex">
-          <DocsContent />
+        <div className="flex overflow-hidden">
+          <ResourceContent />
           <SmartScroll />
         </div>
       </div>
@@ -19,4 +19,4 @@ const Documentation = () => {
   );
 };
 
-export default Documentation;
+export default Resource;

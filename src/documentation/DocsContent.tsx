@@ -1,5 +1,5 @@
 import * as React from "react";
-import DocsDirectionalButton from "../components/DocsDirectionalButton";
+import NextButton from "../components/NextButton";
 
 const DocsContent = () => {
   return (
@@ -44,7 +44,7 @@ const DocsContent = () => {
         </p>
       </div>
       <div className="flex justify-end items-center">
-        <DocsDirectionalButton name="Next" />
+        <NextButton name="Next" />
       </div>
     </div>
   );
