@@ -1,7 +1,41 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import DocsDirectionalButton from "../components/DocsDirectionalButton";
+// import remarkGfm from "remark-gfm";
+// import ReactMarkdown from "react-markdown";
 
 const DocsContent = () => {
+  const [markDownBody, setMarkDownBody] = useState<string>("");
+  useEffect(() => {
+    const getReadMe = async () => {
+      try {
+        const res = await fetch(
+          `https://raw.githubusercontent.com/team-black-box/tbb-interns/test/README.md`
+        );
+
+        if (res.status === 200) {
+          const data = await res.text();
+          setMarkDownBody(data);
+        } else {
+          setMarkDownBody("");
+        }
+      } catch (error) {
+        setMarkDownBody("");
+      }
+    };
+
+    getReadMe();
+  }, []);
+  /*
+{markDownBody.length > 0 ? (
+              <ReactMarkdown
+                children={markDownBody}
+                remarkPlugins={[remarkGfm]}
+              />
+            ) : (
+              ""
+            )}
+
+  */
   return (
     <div className="pr-20 pl-16 mt-16 overflow-y-scroll">
       <div className="mb-6">
