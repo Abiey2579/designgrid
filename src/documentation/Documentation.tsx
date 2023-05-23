@@ -1,6 +1,8 @@
 import * as React from "react";
 import Sidebar from "./Sidebar";
 import Topnav from "./Topnav";
+import DocsContent from "./DocsContent";
+import SmartScroll from "./SmartScroll";
 
 const Documentation = () => {
   return (
@@ -8,6 +10,10 @@ const Documentation = () => {
       <Sidebar />
       <div className="w-full">
         <Topnav />
+        <div className="flex">
+          <DocsContent />
+          <SmartScroll />
+        </div>
       </div>
     </div>
   );
