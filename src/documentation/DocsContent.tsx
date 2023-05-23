@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import DocsDirectionalButton from "../components/DocsDirectionalButton";
-// import remarkGfm from "remark-gfm";
-// import ReactMarkdown from "react-markdown";
+import NextButton from "../components/NextButton";
 
 const DocsContent = () => {
   const [markDownBody, setMarkDownBody] = useState<string>("");
@@ -78,7 +76,7 @@ const DocsContent = () => {
         </p>
       </div>
       <div className="flex justify-end items-center">
-        <DocsDirectionalButton name="Next" />
+        <NextButton name="Next" />
       </div>
     </div>
   );
