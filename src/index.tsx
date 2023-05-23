@@ -2,18 +2,18 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-// import Home from "./home/Home";
-// import Documentation from "./documentation/Documentation";
+import Home from "./home/Home";
+import Documentation from "./documentation/Documentation";
 import Resource from "./resource/Resource";
-// import SignUp from "./authentication/SignUp";
-// import LogIn from "./authentication/LogIn";
+import SignUp from "./authentication/SignUp";
+import LogIn from "./authentication/LogIn";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <Resource />
+    <SignUp />
   </React.StrictMode>
 );
 
