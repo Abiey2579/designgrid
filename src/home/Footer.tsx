@@ -11,7 +11,7 @@ import Envelop from "../assets/svgs/envelope.svg";
 
 const Footer = () => {
   return (
-    <footer className="px-24 bg-dgDarkPurple py-20 flex justify-between">
+    <footer className="lg:px-24 md:px-10 px-6 bg-dgDarkPurple py-20 flex lg:flex-row md:flex-col flex-col md:gap-10 gap-8 justify-between">
       <div>
         <h3 className="text-dgLightPurple text-3xl font-bold mb-10">
           Our Community

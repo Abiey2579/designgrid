@@ -12,13 +12,13 @@ const Home = () => {
   return (
     <React.Fragment>
       <Navbar />
-      {/* <Hero /> */}
-      {/* <Docs /> */}
-      {/* <Design /> */}
-      {/* <Resource /> */}
-      {/* <CTA /> */}
-      {/* <Footer /> */}
-      {/* <Copyright /> */}
+      <Hero />
+      <Docs />
+      <Design />
+      <Resource />
+      <CTA />
+      <Footer />
+      <Copyright />
     </React.Fragment>
   );
 };

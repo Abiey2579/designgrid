@@ -2,8 +2,8 @@ import * as React from "react";
 
 const CTA = () => {
   return (
-    <div className="px-24 bg-dgMagenta py-12 text-center">
-      <h2 className="text-dgLightPurple text-5xl font-bold mb-6 max-w-2xl m-auto">
+    <div className="lg:px-24 md:px-10 px-6 bg-dgMagenta py-12 text-center">
+      <h2 className="text-dgLightPurple lg:text-5xl md:text-4xl text-3xl font-bold mb-6 max-w-2xl m-auto">
         Join <span className="text-dgDarkPurple">DesignGrid</span> Community
       </h2>
       <p className="text-dgLightPurple text-base mb-6 max-w-2xl m-auto">
