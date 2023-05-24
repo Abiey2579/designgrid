@@ -24,7 +24,7 @@ const Hero = () => {
           Explore Resources
         </a>
       </div>
-      <div className="flex lg:flex-row md:flex-row flex-col items-center justify-evenly bg-dgPurple rounded-3xl mt-16 max-w-4xl m-auto">
+      {/* <div className="flex lg:flex-row md:flex-row flex-col items-center justify-evenly bg-dgPurple rounded-3xl mt-16 max-w-4xl m-auto">
         <div className="flex py-11">
           <img src={Persons} alt="Persons" className="mr-4" />
           <div className="text-left">
@@ -46,7 +46,7 @@ const Hero = () => {
             <p className="text-dgWhite text-base w-fit">Learning resources</p>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

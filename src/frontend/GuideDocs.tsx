@@ -1,39 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import NextButton from "../components/NextButton";
 
-const DocsContent = () => {
-  const [markDownBody, setMarkDownBody] = useState<string>("");
-  useEffect(() => {
-    const getReadMe = async () => {
-      try {
-        const res = await fetch(
-          `https://raw.githubusercontent.com/team-black-box/tbb-interns/test/README.md`
-        );
-
-        if (res.status === 200) {
-          const data = await res.text();
-          setMarkDownBody(data);
-        } else {
-          setMarkDownBody("");
-        }
-      } catch (error) {
-        setMarkDownBody("");
-      }
-    };
-
-    getReadMe();
-  }, []);
-  /*
-{markDownBody.length > 0 ? (
-              <ReactMarkdown
-                children={markDownBody}
-                remarkPlugins={[remarkGfm]}
-              />
-            ) : (
-              ""
-            )}
-
-  */
+const GuideDocs = () => {
   return (
     <div className="pr-20 pl-16 mt-16 overflow-y-scroll">
       <div className="mb-6">
@@ -82,4 +50,4 @@ const DocsContent = () => {
   );
 };
 
-export default DocsContent;
+export default GuideDocs;

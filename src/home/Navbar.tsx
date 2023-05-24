@@ -7,9 +7,8 @@ const Navbar = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const navitems = [
     { name: "Home", href: "/" },
-    { name: "Docs", href: "/" },
-    { name: "Designs", href: "/" },
-    { name: "Resources", href: "/" },
+    { name: "Frontend Guide", href: "/" },
+    { name: "Blog", href: "/" },
   ];
 
   const handleShowMenu = () => {
@@ -17,7 +16,7 @@ const Navbar = () => {
     if (!showMenu) setShowMenu(true);
   };
   return (
-    <nav className="lg:px-24 md:px-10 px-6">
+    <nav className="lg:px-24 md:px-10 px-6 relative">
       <div className="h-20 flex flex-row justify-between items-center w-full">
         <h4 className="text-xl font-bold text-dgDarkPurple">DesignGrid</h4>
         <ul className="lg:flex md:hidden hidden gap-16">

@@ -3,8 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import Home from "./home/Home";
-import Documentation from "./documentation/Documentation";
-import Resource from "./resource/Resource";
+import FrontendGuide from "./frontend/FrontendGuide";
 import SignUp from "./authentication/SignUp";
 import LogIn from "./authentication/LogIn";
 
@@ -13,7 +12,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <Home />
+    <FrontendGuide />
   </React.StrictMode>
 );
 

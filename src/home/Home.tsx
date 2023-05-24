@@ -1,9 +1,9 @@
 import * as React from "react";
 import Navbar from "./Navbar";
 import Hero from "./Hero";
-import Docs from "./Docs";
-import Design from "./Design";
-import Resource from "./Resource";
+import FrontenGuide from "./FrontenGuide";
+import Blog from "./Blog";
+import OurFounder from "./OurFounder";
 import CTA from "./CTA";
 import Footer from "./Footer";
 import Copyright from "./Copyright";
@@ -13,9 +13,9 @@ const Home = () => {
     <React.Fragment>
       <Navbar />
       <Hero />
-      <Docs />
-      <Design />
-      <Resource />
+      <FrontenGuide />
+      <Blog />
+      <OurFounder />
       <CTA />
       <Footer />
       <Copyright />
