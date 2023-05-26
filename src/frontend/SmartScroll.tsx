@@ -7,18 +7,16 @@ const SmartScroll = () => {
     { title: "Our Community", active: false },
   ];
   return (
-    <div className="max-w-max min-w-[280px] h-screen">
-      <h1 className="text-xl font-bold text-dgDarkPurple mt-20 mb-7">
-        Smart Scroll
-      </h1>
+    <div className="SmartScroll w-1/4 max-h-[89vh] overflow-y-scroll bg-dgLightPurple px-8">
+      <h1 className="text-xl font-bold text-dgDarkPurple mb-7">Smart Scroll</h1>
       <div>
         {tableOfContent.map((item) => (
           <a
             href="/"
             className={`rounded mb-5 block w-full  ${
               item.active
-                ? "text-xl font-bold text-dgDarkPurple"
-                : "text-based text-dgDarkPurple"
+                ? "text-lg font-bold text-dgDarkPurple"
+                : "text-sm text-dgDarkPurple"
             }`}
           >
             {item.title}

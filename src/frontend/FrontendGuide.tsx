@@ -8,7 +8,7 @@ const FrontendGuide = () => {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="w-full">
+      <div className="flex-1 max-h-screen ">
         <Topnav />
         <div className="flex">
           <GuideDocs />
