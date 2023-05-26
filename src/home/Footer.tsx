@@ -34,19 +34,19 @@ const Footer = () => {
         <div className="flex mb-8">
           <img src={AngleRight} alt="AngleRight" className="mr-8" />
           <a href="/" className="text-dgLightPurple text-base">
-            Design Documentation
-          </a>
-        </div>
-        <div className="flex mb-8">
-          <img src={AngleRight} alt="AngleRight" className="mr-8" />
-          <a href="/" className="text-dgLightPurple text-base">
-            Design Projects
-          </a>
-        </div>
-        <div className="flex mb-8">
-          <img src={AngleRight} alt="AngleRight" className="mr-8" />
-          <a href="/" className="text-dgLightPurple text-base">
             Learning Resources
+          </a>
+        </div>
+        <div className="flex mb-8">
+          <img src={AngleRight} alt="AngleRight" className="mr-8" />
+          <a href="/" className="text-dgLightPurple text-base">
+            Blog
+          </a>
+        </div>
+        <div className="flex mb-8">
+          <img src={AngleRight} alt="AngleRight" className="mr-8" />
+          <a href="/" className="text-dgLightPurple text-base">
+            Newsletters
           </a>
         </div>
       </div>
