@@ -10,7 +10,7 @@ const Blog = () => {
         <h2 className="text-dgDarkPurple font-bold lg:text-5xl md:text-4xl text-3xl  mb-6">
           Impactful Blogs
         </h2>
-        <p className="text-dgDarkPurple text-base mb-6">
+        <p className="text-dgDarkPurple_Opacity text-base mb-6 leading-relaxed">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut

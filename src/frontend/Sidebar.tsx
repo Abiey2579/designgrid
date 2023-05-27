@@ -76,7 +76,7 @@ const Sidebar = (props: SidebarProps) => {
       </div>
       {props.sidebarControl && (
         <div
-          className="fixed min-h-screen min-w-screen"
+          className="fixed min-h-screen w-screen"
           style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
           onClick={() => props.handleSidebarMenu()}
         ></div>

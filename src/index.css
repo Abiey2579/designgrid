@@ -29,3 +29,14 @@ code {
   background: #f3effe;
   border-radius: 4px;
 }
+
+p,
+span,
+button,
+a {
+  font-family: "Catamaran" !important;
+}
+
+::placeholder {
+  font-family: "Catamaran" !important;
+}

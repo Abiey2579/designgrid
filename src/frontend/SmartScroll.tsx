@@ -15,7 +15,7 @@ const SmartScroll = () => {
             href="/"
             className={`rounded mb-5 block w-full  ${
               item.active
-                ? "text-lg font-bold text-dgDarkPurple"
+                ? "text-base font-bold text-dgDarkPurple"
                 : "text-sm text-dgDarkPurple"
             }`}
           >

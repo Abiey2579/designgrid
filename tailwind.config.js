@@ -10,6 +10,7 @@ module.exports = {
         dgPurple: "#7026ED",
         dgMagenta: "#E93558",
         dgDarkPurple: "#150425",
+        dgDarkPurple_Opacity: "#150425d9",
         dgFacebook: "#0981EC",
       },
     },

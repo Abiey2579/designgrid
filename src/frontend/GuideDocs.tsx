@@ -8,7 +8,7 @@ const GuideDocs = () => {
         <h2 className="mb-3 text-2xl font-bold text-dgDarkPurple">
           👋 Hi there, Yahaya
         </h2>
-        <p className="text-sm text-dgDarkPurple leading-relaxed">
+        <p className="text-base text-dgDarkPurple_Opacity leading-relaxed">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -16,10 +16,13 @@ const GuideDocs = () => {
         </p>
       </div>
       <div className="mb-6">
-        <h2 className="mb-3 text-xl font-bold text-dgDarkPurple">
+        <h2
+          id="#ourmission"
+          className="mb-3 text-xl font-bold text-dgDarkPurple"
+        >
           Our Mission
         </h2>
-        <p className="text-sm text-dgDarkPurple leading-relaxed">
+        <p className="text-base text-dgDarkPurple_Opacity leading-relaxed">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -33,7 +36,7 @@ const GuideDocs = () => {
         <h2 className="mb-3 text-xl font-bold text-dgDarkPurple">
           Our Community
         </h2>
-        <p className="text-sm text-dgDarkPurple leading-relaxed">
+        <p className="text-base text-dgDarkPurple_Opacity leading-relaxed">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -47,7 +50,7 @@ const GuideDocs = () => {
         <h2 className="mb-3 text-xl font-bold text-dgDarkPurple">
           Our Community
         </h2>
-        <p className="text-sm text-dgDarkPurple leading-relaxed">
+        <p className="text-base text-dgDarkPurple_Opacity leading-relaxed">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -61,7 +64,7 @@ const GuideDocs = () => {
         <h2 className="mb-3 text-xl font-bold text-dgDarkPurple">
           Our Community
         </h2>
-        <p className="text-sm text-dgDarkPurple leading-relaxed">
+        <p className="text-base text-dgDarkPurple_Opacity leading-relaxed">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -75,7 +78,7 @@ const GuideDocs = () => {
         <h2 className="mb-3 text-xl font-bold text-dgDarkPurple">
           Our Community
         </h2>
-        <p className="text-sm text-dgDarkPurple leading-relaxed">
+        <p className="text-base text-dgDarkPurple_Opacity leading-relaxed">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -89,7 +92,7 @@ const GuideDocs = () => {
         <h2 className="mb-3 text-xl font-bold text-dgDarkPurple">
           Our Community
         </h2>
-        <p className="text-sm text-dgDarkPurple leading-relaxed">
+        <p className="text-base text-dgDarkPurple_Opacity leading-relaxed">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -103,7 +106,7 @@ const GuideDocs = () => {
         <h2 className="mb-3 text-xl font-bold text-dgDarkPurple">
           Our Community
         </h2>
-        <p className="text-sm text-dgDarkPurple leading-relaxed">
+        <p className="text-base text-dgDarkPurple_Opacity leading-relaxed">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
