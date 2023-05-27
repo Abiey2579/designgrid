@@ -13,6 +13,7 @@ const SmartScroll = () => {
         {tableOfContent.map((item) => (
           <a
             href="/"
+            key={item.title}
             className={`rounded mb-5 block w-full  ${
               item.active
                 ? "text-base font-bold text-dgDarkPurple"

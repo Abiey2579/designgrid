@@ -19,14 +19,13 @@ code {
 .GuideDocs::-webkit-scrollbar,
 .SmartScroll::-webkit-scrollbar,
 .SidebarMenu::-webkit-scrollbar {
-  display: none;
   width: 8px;
 }
 
 .GuideDocs::-webkit-scrollbar-thumb,
 .SmartScroll::-webkit-scrollbar-thumb,
 .SidebarMenu::-webkit-scrollbar-thumb {
-  background: #f3effe;
+  background: rgb(203 213 225);
   border-radius: 4px;
 }
 

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Search from "../assets/svgs/search.svg";
+import { tableOfContent } from "../assets/data/tableOfContent";
 
 interface SidebarProps {
   sidebarControl: boolean;
@@ -7,32 +8,9 @@ interface SidebarProps {
 }
 
 const Sidebar = (props: SidebarProps) => {
-  let tableOfContent = [
-    { title: "Welcome", active: true, subMenuTitle: "" },
-    { title: "Introduction", active: false, subMenuTitle: "introduction" },
-    { title: "Prerequisities", active: false, subMenuTitle: "" },
-    { title: "Git Basics", active: false, subMenuTitle: "" },
-    { title: "HTML Fundamentals", active: false, subMenuTitle: "" },
-    { title: "CSS Fundamentals", active: false, subMenuTitle: "" },
-    { title: "Flexbox", active: false, subMenuTitle: "" },
-    { title: "JavaScript Basics", active: false, subMenuTitle: "" },
-    { title: "Conclusion", active: false, subMenuTitle: "" },
-    { title: "Flexbox", active: false, subMenuTitle: "" },
-    { title: "JavaScript Basics", active: false, subMenuTitle: "" },
-    { title: "Conclusion", active: false, subMenuTitle: "" },
-    { title: "Flexbox", active: false, subMenuTitle: "" },
-    { title: "JavaScript Basics", active: false, subMenuTitle: "" },
-    { title: "Conclusion", active: false, subMenuTitle: "" },
-    { title: "Flexbox", active: false, subMenuTitle: "" },
-    { title: "JavaScript Basics", active: false, subMenuTitle: "" },
-    { title: "Conclusion", active: false, subMenuTitle: "" },
-    { title: "Flexbox", active: false, subMenuTitle: "" },
-    { title: "JavaScript Basics", active: false, subMenuTitle: "" },
-    { title: "Conclusion", active: false, subMenuTitle: "" },
-  ];
   const [searchQuery, setSearchQuery] = useState<string>("");
   const filteredHackathons = tableOfContent.filter((item) =>
-    item.title.toLowerCase().includes(searchQuery.toLowerCase())
+    item.header.toLowerCase().includes(searchQuery.toLowerCase())
   );
   const d = props.sidebarControl
     ? "fixed z-10 h-screen"
@@ -61,16 +39,27 @@ const Sidebar = (props: SidebarProps) => {
         </div>
         <div className="SidebarMenu max-h-[75vh] overflow-y-scroll">
           {filteredHackathons.map((item) => (
-            <a
-              href="/"
-              className={`pl-3 py-3 rounded mb-1 text-sm block w-full transition-all hover:bg-dgPurple  ${
-                item.active
-                  ? "bg-dgPurple text-dgLightPurple font-semibold"
-                  : "bg-dgLightPurple text-dgDarkPurple hover:text-dgLightPurple"
-              }`}
-            >
-              {item.title}
-            </a>
+            <React.Fragment>
+              <p
+                key={item.header}
+                className="font-semibold text-gray-900 text-base my-3 py-1 border-slate-300 border-b"
+              >
+                {item.header}
+              </p>
+              {item.subContent.map((subItem) => (
+                <a
+                  href="/"
+                  key={subItem.title}
+                  className={`pl-3 py-3 rounded mb-1 text-sm block w-full transition-all hover:bg-dgPurple  ${
+                    item.active
+                      ? "bg-dgPurple text-dgLightPurple font-semibold"
+                      : "bg-dgLightPurple text-dgDarkPurple hover:text-dgLightPurple"
+                  }`}
+                >
+                  {subItem.title}
+                </a>
+              ))}
+            </React.Fragment>
           ))}
         </div>
       </div>

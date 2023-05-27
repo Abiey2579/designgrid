@@ -3,7 +3,7 @@ import NextButton from "../components/NextButton";
 
 const GuideDocs = () => {
   return (
-    <div className="GuideDocs lg:px-10 md:px-7 px-5 py-5 flex-1 bg-dgLightPurple max-h-[89vh] overflow-y-scroll">
+    <div className="GuideDocs lg:px-10 md:px-7 px-5 py-5 flex-1 bg-dgLightPurple max-h-[88.4vh] overflow-y-scroll">
       <div className="mb-6">
         <h2 className="mb-3 text-2xl font-bold text-dgDarkPurple">
           👋 Hi there, Yahaya
