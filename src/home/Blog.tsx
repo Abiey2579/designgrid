@@ -8,15 +8,15 @@ const Blog = () => {
       <img src={BlogImage} alt="BlogImage" />
       <div className="max-w-md">
         <h2 className="text-dgDarkPurple font-bold lg:text-5xl md:text-4xl text-3xl  mb-6">
-          Impactful Blogs
+          Impactful Articles
         </h2>
         <p className="text-dgDarkPurple_Opacity text-base mb-6 leading-relaxed">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
+          We fuel your frontend development journey with inspiration and
+          insights. Delve into a curated collection of thought-provoking
+          articles designed to empower and drive positive change in the world of
+          web development.
         </p>
-        <Button name="Explore Blog" className="block w-fit" />
+        <Button name="Explore Articles" className="block w-fit" href="/blog" />
       </div>
     </div>
   );

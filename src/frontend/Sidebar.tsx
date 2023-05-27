@@ -21,11 +21,9 @@ const Sidebar = (props: SidebarProps) => {
         className={`min-w-[20%] max-w-[340px] max-h-screen border-r bg-dgLightPurple border-slate-300 pl-5 pr-5 ${d}`}
       >
         <div className="flex items-center justify-between py-7 mb-3">
-          <h1 className="text-dgDarkPurple text-xl font-bold">
-            Frontend Guide
-          </h1>
-          <button className="w-14 py-1 bg-dgPurple outline-0 text-dgLightPurple font-semibold rounded-full text-center text-sm">
-            v1.0
+          <h1 className="text-dgDarkPurple text-xl font-bold">Learning Path</h1>
+          <button className="w-auto px-3 py-1 bg-dgPurple outline-0 text-dgLightPurple font-semibold rounded-full text-center text-sm">
+            v1.0.23
           </button>
         </div>
         <div className="bg-dgWhite rounded flex mb-3 px-3 ">

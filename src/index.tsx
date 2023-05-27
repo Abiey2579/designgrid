@@ -2,17 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import Home from "./home/Home";
-import FrontendGuide from "./frontend/FrontendGuide";
-import SignUp from "./authentication/SignUp";
-import LogIn from "./authentication/LogIn";
+
+import DesignGrid from "./Router";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <FrontendGuide />
+    <DesignGrid />
   </React.StrictMode>
 );
 

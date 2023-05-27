@@ -1,6 +1,7 @@
 import * as React from "react";
 import OurFounderImage from "../assets/svgs/OurFounderImage.svg";
 import Button from "../components/Button";
+import { Link } from "react-router-dom";
 
 const OurFounder = () => {
   return (
@@ -10,12 +11,12 @@ const OurFounder = () => {
           Our Founder
         </h2>
         <p className="text-dgDarkPurple_Opacity text-base mb-6 leading-relaxed">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
+          Hello there! I'm <strong>Yahaya Muhammad Bello</strong>, a passionate
+          frontend developer with a mission to empower aspiring developers like
+          you. I am thrilled to welcome you to this exciting journey of frontend
+          development on our platform.
         </p>
-        <Button name="Learn More" className="block w-fit" />
+        <Button name="Learn More" className="block w-fit" href="/" />
       </div>
       <img src={OurFounderImage} alt="OurFounderImage" />
     </div>

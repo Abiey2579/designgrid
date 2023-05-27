@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import "../assets/css/Navbar.module.css";
 import Button from "../components/Button";
 import NavIcon from "../assets/svgs/nav-icon.svg";
+import { Link } from "react-router-dom";
+import { Bars3Icon } from "@heroicons/react/24/outline";
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const navitems = [
     { name: "Home", href: "/" },
-    { name: "Frontend Guide", href: "/" },
+    { name: "Learning Path", href: "/frontend" },
     { name: "Blog", href: "/" },
   ];
 
@@ -22,18 +24,20 @@ const Navbar = () => {
         <ul className="lg:flex md:hidden hidden gap-16">
           {navitems.map((item) => (
             <li key={item.name}>
-              <a href={item.href} className="text-base text-dgDarkPurple">
-                {item.name}
-              </a>
+              <Link to={item.href}>
+                <span className="text-base text-dgDarkPurple">{item.name}</span>
+              </Link>
             </li>
           ))}
         </ul>
-        <Button name="Sign Up" className="lg:flex md:hidden hidden" />
-        <img
-          src={NavIcon}
-          alt="NavIcon"
+        <Button
+          name="Sign Up"
+          className="lg:flex md:hidden hidden"
+          href="/signup"
+        />
+        <Bars3Icon
           onClick={handleShowMenu}
-          className="w-5 lg:hidden md:flex"
+          className="w-8 cursor-pointer lg:hidden md:flex"
         />
       </div>
       {showMenu && (

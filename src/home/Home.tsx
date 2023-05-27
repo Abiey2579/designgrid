@@ -1,7 +1,7 @@
 import * as React from "react";
 import Navbar from "./Navbar";
 import Hero from "./Hero";
-import FrontenGuide from "./FrontenGuide";
+import LearningPath from "./LearningPath";
 import Blog from "./Blog";
 import OurFounder from "./OurFounder";
 import CTA from "./CTA";
@@ -13,7 +13,7 @@ const Home = () => {
     <React.Fragment>
       <Navbar />
       <Hero />
-      <FrontenGuide />
+      <LearningPath />
       <Blog />
       <OurFounder />
       <CTA />
