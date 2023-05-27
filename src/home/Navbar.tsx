@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "../assets/css/Navbar.module.css";
 import Button from "../components/Button";
-import NavIcon from "../assets/svgs/nav-icon.svg";
 import { Link } from "react-router-dom";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 
@@ -10,7 +9,8 @@ const Navbar = () => {
   const navitems = [
     { name: "Home", href: "/" },
     { name: "Learning Path", href: "/frontend" },
-    { name: "Blog", href: "/" },
+    { name: "Blog", href: "/blog" },
+    { name: "About", href: "/about" },
   ];
 
   const handleShowMenu = () => {
@@ -53,12 +53,11 @@ const Navbar = () => {
             </li>
           ))}
           <li key="Sign Up" className="mx-3 my-1">
-            <a
-              href="/"
-              className="text-base bg-dgPurple text-dgLightPurple pl-4 py-4 rounded mb-1 block w-full"
-            >
-              Sign Up
-            </a>
+            <Link to={"/signup"}>
+              <span className="text-base bg-dgPurple text-dgLightPurple pl-4 py-4 rounded mb-1 block w-full">
+                Sign Up
+              </span>
+            </Link>
           </li>
         </ul>
       )}

@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import Search from "../assets/svgs/search.svg";
 import { tableOfContent } from "../assets/data/tableOfContent";
+import {
+  BookOpenIcon,
+  CodeBracketIcon,
+  UsersIcon,
+  ShareIcon,
+  CommandLineIcon,
+} from "@heroicons/react/24/outline";
 
 interface SidebarProps {
   sidebarControl: boolean;
@@ -48,13 +55,41 @@ const Sidebar = (props: SidebarProps) => {
                 <a
                   href="/"
                   key={subItem.title}
-                  className={`pl-3 py-3 rounded mb-1 text-sm block w-full transition-all hover:bg-dgPurple  ${
+                  title={subItem.title}
+                  className={`pl-3 py-3 flex items-center rounded mb-1 text-sm block w-full transition-all hover:bg-dgPurple  ${
                     item.active
                       ? "bg-dgPurple text-dgLightPurple font-semibold"
                       : "bg-dgLightPurple text-dgDarkPurple hover:text-dgLightPurple"
                   }`}
                 >
-                  {subItem.title}
+                  {subItem.icon === "BookOpenIcon" ? (
+                    <BookOpenIcon className="mr-2 w-4" />
+                  ) : (
+                    ""
+                  )}
+                  {subItem.icon === "CodeBracketIcon" ? (
+                    <CodeBracketIcon className="mr-2 w-4" />
+                  ) : (
+                    ""
+                  )}
+                  {subItem.icon === "CommandLineIcon" ? (
+                    <CommandLineIcon className="mr-2 w-4" />
+                  ) : (
+                    ""
+                  )}
+                  {subItem.icon === "ShareIcon" ? (
+                    <ShareIcon className="mr-2 w-4" />
+                  ) : (
+                    ""
+                  )}
+                  {subItem.icon === "UsersIcon" ? (
+                    <UsersIcon className="mr-2 w-4" />
+                  ) : (
+                    ""
+                  )}
+                  {subItem.title.length > 30
+                    ? subItem.title.substring(0, 30) + "..."
+                    : subItem.title}
                 </a>
               ))}
             </React.Fragment>
