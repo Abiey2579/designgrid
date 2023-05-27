@@ -33,7 +33,7 @@ const Sidebar = (props: SidebarProps) => {
             v1.0.23
           </button>
         </div>
-        <div className="bg-dgWhite rounded flex mb-3 px-3 ">
+        {/* <div className="bg-dgWhite rounded flex mb-3 px-3 ">
           <img src={Search} alt="Search" className="w-4" />
           <input
             type="text"
@@ -41,7 +41,7 @@ const Sidebar = (props: SidebarProps) => {
             placeholder="Search ..."
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-        </div>
+        </div> */}
         <div className="SidebarMenu max-h-[75vh] overflow-y-scroll">
           {filteredHackathons.map((item) => (
             <React.Fragment>
