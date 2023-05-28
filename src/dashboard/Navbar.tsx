@@ -75,7 +75,7 @@ const Navbar = () => {
             </Link>
           </Popover.Group>
           <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-            <div className="lg:flex md:hidden hidden lg:flex-col relative">
+            <div className="flex flex-col relative">
               <div
                 className="flex items-center cursor-pointer"
                 onClick={() => handleProfileImageMenu()}

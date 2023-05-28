@@ -85,11 +85,7 @@ const Navbar = () => {
             </Link>
           </Popover.Group>
           <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-            <Button
-              name="Sign Up"
-              className="lg:flex md:hidden hidden"
-              href="/auth/signup"
-            />
+            <Button name="Sign Up" href="/auth/signup" />
           </div>
         </div>
       </div>
