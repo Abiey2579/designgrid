@@ -1,12 +1,24 @@
 import * as React from "react";
 import StarbucksCup from "../assets/svgs/StarbucksCup.svg";
-import AuthButton from "../components/AuthButton";
+import { Link } from "react-router-dom";
+import { account } from "./appwrite-auth";
 
-import Apple from "../assets/svgs/apple-auth.svg";
-import Facebook from "../assets/svgs/facebook-auth.svg";
 import Google from "../assets/svgs/google-auth.svg";
+import GitHub from "../assets/svgs/github.svg";
+import LinkedIn from "../assets/svgs/linkedin-in.svg";
 
 const LogIn = () => {
+  const handleOAuth = async (service: string) => {
+    try {
+      await account.createOAuth2Session(
+        service,
+        "http://localhost:3000/frontend",
+        "http://localhost:3000/signup"
+      );
+    } catch (error) {
+      alert(error);
+    }
+  };
   return (
     <div className="lg:px-24 md:px-10 px-6  min-h-screen flex justify-around items-center">
       <div className="max-w-md">
@@ -15,32 +27,42 @@ const LogIn = () => {
           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
-        <AuthButton
-          name="Google"
-          icon={Google}
-          label="Continue with Google"
-          className="mb-5"
-        />
-        <AuthButton
-          name="Apple"
-          icon={Apple}
-          label="Continue with Apple"
-          className="mb-5"
-        />
-        <AuthButton
-          name="Facebook"
-          icon={Facebook}
-          label="Continue with Facebook"
-          className="mb-5"
-        />
+
+        <button
+          onClick={() => handleOAuth("google")}
+          className={`bg-dgWhite font-normal text-dgDarkPurple rounded-full text-base w-[300px] flex outline-0 mb-5`}
+        >
+          <div className="w-20 text-center py-4">
+            <img src={Google} alt={"Google"} className="m-auto" />
+          </div>
+          <p className="w-fit py-4">Continue with Google</p>
+        </button>
+        <button
+          onClick={() => handleOAuth("github")}
+          className={`bg-dgDarkPurple font-normal text-dgLightPurple rounded-full text-base w-[300px] flex outline-0 mb-5`}
+        >
+          <div className="w-20 text-center py-4">
+            <img src={GitHub} alt={"GitHub"} className="m-auto" />
+          </div>
+          <p className="w-fit py-4">Continue with GitHub</p>
+        </button>
+        <button
+          onClick={() => handleOAuth("linkedin")}
+          className={`bg-dgFacebook font-normal text-dgLightPurple rounded-full text-base w-[300px] flex outline-0 mb-5`}
+        >
+          <div className="w-20 text-center py-4">
+            <img src={LinkedIn} alt={"LinkedIn"} className="m-auto" />
+          </div>
+          <p className="w-fit py-4">Continue with LinkedIn</p>
+        </button>
+
         <p className="text-dgDarkPurple text-base mb-6">
           Don't have an account?{" "}
-          <a
-            href="/"
-            className="inline-block text-dgPurple font-bold text-base"
-          >
-            Create one
-          </a>
+          <Link to={"/signup"}>
+            <span className="inline-block text-dgPurple font-bold text-base">
+              Create one
+            </span>
+          </Link>
         </p>
       </div>
       <img
