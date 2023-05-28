@@ -8,32 +8,32 @@ import {
   BookOpenIcon,
   PresentationChartLineIcon,
   UserIcon,
-  HomeModernIcon,
-  UserPlusIcon,
+  TrashIcon,
 } from "@heroicons/react/24/outline";
-import Button from "../components/Button";
+import UserProfile from "../assets/svgs/user-profile.svg";
+import AngleDown from "../assets/svgs/angle-down-dark.svg";
 
 const NAV_ITEMS = [
-  {
-    name: "Home",
-    href: "/",
-    icon: HomeModernIcon,
-  },
   {
     name: "Learning Path",
     href: "/frontend",
     icon: PresentationChartLineIcon,
   },
-
   {
     name: "Blog",
     href: "/blog",
     icon: BookOpenIcon,
   },
+
   {
-    name: "About",
-    href: "/about",
+    name: "Update profile",
+    href: "/update-profile",
     icon: UserIcon,
+  },
+  {
+    name: "Logout",
+    href: "/logout",
+    icon: TrashIcon,
   },
 ];
 
@@ -63,11 +63,6 @@ const Navbar = () => {
             </Popover.Button>
           </div>
           <Popover.Group as="nav" className="hidden space-x-10 md:flex">
-            <Link to={"/home"}>
-              <span className="text-base font-medium text-dgDarkPurple_Opacity hover:text-dgDarkPurple_Opacity">
-                Home
-              </span>
-            </Link>
             <Link to={"/frontend"}>
               <span className="text-base font-medium text-dgDarkPurple_Opacity hover:text-dgDarkPurple_Opacity">
                 Learning Path
@@ -78,18 +73,45 @@ const Navbar = () => {
                 Blog
               </span>
             </Link>
-            <Link to={"/about"}>
-              <span className="text-base font-medium text-dgDarkPurple_Opacity hover:text-dgDarkPurple_Opacity">
-                About
-              </span>
-            </Link>
           </Popover.Group>
           <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-            <Button
-              name="Sign Up"
-              className="lg:flex md:hidden hidden"
-              href="/auth/signup"
-            />
+            <div className="lg:flex md:hidden hidden lg:flex-col relative">
+              <div
+                className="flex items-center cursor-pointer"
+                onClick={() => handleProfileImageMenu()}
+              >
+                <img
+                  src={UserProfile}
+                  alt="UserProfile"
+                  className="select-none"
+                />
+                <p className="text-base font-medium ml-3 select-none">
+                  Yahya M. Bello
+                </p>
+
+                <img
+                  src={AngleDown}
+                  alt="AngleDown"
+                  className="ml-6 select-none"
+                />
+              </div>
+              {showProfileImageMenu && (
+                <div className="absolute w-full top-full bg-dgWhite shadow mt-3 p-3 gap-2 flex flex-col rounded">
+                  <a
+                    href="/"
+                    className="px-3 py-2 hover:bg-dgLightPurple rounded"
+                  >
+                    Update profile
+                  </a>
+                  <a
+                    href="/"
+                    className="px-3 py-2 hover:bg-dgLightPurple rounded"
+                  >
+                    Logout
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -134,19 +156,6 @@ const Navbar = () => {
                       </span>
                     </a>
                   ))}
-                  <a
-                    key={"signup"}
-                    href={"/signup"}
-                    className="-m-3 flex items-center rounded-md p-3 bg-dgPurple"
-                  >
-                    <UserPlusIcon
-                      className="h-6 w-6 flex-shrink-0 text-dgLightPurple"
-                      aria-hidden="true"
-                    />
-                    <span className="ml-3 text-base font-medium text-dgLightPurple">
-                      Sign Up
-                    </span>
-                  </a>
                 </nav>
               </div>
             </div>

@@ -8,6 +8,7 @@ import OnboardingOne from "./authentication/OnboardingOne";
 import OnboardingTwo from "./authentication/OnboardingTwo";
 import OnboardingThree from "./authentication/OnboardingThree";
 import OnboardingFour from "./authentication/OnboardingFour";
+import Dashboard from "./dashboard/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
   {
     path: "/auth/login",
     element: <LogIn />,
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
   },
 ]);
 
