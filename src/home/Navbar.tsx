@@ -33,7 +33,7 @@ const Navbar = () => {
         <Button
           name="Sign Up"
           className="lg:flex md:hidden hidden"
-          href="/signup"
+          href="/auth/signup"
         />
         <Bars3Icon
           onClick={handleShowMenu}
@@ -53,7 +53,7 @@ const Navbar = () => {
             </li>
           ))}
           <li key="Sign Up" className="mx-3 my-1">
-            <Link to={"/signup"}>
+            <Link to={"/auth/signup"}>
               <span className="text-base bg-dgPurple text-dgLightPurple pl-4 py-4 rounded mb-1 block w-full">
                 Sign Up
               </span>

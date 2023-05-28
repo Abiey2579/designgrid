@@ -12,6 +12,7 @@ module.exports = {
         dgDarkPurple: "#150425",
         dgDarkPurple_Opacity: "#150425d9",
         dgFacebook: "#0981EC",
+        dgBorder: "rbga(21,4,37,12%)",
       },
     },
   },
