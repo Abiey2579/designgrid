@@ -11,10 +11,10 @@ const UpdateProfile = () => {
         <div className="flex items-center gap-5 mb-14">
           <img src={UserProfile} alt="UserProfile" />
           <div className="flex md:flex-row flex-col gap-5">
-            <button className="bg-dgPurple rounded-full border-0 outline-0 px-4 py-2 text-base font-medium text-dgLightPurple">
+            <button className="bg-dgPurple select-none rounded-full border-0 outline-0 px-4 py-2 text-base font-medium text-dgLightPurple">
               Change
             </button>
-            <button className="bg-dgLightPurple rounded-full border border-slate-400 outline-0 px-4 py-2 text-base font-medium text-dgDarkPurple">
+            <button className="bg-dgLightPurple select-none rounded-full border border-slate-400 outline-0 px-4 py-2 text-base font-medium text-dgDarkPurple">
               Remove
             </button>
           </div>
@@ -71,7 +71,7 @@ const UpdateProfile = () => {
             />
           </div>
         </div>
-        <button className="bg-dgPurple rounded-full border-0 outline-0 px-4 py-2 text-base font-medium text-dgLightPurple">
+        <button className="bg-dgPurple select-none rounded-full border-0 outline-0 px-4 py-2 text-base font-medium text-dgLightPurple">
           Save changes
         </button>
       </div>

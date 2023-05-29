@@ -19,6 +19,7 @@ code {
 .GuideDocs::-webkit-scrollbar,
 .SmartScroll::-webkit-scrollbar,
 .SidebarMenu::-webkit-scrollbar {
+  display: none;
   width: 8px;
 }
 

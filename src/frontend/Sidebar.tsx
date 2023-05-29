@@ -7,6 +7,8 @@ import {
   UsersIcon,
   ShareIcon,
   CommandLineIcon,
+  MagnifyingGlassIcon,
+  XMarkIcon,
 } from "@heroicons/react/24/outline";
 
 interface SidebarProps {
@@ -25,29 +27,37 @@ const Sidebar = (props: SidebarProps) => {
   return (
     <React.Fragment>
       <div
-        className={`min-w-[20%] max-w-[340px] max-h-screen border-r bg-dgLightPurple border-slate-300 pl-5 pr-5 ${d}`}
+        className={`min-w-[20%] max-w-[340px] h-screen bg-dgDarkPurple pl-5 pr-5 ${d} z-20`}
       >
         <div className="flex items-center justify-between py-7 mb-3">
-          <h1 className="text-dgDarkPurple text-xl font-bold">Learning Path</h1>
+          <h1 className="text-dgLightPurple text-xl font-bold">
+            Learning Path
+          </h1>
           <button className="w-auto px-3 py-1 bg-dgPurple outline-0 text-dgLightPurple font-semibold rounded-full text-center text-sm">
-            v1.0.23
+            v1.0
           </button>
+          {props.sidebarControl && (
+            <XMarkIcon
+              onClick={() => props.handleSidebarMenu()}
+              className="w-6 rounded text-dgLightPurple cursor-pointer"
+            />
+          )}
         </div>
-        {/* <div className="bg-dgWhite rounded flex mb-3 px-3 ">
-          <img src={Search} alt="Search" className="w-4" />
+        <div className="bg-dgLightPurple border border-slate-300 rounded flex mb-3 px-3 ">
+          <MagnifyingGlassIcon className="w-5" />
           <input
             type="text"
-            className="pl-3 py-3 border-0 outline-0 text-base w-5/6"
+            className="pl-3 py-3 border-0 outline-0 text-base flex-1 bg-dgLightPurple "
             placeholder="Search ..."
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-        </div> */}
+        </div>
         <div className="SidebarMenu max-h-[75vh] overflow-y-scroll">
           {filteredHackathons.map((item) => (
             <React.Fragment>
               <p
                 key={item.header}
-                className="font-semibold text-gray-900 text-base my-3 py-1 border-slate-300 border-b"
+                className="font-semibold text-dgLightPurple text-base my-3 py-1 border-slate-300 border-b"
               >
                 {item.header}
               </p>
@@ -59,7 +69,7 @@ const Sidebar = (props: SidebarProps) => {
                   className={`pl-3 py-3 flex items-center rounded mb-1 text-sm block w-full transition-all hover:bg-dgPurple  ${
                     item.active
                       ? "bg-dgPurple text-dgLightPurple font-semibold"
-                      : "bg-dgLightPurple text-dgDarkPurple hover:text-dgLightPurple"
+                      : "text-dgLightPurple"
                   }`}
                 >
                   {subItem.icon === "BookOpenIcon" ? (
@@ -98,7 +108,7 @@ const Sidebar = (props: SidebarProps) => {
       </div>
       {props.sidebarControl && (
         <div
-          className="fixed min-h-screen w-screen"
+          className="fixed min-h-screen w-screen z-10"
           style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
           onClick={() => props.handleSidebarMenu()}
         ></div>

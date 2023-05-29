@@ -116,9 +116,9 @@ const Navbar = () => {
               <div className="mt-6">
                 <nav className="grid gap-y-8">
                   {NAV_ITEMS.map((item) => (
-                    <a
+                    <Link
                       key={item.name}
-                      href={item.href}
+                      to={item.href}
                       className="-m-3 flex items-center rounded-md p-3 hover:bg-dgLightPurple"
                     >
                       <item.icon
@@ -128,11 +128,11 @@ const Navbar = () => {
                       <span className="ml-3 text-base font-medium text-dgDarkPurple_Opacity">
                         {item.name}
                       </span>
-                    </a>
+                    </Link>
                   ))}
-                  <a
+                  <Link
                     key={"signup"}
-                    href={"/signup"}
+                    to={"/signup"}
                     className="-m-3 flex items-center rounded-md p-3 bg-dgPurple"
                   >
                     <UserPlusIcon
@@ -142,7 +142,7 @@ const Navbar = () => {
                     <span className="ml-3 text-base font-medium text-dgLightPurple">
                       Sign Up
                     </span>
-                  </a>
+                  </Link>
                 </nav>
               </div>
             </div>

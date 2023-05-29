@@ -8,9 +8,13 @@ import {
   BookOpenIcon,
   PresentationChartLineIcon,
   UserPlusIcon,
+  ChartBarSquareIcon,
+  UserIcon,
+  TrashIcon,
+  ChevronDownIcon,
 } from "@heroicons/react/24/outline";
+
 import UserProfile from "../assets/svgs/user-profile.svg";
-import AngleDown from "../assets/svgs/angle-down-dark.svg";
 
 const NAV_ITEMS = [
   {
@@ -25,7 +29,7 @@ const NAV_ITEMS = [
   },
   {
     name: "Sign Up",
-    href: "/signup",
+    href: "/auth/signup",
     icon: UserPlusIcon,
   },
 ];
@@ -66,7 +70,7 @@ const Navbar = () => {
                 Learning Path
               </span>
             </Link>
-            <Link to={"/signup"}>
+            <Link to={"/auth/signup"}>
               <span className="text-base font-medium text-dgDarkPurple_Opacity hover:text-dgDarkPurple_Opacity">
                 Sign Up
               </span>
@@ -75,38 +79,39 @@ const Navbar = () => {
           <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
             <div className="flex flex-col relative">
               <div
-                className="flex items-center cursor-pointer"
+                className="flex items-center gap-3 cursor-pointer"
                 onClick={() => handleProfileImageMenu()}
               >
                 <img
                   src={UserProfile}
                   alt="UserProfile"
-                  className="select-none"
+                  className="select-none w-9"
                 />
-                <p className="text-base font-medium ml-3 select-none">
+                <p className="text-base font-medium select-none">
                   Yahya M. Bello
                 </p>
-
-                <img
-                  src={AngleDown}
-                  alt="AngleDown"
-                  className="ml-6 select-none"
-                />
+                <ChevronDownIcon className="select-none w-5" />
               </div>
               {showProfileImageMenu && (
                 <div className="absolute w-full top-full bg-dgWhite shadow mt-3 p-3 gap-2 flex flex-col rounded">
-                  <a
-                    href="/"
-                    className="px-3 py-2 hover:bg-dgLightPurple rounded"
+                  <Link
+                    to="/dashboard"
+                    className="px-3 py-2 hover:bg-dgLightPurple rounded flex items-center gap-3"
                   >
-                    Update profile
-                  </a>
-                  <a
-                    href="/"
-                    className="px-3 py-2 hover:bg-dgLightPurple rounded"
+                    <ChartBarSquareIcon className="w-5" />
+                    Dashboard
+                  </Link>
+                  <Link
+                    to="/dashboard/profile/update"
+                    className="px-3 py-2 hover:bg-dgLightPurple rounded flex items-center gap-3"
                   >
+                    <UserIcon className="w-5" />
+                    Update Profile
+                  </Link>
+                  <span className="px-3 py-2 hover:bg-dgLightPurple rounded flex items-center gap-3">
+                    <TrashIcon className="w-5" />
                     Logout
-                  </a>
+                  </span>
                 </div>
               )}
             </div>
@@ -140,9 +145,9 @@ const Navbar = () => {
               <div className="mt-6">
                 <nav className="grid gap-y-8">
                   {NAV_ITEMS.map((item) => (
-                    <a
+                    <Link
                       key={item.name}
-                      href={item.href}
+                      to={item.href}
                       className="-m-3 flex items-center rounded-md p-3 hover:bg-dgLightPurple"
                     >
                       <item.icon
@@ -152,7 +157,7 @@ const Navbar = () => {
                       <span className="ml-3 text-base font-medium text-dgDarkPurple_Opacity">
                         {item.name}
                       </span>
-                    </a>
+                    </Link>
                   ))}
                 </nav>
               </div>

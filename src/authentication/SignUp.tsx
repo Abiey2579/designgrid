@@ -1,6 +1,7 @@
 import * as React from "react";
 import CoffeeCup from "../assets/svgs/CoffeeCup.svg";
 import AuthButton from "../components/AuthButton";
+import { Link } from "react-router-dom";
 
 import Apple from "../assets/svgs/apple-auth.svg";
 import Facebook from "../assets/svgs/facebook-auth.svg";
@@ -35,12 +36,12 @@ const SignUp = () => {
         />
         <p className="text-dgDarkPurple text-base mb-6">
           Already have an account?{" "}
-          <a
-            href="/"
+          <Link
+            to="/auth/login"
             className="inline-block text-dgPurple font-bold text-base"
           >
             Log In
-          </a>
+          </Link>
         </p>
       </div>
       <img
