@@ -7,33 +7,26 @@ import {
   XMarkIcon,
   BookOpenIcon,
   PresentationChartLineIcon,
-  UserIcon,
-  TrashIcon,
+  UserPlusIcon,
 } from "@heroicons/react/24/outline";
 import UserProfile from "../assets/svgs/user-profile.svg";
 import AngleDown from "../assets/svgs/angle-down-dark.svg";
 
 const NAV_ITEMS = [
   {
+    name: "Home",
+    href: "/home",
+    icon: BookOpenIcon,
+  },
+  {
     name: "Learning Path",
     href: "/frontend",
     icon: PresentationChartLineIcon,
   },
   {
-    name: "Blog",
-    href: "/community/blogs",
-    icon: BookOpenIcon,
-  },
-
-  {
-    name: "Update profile",
-    href: "/update-profile",
-    icon: UserIcon,
-  },
-  {
-    name: "Logout",
-    href: "/logout",
-    icon: TrashIcon,
+    name: "Sign Up",
+    href: "/signup",
+    icon: UserPlusIcon,
   },
 ];
 
@@ -50,7 +43,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between py-1 md:justify-start md:space-x-10 h-20">
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <h4 className="text-xl font-bold text-dgDarkPurple">
-              <span className="text-dgPurple">Design</span>Grid
+              <span className="text-dgPurple">Community</span> Blogs
             </h4>
           </div>
           <div className="-my-2 -mr-2 md:hidden">
@@ -63,14 +56,19 @@ const Navbar = () => {
             </Popover.Button>
           </div>
           <Popover.Group as="nav" className="hidden space-x-10 md:flex">
+            <Link to={"/home"}>
+              <span className="text-base font-medium text-dgDarkPurple_Opacity hover:text-dgDarkPurple_Opacity">
+                Home
+              </span>
+            </Link>
             <Link to={"/frontend"}>
               <span className="text-base font-medium text-dgDarkPurple_Opacity hover:text-dgDarkPurple_Opacity">
                 Learning Path
               </span>
             </Link>
-            <Link to={"/community/blogs"}>
+            <Link to={"/signup"}>
               <span className="text-base font-medium text-dgDarkPurple_Opacity hover:text-dgDarkPurple_Opacity">
-                Blog
+                Sign Up
               </span>
             </Link>
           </Popover.Group>

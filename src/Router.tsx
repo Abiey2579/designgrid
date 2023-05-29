@@ -11,6 +11,7 @@ import OnboardingFour from "./authentication/OnboardingFour";
 import Dashboard from "./dashboard/Dashboard";
 import UpdateProfile from "./dashboard/UpdateProfile";
 import ErrorElement from "./components/ErrorElement";
+import Blog from "./community/Blog";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
   {
     path: "/dashboard/profile/update",
     element: <UpdateProfile />,
+  },
+  {
+    path: "/community/blogs",
+    element: <Blog />,
   },
 ]);
 
