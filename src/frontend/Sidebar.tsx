@@ -10,6 +10,7 @@ import {
   MagnifyingGlassIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import { CheckBadgeIcon } from "@heroicons/react/24/solid";
 
 interface SidebarProps {
   sidebarControl: boolean;
@@ -43,11 +44,11 @@ const Sidebar = (props: SidebarProps) => {
             />
           )}
         </div>
-        <div className="bg-dgLightPurple border border-slate-300 rounded flex mb-3 px-3 ">
+        <div className="bg-dgWhite rounded flex mb-3 px-3 ">
           <MagnifyingGlassIcon className="w-5" />
           <input
             type="text"
-            className="pl-3 py-3 border-0 outline-0 text-base flex-1 bg-dgLightPurple "
+            className="pl-3 py-3 border-0 outline-0 text-base flex-1 bg-dgWhite "
             placeholder="Search ..."
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -57,16 +58,25 @@ const Sidebar = (props: SidebarProps) => {
             <React.Fragment>
               <p
                 key={item.header}
-                className="font-semibold text-dgLightPurple text-base my-3 py-1 border-slate-300 border-b"
+                className="flex items-center justify-between font-semibold text-dgLightPurple text-base my-3 py-1 border-slate-300 border-b"
               >
-                {item.header}
+                <span>{item.header}</span>
+                {item.header === "Introduction" ? (
+                  <h5 className="text-sm flex gap-1 items-center">
+                    4/{item.subContent.length}
+                    <CheckBadgeIcon className="w-5 text-dgPurple" />
+                  </h5>
+                ) : (
+                  <h5 className="text-sm flex gap-1 items-center">
+                    0/{item.subContent.length}
+                  </h5>
+                )}
               </p>
               {item.subContent.map((subItem) => (
-                <a
-                  href="/"
+                <span
                   key={subItem.title}
                   title={subItem.title}
-                  className={`pl-3 py-3 flex items-center rounded mb-1 text-sm block w-full transition-all hover:bg-dgPurple  ${
+                  className={`pl-3 py-3 flex items-center select-none cursor-pointer rounded mb-1 text-sm block w-full transition-all hover:bg-dgPurple  ${
                     item.active
                       ? "bg-dgPurple text-dgLightPurple font-semibold"
                       : "text-dgLightPurple"
@@ -100,7 +110,7 @@ const Sidebar = (props: SidebarProps) => {
                   {subItem.title.length > 30
                     ? subItem.title.substring(0, 30) + "..."
                     : subItem.title}
-                </a>
+                </span>
               ))}
             </React.Fragment>
           ))}

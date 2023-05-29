@@ -13,23 +13,24 @@ import {
   TrashIcon,
   ChevronDownIcon,
 } from "@heroicons/react/24/outline";
+import * as uriPaths from "../assets/data/constants";
 
 import UserProfile from "../assets/svgs/user-profile.svg";
 
 const NAV_ITEMS = [
   {
-    name: "Home",
-    href: "/home",
+    name: "Blog",
+    href: uriPaths.COMMUNITY_BLOGS,
     icon: BookOpenIcon,
   },
   {
     name: "Learning Path",
-    href: "/frontend",
+    href: uriPaths.LEARNING_PATH,
     icon: PresentationChartLineIcon,
   },
   {
     name: "Sign Up",
-    href: "/auth/signup",
+    href: uriPaths.SIGN_UP,
     icon: UserPlusIcon,
   },
 ];
@@ -60,17 +61,17 @@ const Navbar = () => {
             </Popover.Button>
           </div>
           <Popover.Group as="nav" className="hidden space-x-10 md:flex">
-            <Link to={"/home"}>
+            <Link to={uriPaths.COMMUNITY_BLOGS}>
               <span className="text-base font-medium text-dgDarkPurple_Opacity hover:text-dgDarkPurple_Opacity">
-                Home
+                Blogs
               </span>
             </Link>
-            <Link to={"/frontend"}>
+            <Link to={uriPaths.LEARNING_PATH}>
               <span className="text-base font-medium text-dgDarkPurple_Opacity hover:text-dgDarkPurple_Opacity">
                 Learning Path
               </span>
             </Link>
-            <Link to={"/auth/signup"}>
+            <Link to={uriPaths.SIGN_UP}>
               <span className="text-base font-medium text-dgDarkPurple_Opacity hover:text-dgDarkPurple_Opacity">
                 Sign Up
               </span>
@@ -95,14 +96,14 @@ const Navbar = () => {
               {showProfileImageMenu && (
                 <div className="absolute w-full top-full bg-dgWhite shadow mt-3 p-3 gap-2 flex flex-col rounded">
                   <Link
-                    to="/dashboard"
+                    to={uriPaths.DASHBOARD}
                     className="px-3 py-2 hover:bg-dgLightPurple rounded flex items-center gap-3"
                   >
                     <ChartBarSquareIcon className="w-5" />
                     Dashboard
                   </Link>
                   <Link
-                    to="/dashboard/profile/update"
+                    to={uriPaths.UPDATE_PROFILE}
                     className="px-3 py-2 hover:bg-dgLightPurple rounded flex items-center gap-3"
                   >
                     <UserIcon className="w-5" />

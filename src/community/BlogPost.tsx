@@ -7,6 +7,7 @@ import { FolderIcon, CalendarIcon, ClockIcon } from "@heroicons/react/24/solid";
 import UserProfile from "../assets/svgs/user-profile.svg";
 import BlogCardOne from "./BlogCardOne";
 import Footer from "../home/Footer";
+import Copyright from "../home/Copyright";
 
 interface BlogPostTagsProps {
   icon: any;
@@ -15,9 +16,9 @@ interface BlogPostTagsProps {
 
 const BlogPostTags = (props: BlogPostTagsProps) => {
   return (
-    <div className="h-9 rounded-full bg-dgDarkPurple w-max flex gap-3 items-center px-6 cursor-pointer select-none">
-      <props.icon className="text-dgLightPurple w-5" />
-      <p className="text-dgLightPurple text-base font-bold">{props.name}</p>
+    <div className="h-7 rounded-full bg-dgDarkPurple w-max flex gap-3 items-center px-4 cursor-pointer select-none">
+      <props.icon className="text-dgLightPurple w-4" />
+      <p className="text-dgLightPurple text-sm font-semibold">{props.name}</p>
     </div>
   );
 };
@@ -87,7 +88,7 @@ const BlogPost = () => {
         <div className="max-w-[960px] max-h-[532px] overflow-hidden rounded-lg mx-auto mb-5">
           <img src={ImageOne} alt="Image Cover" className="" />
         </div>
-        <div className="flex gap-5 mb-5">
+        <div className="flex lg:flex-row md:flex-row flex-col flex-wrap lg:gap-3 md:gap-2 gap-1 mb-5">
           <BlogPostTags icon={FolderIcon} name="Coding Best practice" />
           <BlogPostTags icon={CalendarIcon} name="May 28, 2023" />
           <BlogPostTags icon={ClockIcon} name="8min read" />
@@ -136,6 +137,7 @@ const BlogPost = () => {
         </div>
       </div>
       <Footer />
+      <Copyright />
     </React.Fragment>
   );
 };

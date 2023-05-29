@@ -10,31 +10,31 @@ import {
   UserIcon,
   TrashIcon,
   ChartBarSquareIcon,
+  ChevronDownIcon,
 } from "@heroicons/react/24/outline";
 import UserProfile from "../assets/svgs/user-profile.svg";
-import AngleDown from "../assets/svgs/angle-down-dark.svg";
+import * as uriPaths from "../assets/data/constants";
 
 const NAV_ITEMS = [
   {
     name: "Learning Path",
-    href: "/frontend",
+    href: uriPaths.LEARNING_PATH,
     icon: PresentationChartLineIcon,
   },
   {
     name: "Blog",
-    href: "/community/blogs",
+    href: uriPaths.COMMUNITY_BLOGS,
     icon: BookOpenIcon,
   },
-
   {
-    name: "Update profile",
-    href: "/dashboard/profile/update",
-    icon: UserIcon,
+    name: "Dashboard",
+    href: uriPaths.DASHBOARD,
+    icon: ChartBarSquareIcon,
   },
   {
-    name: "Logout",
-    href: "/logout",
-    icon: TrashIcon,
+    name: "Update profile",
+    href: uriPaths.UPDATE_PROFILE,
+    icon: UserIcon,
   },
 ];
 
@@ -64,12 +64,12 @@ const Navbar = (props: { pageURI: string }) => {
             </Popover.Button>
           </div>
           <Popover.Group as="nav" className="hidden space-x-10 md:flex">
-            <Link to={"/frontend"}>
+            <Link to={uriPaths.LEARNING_PATH}>
               <span className="text-base font-medium text-dgDarkPurple_Opacity hover:text-dgDarkPurple_Opacity">
                 Learning Path
               </span>
             </Link>
-            <Link to={"/community/blogs"}>
+            <Link to={uriPaths.COMMUNITY_BLOGS}>
               <span className="text-base font-medium text-dgDarkPurple_Opacity hover:text-dgDarkPurple_Opacity">
                 Blog
               </span>
@@ -78,42 +78,37 @@ const Navbar = (props: { pageURI: string }) => {
           <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
             <div className="flex flex-col relative">
               <div
-                className="flex items-center cursor-pointer"
+                className="flex items-center gap-3 cursor-pointer"
                 onClick={() => handleProfileImageMenu()}
               >
                 <img
                   src={UserProfile}
                   alt="UserProfile"
-                  className="select-none"
+                  className="select-none w-9"
                 />
-                <p className="text-base font-medium ml-3 select-none">
+                <p className="text-base font-medium select-none">
                   Yahya M. Bello
                 </p>
-
-                <img
-                  src={AngleDown}
-                  alt="AngleDown"
-                  className="ml-6 select-none"
-                />
+                <ChevronDownIcon className="select-none w-5" />
               </div>
               {showProfileImageMenu && (
                 <div className="absolute w-full top-full bg-dgWhite shadow mt-3 p-3 gap-2 flex flex-col rounded">
-                  {props.pageURI === "/dashboard" ? (
+                  {props.pageURI === uriPaths.DASHBOARD ? (
                     ""
                   ) : (
                     <Link
-                      to="/dashboard"
+                      to={uriPaths.DASHBOARD}
                       className="px-3 py-2 hover:bg-dgLightPurple rounded  flex items-center gap-3"
                     >
                       <ChartBarSquareIcon className="w-5" />
                       Dashboard
                     </Link>
                   )}
-                  {props.pageURI === "/dashboard/profile/update" ? (
+                  {props.pageURI === uriPaths.UPDATE_PROFILE ? (
                     ""
                   ) : (
                     <Link
-                      to="/dashboard/profile/update"
+                      to={uriPaths.UPDATE_PROFILE}
                       className="px-3 py-2 hover:bg-dgLightPurple rounded  flex items-center gap-3"
                     >
                       <UserIcon className="w-5" />
@@ -156,21 +151,29 @@ const Navbar = (props: { pageURI: string }) => {
               </div>
               <div className="mt-6">
                 <nav className="grid gap-y-8">
-                  {NAV_ITEMS.map((item) => (
-                    <Link
-                      key={item.name}
-                      to={item.href}
-                      className="-m-3 flex items-center rounded-md p-3 hover:bg-dgLightPurple"
-                    >
-                      <item.icon
-                        className="h-6 w-6 flex-shrink-0 "
-                        aria-hidden="true"
-                      />
-                      <span className="ml-3 text-base font-medium text-dgDarkPurple_Opacity">
-                        {item.name}
-                      </span>
-                    </Link>
-                  ))}
+                  {NAV_ITEMS.map((item) =>
+                    props.pageURI === uriPaths.UPDATE_PROFILE &&
+                    item.href === uriPaths.UPDATE_PROFILE ? (
+                      ""
+                    ) : props.pageURI === uriPaths.DASHBOARD &&
+                      item.href === uriPaths.DASHBOARD ? (
+                      ""
+                    ) : (
+                      <Link
+                        key={item.name}
+                        to={item.href}
+                        className="-m-3 flex items-center rounded-md p-3 hover:bg-dgLightPurple"
+                      >
+                        <item.icon
+                          className="h-6 w-6 flex-shrink-0 "
+                          aria-hidden="true"
+                        />
+                        <span className="ml-3 text-base font-medium text-dgDarkPurple_Opacity">
+                          {item.name}
+                        </span>
+                      </Link>
+                    )
+                  )}
                 </nav>
               </div>
             </div>

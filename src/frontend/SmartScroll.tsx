@@ -12,7 +12,7 @@ const SmartScroll = () => {
       <div>
         {tableOfContent.map((item) => (
           <a
-            href="/"
+            href={`#${item.title.split(" ").join("-").toLocaleLowerCase()}`}
             key={item.title}
             className={`rounded mb-5 block w-full  ${
               item.active
