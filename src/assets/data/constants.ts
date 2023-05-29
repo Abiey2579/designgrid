@@ -1,0 +1,9 @@
+export const LEARNING_PATH = "/learnpath/frontend";
+export const DASHBOARD = "/dashboard";
+export const HOME = "/home";
+export const SIGN_UP = "/auth/signup";
+export const LOG_IN = "/auth/login";
+export const UPDATE_PROFILE = "/dashboard/profile/update";
+export const COMMUNITY_BLOGS = "/community/blogs";
+export const COMMUNITY_BLOG_POST = "/community/blog/";
+export const ABOUT = "/about";

@@ -5,7 +5,7 @@ import Content from "./Content";
 const Dashboard = () => {
   return (
     <div>
-      <Navbar />
+      <Navbar pageURI={"/dashboard"} />
       <Content />
     </div>
   );

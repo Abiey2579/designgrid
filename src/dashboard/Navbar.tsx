@@ -9,6 +9,7 @@ import {
   PresentationChartLineIcon,
   UserIcon,
   TrashIcon,
+  ChartBarSquareIcon,
 } from "@heroicons/react/24/outline";
 import UserProfile from "../assets/svgs/user-profile.svg";
 import AngleDown from "../assets/svgs/angle-down-dark.svg";
@@ -37,7 +38,7 @@ const NAV_ITEMS = [
   },
 ];
 
-const Navbar = () => {
+const Navbar = (props: { pageURI: string }) => {
   const [showProfileImageMenu, setshowProfileImageMenu] =
     useState<boolean>(false);
 
@@ -97,18 +98,32 @@ const Navbar = () => {
               </div>
               {showProfileImageMenu && (
                 <div className="absolute w-full top-full bg-dgWhite shadow mt-3 p-3 gap-2 flex flex-col rounded">
-                  <a
-                    href="/"
-                    className="px-3 py-2 hover:bg-dgLightPurple rounded"
-                  >
-                    Update profile
-                  </a>
-                  <a
-                    href="/"
-                    className="px-3 py-2 hover:bg-dgLightPurple rounded"
-                  >
+                  {props.pageURI === "/dashboard" ? (
+                    ""
+                  ) : (
+                    <Link
+                      to="/dashboard"
+                      className="px-3 py-2 hover:bg-dgLightPurple rounded  flex items-center gap-3"
+                    >
+                      <ChartBarSquareIcon className="w-5" />
+                      Dashboard
+                    </Link>
+                  )}
+                  {props.pageURI === "/dashboard/profile/update" ? (
+                    ""
+                  ) : (
+                    <Link
+                      to="/dashboard/profile/update"
+                      className="px-3 py-2 hover:bg-dgLightPurple rounded  flex items-center gap-3"
+                    >
+                      <UserIcon className="w-5" />
+                      Update profile
+                    </Link>
+                  )}
+                  <span className="px-3 py-2 hover:bg-dgLightPurple rounded  flex items-center gap-3">
+                    <TrashIcon className="w-5" />
                     Logout
-                  </a>
+                  </span>
                 </div>
               )}
             </div>

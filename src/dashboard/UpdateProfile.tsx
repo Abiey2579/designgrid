@@ -5,7 +5,7 @@ import UserProfile from "../assets/svgs/user-profile-lg.svg";
 const UpdateProfile = () => {
   return (
     <React.Fragment>
-      <Navbar />
+      <Navbar pageURI={"/dashboard/profile/update"} />
       <div className="lg:px-24 md:px-10 px-6 max-w-4xl mx-auto my-16">
         <h1 className="font-bold text-dgDarkPurple text-2xl mb-5">Profile</h1>
         <div className="flex items-center gap-5 mb-14">
