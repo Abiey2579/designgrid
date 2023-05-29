@@ -32,7 +32,8 @@ code {
 p,
 span,
 button,
-a {
+a,
+input {
   font-family: "Catamaran" !important;
 }
 
