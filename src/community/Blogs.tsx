@@ -2,7 +2,7 @@ import * as React from "react";
 import Navbar from "./Navbar";
 import Content from "./Content";
 
-const Blog = () => {
+const Blogs = () => {
   return (
     <React.Fragment>
       <Navbar />
@@ -11,4 +11,4 @@ const Blog = () => {
   );
 };
 
-export default Blog;
+export default Blogs;
