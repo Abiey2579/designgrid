@@ -9,10 +9,17 @@ import OnboardingTwo from "./authentication/OnboardingTwo";
 import OnboardingThree from "./authentication/OnboardingThree";
 import OnboardingFour from "./authentication/OnboardingFour";
 import Dashboard from "./dashboard/Dashboard";
+import UpdateProfile from "./dashboard/UpdateProfile";
+import ErrorElement from "./components/ErrorElement";
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <Home />,
+    errorElement: <ErrorElement />,
+  },
+  {
+    path: "/home",
     element: <Home />,
   },
   {
@@ -46,6 +53,10 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Dashboard />,
+  },
+  {
+    path: "/dashboard/profile/update",
+    element: <UpdateProfile />,
   },
 ]);
 
