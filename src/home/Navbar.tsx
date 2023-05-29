@@ -27,7 +27,7 @@ const NAV_ITEMS = [
 
   {
     name: "Blog",
-    href: "/blog",
+    href: "/community/blogs",
     icon: BookOpenIcon,
   },
   {
@@ -73,7 +73,7 @@ const Navbar = () => {
                 Learning Path
               </span>
             </Link>
-            <Link to={"/blog"}>
+            <Link to={"/community/blogs"}>
               <span className="text-base font-medium text-dgDarkPurple_Opacity hover:text-dgDarkPurple_Opacity">
                 Blog
               </span>
