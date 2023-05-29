@@ -1,5 +1,6 @@
 import React from "react";
 import NextButton from "../components/NextButton";
+import DirectionButton from "./DirectionButtons";
 
 const GuideDocs = () => {
   return (
@@ -116,9 +117,7 @@ const GuideDocs = () => {
           culpa qui officia deserunt mollit anim id est laborum.
         </p>
       </div>
-      <div className="flex justify-end items-center">
-        <NextButton name="Next" />
-      </div>
+      <DirectionButton />
     </div>
   );
 };

@@ -19,6 +19,7 @@ code {
 .GuideDocs::-webkit-scrollbar,
 .SmartScroll::-webkit-scrollbar,
 .SidebarMenu::-webkit-scrollbar {
+  display: none;
   width: 8px;
 }
 
@@ -35,6 +36,15 @@ button,
 a,
 input {
   font-family: "Catamaran" !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Product Sans" !important;
 }
 
 ::placeholder {

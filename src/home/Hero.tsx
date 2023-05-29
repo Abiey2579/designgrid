@@ -1,7 +1,7 @@
 import * as React from "react";
 import Button from "../components/Button";
-
 import { Link } from "react-router-dom";
+import * as uriPaths from "../assets/data/constants";
 
 const Hero = () => {
   return (
@@ -15,8 +15,8 @@ const Hero = () => {
         ever-evolving world of web development.
       </p>
       <div className="max-w-[700px] flex lg:flex-row md:flex-row flex-col gap-5 block m-auto justify-center items-center">
-        <Button name="Get Started" href="/" />
-        <Link to={"/"}>
+        <Button name="Get Started" href={uriPaths.SIGN_UP} />
+        <Link to={uriPaths.LEARNING_PATH}>
           <span className="bg-dgLightPurple border border-dgDarkPurple px-10 py-4 inline-block font-normal text-dgDarkPurple rounded-full text-base">
             Explore Learning Path
           </span>

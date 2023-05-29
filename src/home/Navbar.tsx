@@ -12,38 +12,33 @@ import {
   UserPlusIcon,
 } from "@heroicons/react/24/outline";
 import Button from "../components/Button";
+import * as uriPaths from "../assets/data/constants";
 
 const NAV_ITEMS = [
   {
     name: "Home",
-    href: "/",
+    href: uriPaths.HOME,
     icon: HomeModernIcon,
   },
   {
     name: "Learning Path",
-    href: "/frontend",
+    href: uriPaths.LEARNING_PATH,
     icon: PresentationChartLineIcon,
   },
 
   {
     name: "Blog",
-    href: "/community/blogs",
+    href: uriPaths.COMMUNITY_BLOGS,
     icon: BookOpenIcon,
   },
   {
     name: "About",
-    href: "/about",
+    href: uriPaths.ABOUT,
     icon: UserIcon,
   },
 ];
 
 const Navbar = () => {
-  const [showProfileImageMenu, setshowProfileImageMenu] =
-    useState<boolean>(false);
-
-  const handleProfileImageMenu = () => {
-    return setshowProfileImageMenu(!showProfileImageMenu);
-  };
   return (
     <Popover className="relative bg-dgLightPurple z-50 border-b border-dgBorder">
       <div className="lg:px-24 md:px-10 px-6 ">
@@ -63,22 +58,22 @@ const Navbar = () => {
             </Popover.Button>
           </div>
           <Popover.Group as="nav" className="hidden space-x-10 md:flex">
-            <Link to={"/home"}>
+            <Link to={uriPaths.HOME}>
               <span className="text-base font-medium text-dgDarkPurple_Opacity hover:text-dgDarkPurple_Opacity">
                 Home
               </span>
             </Link>
-            <Link to={"/frontend"}>
+            <Link to={uriPaths.LEARNING_PATH}>
               <span className="text-base font-medium text-dgDarkPurple_Opacity hover:text-dgDarkPurple_Opacity">
                 Learning Path
               </span>
             </Link>
-            <Link to={"/community/blogs"}>
+            <Link to={uriPaths.COMMUNITY_BLOGS}>
               <span className="text-base font-medium text-dgDarkPurple_Opacity hover:text-dgDarkPurple_Opacity">
                 Blog
               </span>
             </Link>
-            <Link to={"/about"}>
+            <Link to={uriPaths.ABOUT}>
               <span className="text-base font-medium text-dgDarkPurple_Opacity hover:text-dgDarkPurple_Opacity">
                 About
               </span>
@@ -116,9 +111,9 @@ const Navbar = () => {
               <div className="mt-6">
                 <nav className="grid gap-y-8">
                   {NAV_ITEMS.map((item) => (
-                    <a
+                    <Link
                       key={item.name}
-                      href={item.href}
+                      to={item.href}
                       className="-m-3 flex items-center rounded-md p-3 hover:bg-dgLightPurple"
                     >
                       <item.icon
@@ -128,11 +123,11 @@ const Navbar = () => {
                       <span className="ml-3 text-base font-medium text-dgDarkPurple_Opacity">
                         {item.name}
                       </span>
-                    </a>
+                    </Link>
                   ))}
-                  <a
+                  <Link
                     key={"signup"}
-                    href={"/signup"}
+                    to={uriPaths.SIGN_UP}
                     className="-m-3 flex items-center rounded-md p-3 bg-dgPurple"
                   >
                     <UserPlusIcon
@@ -142,7 +137,7 @@ const Navbar = () => {
                     <span className="ml-3 text-base font-medium text-dgLightPurple">
                       Sign Up
                     </span>
-                  </a>
+                  </Link>
                 </nav>
               </div>
             </div>

@@ -2,6 +2,7 @@ import * as React from "react";
 import UserProfile from "../assets/svgs/user-profile-lg.svg";
 import Topic from "./Topic";
 import { Link } from "react-router-dom";
+import * as uriPaths from "../assets/data/constants";
 
 const ReactIcon = () => {
   return (
@@ -26,7 +27,7 @@ const Content = () => {
       <h1 className="font-bold text-dgDarkPurple text-2xl mb-5">Dashboard</h1>
       <div className="flex items-center gap-5 mb-14">
         <img src={UserProfile} alt="UserProfile" />
-        <Link to={"/dashboard/profile/update"}>
+        <Link to={uriPaths.UPDATE_PROFILE}>
           <span className="bg-dgPurple rounded-full border-0 outline-0 px-4 py-2 text-base font-medium text-dgLightPurple">
             Update profile
           </span>

@@ -1,20 +1,21 @@
 import * as React from "react";
 import Navbar from "./Navbar";
 import UserProfile from "../assets/svgs/user-profile-lg.svg";
+import * as uriPaths from "../assets/data/constants";
 
 const UpdateProfile = () => {
   return (
     <React.Fragment>
-      <Navbar />
+      <Navbar pageURI={uriPaths.UPDATE_PROFILE} />
       <div className="lg:px-24 md:px-10 px-6 max-w-4xl mx-auto my-16">
         <h1 className="font-bold text-dgDarkPurple text-2xl mb-5">Profile</h1>
         <div className="flex items-center gap-5 mb-14">
           <img src={UserProfile} alt="UserProfile" />
           <div className="flex md:flex-row flex-col gap-5">
-            <button className="bg-dgPurple rounded-full border-0 outline-0 px-4 py-2 text-base font-medium text-dgLightPurple">
+            <button className="bg-dgPurple select-none rounded-full border-0 outline-0 px-4 py-2 text-base font-medium text-dgLightPurple">
               Change
             </button>
-            <button className="bg-dgLightPurple rounded-full border border-slate-400 outline-0 px-4 py-2 text-base font-medium text-dgDarkPurple">
+            <button className="bg-dgLightPurple select-none rounded-full border border-slate-400 outline-0 px-4 py-2 text-base font-medium text-dgDarkPurple">
               Remove
             </button>
           </div>
@@ -71,7 +72,7 @@ const UpdateProfile = () => {
             />
           </div>
         </div>
-        <button className="bg-dgPurple rounded-full border-0 outline-0 px-4 py-2 text-base font-medium text-dgLightPurple">
+        <button className="bg-dgPurple select-none rounded-full border-0 outline-0 px-4 py-2 text-base font-medium text-dgLightPurple">
           Save changes
         </button>
       </div>

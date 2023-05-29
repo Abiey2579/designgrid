@@ -13,6 +13,7 @@ import UpdateProfile from "./dashboard/UpdateProfile";
 import ErrorElement from "./components/ErrorElement";
 import Blogs from "./community/Blogs";
 import BlogPost from "./community/BlogPost";
+import * as uriPaths from "./assets/data/constants";
 
 const router = createBrowserRouter([
   {
@@ -21,51 +22,51 @@ const router = createBrowserRouter([
     errorElement: <ErrorElement />,
   },
   {
-    path: "/home",
+    path: uriPaths.HOME,
     element: <Home />,
   },
   {
-    path: "/frontend",
+    path: uriPaths.LEARNING_PATH,
     element: <FrontendGuide />,
   },
   {
-    path: "/auth/signup",
+    path: uriPaths.SIGN_UP,
     element: <SignUp />,
   },
   {
-    path: "/auth/onboarding/1",
+    path: uriPaths.ONBOARDING_1,
     element: <OnboardingOne />,
   },
   {
-    path: "/auth/onboarding/2",
+    path: uriPaths.ONBOARDING_2,
     element: <OnboardingTwo />,
   },
   {
-    path: "/auth/onboarding/3",
+    path: uriPaths.ONBOARDING_3,
     element: <OnboardingThree />,
   },
   {
-    path: "/auth/onboarding/4",
+    path: uriPaths.ONBOARDING_4,
     element: <OnboardingFour />,
   },
   {
-    path: "/auth/login",
+    path: uriPaths.LOG_IN,
     element: <LogIn />,
   },
   {
-    path: "/dashboard",
+    path: uriPaths.DASHBOARD,
     element: <Dashboard />,
   },
   {
-    path: "/dashboard/profile/update",
+    path: uriPaths.UPDATE_PROFILE,
     element: <UpdateProfile />,
   },
   {
-    path: "/community/blogs",
+    path: uriPaths.COMMUNITY_BLOGS,
     element: <Blogs />,
   },
   {
-    path: "/community/blog/:id",
+    path: `${uriPaths.COMMUNITY_BLOG_POST}:id`,
     element: <BlogPost />,
   },
 ]);

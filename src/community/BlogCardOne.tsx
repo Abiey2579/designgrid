@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 
 interface BlogCardOneProps {
   image: string;
@@ -10,6 +11,7 @@ interface BlogCardOneProps {
 }
 
 const BlogCardOne = (props: BlogCardOneProps) => {
+  const uri = props.title.split(" ").join("-").toLocaleLowerCase();
   return (
     <div>
       <img src={props.image} alt="ImageOne" className="rounded-lg mb-1" />
@@ -23,7 +25,7 @@ const BlogCardOne = (props: BlogCardOneProps) => {
         <span className="text-sm font-normal">{props.readtime}min read</span>
       </div>
       <h1 className="text-xl font-semibold text-dgDarkPurple mb-1">
-        {props.title}
+        <Link to={`/community/blog/${uri}`}>{props.title}</Link>
       </h1>
       <p className="text-sm text-dgDarkPurple_Opacity leading-5">
         {props.partialDesc}

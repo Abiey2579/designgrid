@@ -58,10 +58,11 @@ const LogIn = () => {
 
         <p className="text-dgDarkPurple text-base mb-6">
           Don't have an account?{" "}
-          <Link to={"/signup"}>
-            <span className="inline-block text-dgPurple font-bold text-base">
-              Create one
-            </span>
+          <Link
+            to="/auth/signup"
+            className="inline-block text-dgPurple font-bold text-base"
+          >
+            Create one
           </Link>
         </p>
       </div>

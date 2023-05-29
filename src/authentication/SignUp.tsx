@@ -56,10 +56,11 @@ const SignUp = () => {
         </button>
         <p className="text-dgDarkPurple text-base mb-6">
           Already have an account?{" "}
-          <Link to={"/login"}>
-            <span className="inline-block text-dgPurple font-bold text-base">
-              Log In
-            </span>
+          <Link
+            to="/auth/login"
+            className="inline-block text-dgPurple font-bold text-base"
+          >
+            Log In
           </Link>
         </p>
       </div>
