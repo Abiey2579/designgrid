@@ -8,6 +8,8 @@ import {
 } from "@heroicons/react/24/outline";
 import UserProfile from "../assets/svgs/user-profile.svg";
 import { Link } from "react-router-dom";
+import * as uriPaths from "../assets/data/constants";
+
 export interface TopnavProps {
   handleSidebarMenu: Function;
 }
@@ -41,14 +43,14 @@ const Topnav = (props: TopnavProps) => {
         {showProfileImageMenu && (
           <div className="absolute w-full top-full bg-dgWhite shadow mt-3 p-3 gap-2 flex flex-col rounded">
             <Link
-              to="/dashboard"
+              to={uriPaths.DASHBOARD}
               className="px-3 py-2 hover:bg-dgLightPurple rounded flex items-center gap-3"
             >
               <ChartBarSquareIcon className="w-5" />
               Dashboard
             </Link>
             <Link
-              to="/dashboard/profile/update"
+              to={uriPaths.UPDATE_PROFILE}
               className="px-3 py-2 hover:bg-dgLightPurple rounded flex items-center gap-3"
             >
               <UserIcon className="w-5" />
