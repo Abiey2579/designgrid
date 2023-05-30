@@ -41,7 +41,7 @@ const Navbar = () => {
   const [showProfileImageMenu, setshowProfileImageMenu] =
     useState<boolean>(false);
   const navigate = useNavigate();
-  const [userId, setUserId] = useState<string>("ddd");
+  const [userId, setUserId] = useState<string>("");
 
   const handleProfileImageMenu = () => {
     return setshowProfileImageMenu(!showProfileImageMenu);
