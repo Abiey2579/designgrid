@@ -35,7 +35,9 @@ const BlogPost = () => {
         </div>
         <div className="flex items-center cursor-pointer mb-5 w-max">
           <img src={UserProfile} alt="UserProfile" className="select-none" />
-          <h3 className="text-xl font-bold ml-3 select-none">Yahya M. Bello</h3>
+          <h3 className="text-xl font-bold ml-3 select-none text-dgDarkPurple">
+            Yahya M. Bello
+          </h3>
         </div>
         <hr className="bg-slate-300 block mb-5" />
         <BlogMarkdown />

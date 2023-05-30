@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "./Sidebar";
 import Topnav from "../components/Topnav";
-import GuideDocs from "./GuideDocs";
-import SmartScroll from "./SmartScroll";
+import FrontendMarkdown from "./FrontendMarkdown";
 import { account } from "../assets/config/appwrite-auth";
 import { useNavigate } from "react-router-dom";
 import * as uriPaths from "../assets/data/uriPaths";
 
-const FrontendGuide = () => {
+const Frontend = () => {
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
-  const [userId, setUserId] = useState<string>("");
+  const [userId, setUserId] = useState<string>("dd");
   const navigate = useNavigate();
 
   const toggleSidebar = () => {
@@ -19,7 +18,7 @@ const FrontendGuide = () => {
   useEffect(() => {
     account.getSession("current").then((e) => setUserId(e.userId));
     if (!userId) {
-      navigate(uriPaths.SIGN_UP);
+      // navigate(uriPaths.SIGN_UP);
     }
   }, []);
 
@@ -34,8 +33,7 @@ const FrontendGuide = () => {
           <div className="flex-1 max-h-screen ">
             <Topnav handleSidebarMenu={toggleSidebar} />
             <div className="flex">
-              <GuideDocs />
-              <SmartScroll />
+              <FrontendMarkdown />
             </div>
           </div>
         </div>
@@ -44,4 +42,4 @@ const FrontendGuide = () => {
   );
 };
 
-export default FrontendGuide;
+export default Frontend;

@@ -1,7 +1,7 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./home/Home";
-import FrontendGuide from "./frontend/FrontendGuide";
+import Frontend from "./frontend/Frontend";
 import SignUp from "./authentication/SignUp";
 import LogIn from "./authentication/LogIn";
 import OnboardingOne from "./authentication/OnboardingOne";
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
   },
   {
     path: uriPaths.LEARNING_PATH,
-    element: <FrontendGuide />,
+    element: <Frontend />,
   },
   {
     path: uriPaths.SIGN_UP,

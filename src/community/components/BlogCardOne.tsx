@@ -19,9 +19,13 @@ const BlogCardOne = (props: BlogCardOneProps) => {
         <span className="text-sm font-semibold text-dgPurple">
           {props.category}
         </span>
-        <span className="text-base font-bold text-dgDarkPurple">|</span>
+        <span className="text-base font-bold text-dgDarkPurple select-none">
+          |
+        </span>
         <span className="text-sm font-normal">{props.date}</span>
-        <span className="text-base font-bold text-dgDarkPurple">|</span>
+        <span className="text-base font-bold text-dgDarkPurple select-none">
+          |
+        </span>
         <span className="text-sm font-normal">{props.readtime}min read</span>
       </div>
       <h1 className="text-xl font-semibold text-dgDarkPurple mb-1">
