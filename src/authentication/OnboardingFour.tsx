@@ -35,9 +35,9 @@ const OnboardingFour = () => {
     if (userId) {
       const promise = await finishOnboarding({
         uid: userId,
-        q1: qListAnswers[1],
-        q2: qListAnswers[2],
-        q3: qListAnswers[3],
+        q1: qListAnswers[1].potentialAnswer,
+        q2: qListAnswers[2].potentialAnswer,
+        q3: qListAnswers[3].potentialAnswer,
         feedback_q1: selectTagValue,
         feedback_q2: textareaValue,
       });

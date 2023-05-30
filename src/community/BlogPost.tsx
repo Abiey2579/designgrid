@@ -8,14 +8,10 @@ import UserProfile from "../assets/svgs/user-profile.svg";
 import BlogCardOne from "./components/BlogCardOne";
 import Footer from "../home/Footer";
 import Copyright from "../home/Copyright";
-import BlogPostContent from "./components/BlogMarkdown";
+import BlogMarkdown from "./components/BlogMarkdown";
+import { BlogPostTagProps } from "../assets/Model/model";
 
-interface BlogPostTagsProps {
-  icon: any;
-  name: string;
-}
-
-const BlogPostTags = (props: BlogPostTagsProps) => {
+const BlogPostTag = (props: BlogPostTagProps) => {
   return (
     <div className="h-7 rounded-full bg-dgDarkPurple w-max flex gap-3 items-center px-4 cursor-pointer select-none">
       <props.icon className="text-dgLightPurple w-4" />
@@ -30,19 +26,19 @@ const BlogPost = () => {
       <Navbar />
       <div className="lg:px-24 md:px-10 px-6 max-w-6xl mx-auto my-10">
         <div className="max-w-[960px] max-h-[532px] overflow-hidden rounded-lg mx-auto mb-5">
-          <img src={ImageOne} alt="Image Cover" className="" />
+          <img src={ImageOne} alt="" />
         </div>
         <div className="flex lg:flex-row md:flex-row flex-col flex-wrap lg:gap-3 md:gap-2 gap-1 mb-5">
-          <BlogPostTags icon={FolderIcon} name="Coding Best practice" />
-          <BlogPostTags icon={CalendarIcon} name="May 28, 2023" />
-          <BlogPostTags icon={ClockIcon} name="8min read" />
+          <BlogPostTag icon={FolderIcon} name="Coding Best practice" />
+          <BlogPostTag icon={CalendarIcon} name="May 28, 2023" />
+          <BlogPostTag icon={ClockIcon} name="8min read" />
         </div>
         <div className="flex items-center cursor-pointer mb-5 w-max">
           <img src={UserProfile} alt="UserProfile" className="select-none" />
           <h3 className="text-xl font-bold ml-3 select-none">Yahya M. Bello</h3>
         </div>
         <hr className="bg-slate-300 block mb-5" />
-        <BlogPostContent />
+        <BlogMarkdown />
         <hr className="bg-slate-300 block mb-8" />
         <h2 className="mb-4 text-xl font-bold text-dgDarkPurple">
           Related Blogs

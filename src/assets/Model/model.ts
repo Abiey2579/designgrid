@@ -19,3 +19,8 @@ export interface UpdateProfile {
   email: string;
   phoneNumber: string;
 }
+
+export interface BlogPostTagProps {
+  icon: any;
+  name: string;
+}

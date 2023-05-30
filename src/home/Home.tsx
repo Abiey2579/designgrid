@@ -7,8 +7,10 @@ import OurFounder from "./OurFounder";
 import CTA from "./CTA";
 import Footer from "./Footer";
 import Copyright from "./Copyright";
+import { qListAnswers } from "../assets/data/onboardingQuestions";
 
 const Home = () => {
+  console.log(qListAnswers[1]);
   return (
     <React.Fragment>
       <Navbar />

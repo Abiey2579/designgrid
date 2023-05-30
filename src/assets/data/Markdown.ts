@@ -1,4 +1,3 @@
-import image from "./logo512.png";
 export const MD = `
 
 # **Why Typescript is So Important for React Developers**

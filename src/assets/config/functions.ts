@@ -1,4 +1,4 @@
-import * as Model from "../Model/mode";
+import * as Model from "../Model/model";
 import {
   account,
   database,
