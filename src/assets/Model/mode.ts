@@ -10,3 +10,12 @@ export interface FinishOnboarding {
   feedback_q1: string;
   feedback_q2: string;
 }
+
+export interface UpdateProfile {
+  firstName: string;
+  lastName: string;
+  country: string;
+  dob: string;
+  email: string;
+  phoneNumber: string;
+}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Popover, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
@@ -13,7 +13,8 @@ import {
   ChevronDownIcon,
 } from "@heroicons/react/24/outline";
 import UserProfile from "../assets/svgs/user-profile.svg";
-import * as uriPaths from "../assets/data/constants";
+import * as uriPaths from "../assets/data/uriPaths";
+import { logout } from "../assets/config/functions";
 
 const NAV_ITEMS = [
   {
@@ -41,10 +42,19 @@ const NAV_ITEMS = [
 const Navbar = (props: { pageURI: string }) => {
   const [showProfileImageMenu, setshowProfileImageMenu] =
     useState<boolean>(false);
+  const navigate = useNavigate();
 
   const handleProfileImageMenu = () => {
     return setshowProfileImageMenu(!showProfileImageMenu);
   };
+
+  const handleLogout = () => {
+    const promise = logout();
+    if (promise !== null) {
+      navigate(uriPaths.LOG_IN);
+    }
+  };
+
   return (
     <Popover className="relative bg-dgLightPurple z-50 border-b border-dgBorder">
       <div className="lg:px-24 md:px-10 px-6 ">
@@ -115,7 +125,10 @@ const Navbar = (props: { pageURI: string }) => {
                       Update profile
                     </Link>
                   )}
-                  <span className="px-3 py-2 hover:bg-dgLightPurple rounded  flex items-center gap-3">
+                  <span
+                    onClick={() => handleLogout()}
+                    className="px-3 py-2 hover:bg-dgLightPurple rounded select-none cursor-pointer flex items-center gap-3"
+                  >
                     <TrashIcon className="w-5" />
                     Logout
                   </span>
@@ -174,6 +187,19 @@ const Navbar = (props: { pageURI: string }) => {
                       </Link>
                     )
                   )}
+                  <span
+                    key={"logout"}
+                    onClick={() => handleLogout()}
+                    className="-m-3 flex items-center cursor-pointer select-none rounded-md p-3 hover:bg-dgLightPurple"
+                  >
+                    <TrashIcon
+                      className="h-6 w-6 flex-shrink-0 "
+                      aria-hidden="true"
+                    />
+                    <span className="ml-3 text-base font-medium text-dgDarkPurple_Opacity">
+                      Logout
+                    </span>
+                  </span>
                 </nav>
               </div>
             </div>

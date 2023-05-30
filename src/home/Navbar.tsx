@@ -12,7 +12,7 @@ import {
   UserPlusIcon,
 } from "@heroicons/react/24/outline";
 import Button from "../components/Button";
-import * as uriPaths from "../assets/data/constants";
+import * as uriPaths from "../assets/data/uriPaths";
 
 const NAV_ITEMS = [
   {
@@ -80,7 +80,7 @@ const Navbar = () => {
             </Link>
           </Popover.Group>
           <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-            <Button name="Sign Up" href="/auth/signup" />
+            <Button name="Sign Up" href={uriPaths.SIGN_UP} />
           </div>
         </div>
       </div>

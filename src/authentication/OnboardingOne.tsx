@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import OnboardProgressBar from "../components/OnboardindProgressBar";
-import * as uriPaths from "../assets/data/constants";
+import * as uriPaths from "../assets/data/uriPaths";
 import { account } from "../assets/config/appwrite-auth";
 import ToastSuccess from "../components/ToastSuccess";
 import ToastWarning from "../components/ToastWarning";

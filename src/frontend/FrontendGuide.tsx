@@ -4,33 +4,28 @@ import Topnav from "../components/Topnav";
 import GuideDocs from "./GuideDocs";
 import SmartScroll from "./SmartScroll";
 import { account } from "../assets/config/appwrite-auth";
+import { useNavigate } from "react-router-dom";
+import * as uriPaths from "../assets/data/uriPaths";
 
 const FrontendGuide = () => {
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
-  const [showContent, setShowContent] = useState<boolean>(false);
+  const [userId, setUserId] = useState<string>("");
+  const navigate = useNavigate();
 
   const toggleSidebar = () => {
     return setShowSidebar(!showSidebar);
   };
 
   useEffect(() => {
-    const handleGetSession = async () => {
-      await account
-        .getSession("current")
-        .then((e) => {
-          setShowContent(true);
-        })
-        .catch((err) => {
-          setShowContent(false);
-          window.location.replace("http://localhost:3000/login");
-        });
-    };
+    account.getSession("current").then((e) => setUserId(e.userId));
+    if (!userId) {
+      navigate(uriPaths.SIGN_UP);
+    }
+  }, []);
 
-    handleGetSession();
-  }, [showSidebar]);
   return (
     <React.Fragment>
-      {showContent && (
+      {userId && (
         <div className="flex">
           <Sidebar
             sidebarControl={showSidebar}

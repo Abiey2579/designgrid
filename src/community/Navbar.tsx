@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Popover, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
@@ -13,8 +13,10 @@ import {
   TrashIcon,
   ChevronDownIcon,
 } from "@heroicons/react/24/outline";
-import * as uriPaths from "../assets/data/constants";
-
+import * as uriPaths from "../assets/data/uriPaths";
+import { logout } from "../assets/config/functions";
+import { account } from "../assets/config/appwrite-auth";
+import Button from "../components/Button";
 import UserProfile from "../assets/svgs/user-profile.svg";
 
 const NAV_ITEMS = [
@@ -38,9 +40,22 @@ const NAV_ITEMS = [
 const Navbar = () => {
   const [showProfileImageMenu, setshowProfileImageMenu] =
     useState<boolean>(false);
+  const navigate = useNavigate();
+  const [userId, setUserId] = useState<string>("ddd");
 
   const handleProfileImageMenu = () => {
     return setshowProfileImageMenu(!showProfileImageMenu);
+  };
+
+  useEffect(() => {
+    account.getSession("current").then((e) => setUserId(e.userId));
+  }, []);
+
+  const handleLogout = () => {
+    const promise = logout();
+    if (promise !== null) {
+      navigate(uriPaths.LOG_IN);
+    }
   };
   return (
     <Popover className="relative bg-dgLightPurple z-50 border-b border-dgBorder">
@@ -71,51 +86,53 @@ const Navbar = () => {
                 Learning Path
               </span>
             </Link>
-            <Link to={uriPaths.SIGN_UP}>
-              <span className="text-base font-medium text-dgDarkPurple_Opacity hover:text-dgDarkPurple_Opacity">
-                Sign Up
-              </span>
-            </Link>
           </Popover.Group>
           <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-            <div className="flex flex-col relative">
-              <div
-                className="flex items-center gap-3 cursor-pointer"
-                onClick={() => handleProfileImageMenu()}
-              >
-                <img
-                  src={UserProfile}
-                  alt="UserProfile"
-                  className="select-none w-9"
-                />
-                <p className="text-base font-medium select-none">
-                  Yahya M. Bello
-                </p>
-                <ChevronDownIcon className="select-none w-5" />
-              </div>
-              {showProfileImageMenu && (
-                <div className="absolute w-full top-full bg-dgWhite shadow mt-3 p-3 gap-2 flex flex-col rounded">
-                  <Link
-                    to={uriPaths.DASHBOARD}
-                    className="px-3 py-2 hover:bg-dgLightPurple rounded flex items-center gap-3"
-                  >
-                    <ChartBarSquareIcon className="w-5" />
-                    Dashboard
-                  </Link>
-                  <Link
-                    to={uriPaths.UPDATE_PROFILE}
-                    className="px-3 py-2 hover:bg-dgLightPurple rounded flex items-center gap-3"
-                  >
-                    <UserIcon className="w-5" />
-                    Update Profile
-                  </Link>
-                  <span className="px-3 py-2 hover:bg-dgLightPurple rounded flex items-center gap-3">
-                    <TrashIcon className="w-5" />
-                    Logout
-                  </span>
+            {userId ? (
+              <div className="flex flex-col relative">
+                <div
+                  className="flex items-center gap-3 cursor-pointer"
+                  onClick={() => handleProfileImageMenu()}
+                >
+                  <img
+                    src={UserProfile}
+                    alt="UserProfile"
+                    className="select-none w-9"
+                  />
+                  <p className="text-base font-medium select-none">
+                    Yahya M. Bello
+                  </p>
+                  <ChevronDownIcon className="select-none w-5" />
                 </div>
-              )}
-            </div>
+                {showProfileImageMenu && (
+                  <div className="absolute w-full top-full bg-dgWhite shadow mt-3 p-3 gap-2 flex flex-col rounded">
+                    <Link
+                      to={uriPaths.DASHBOARD}
+                      className="px-3 py-2 hover:bg-dgLightPurple rounded flex items-center gap-3"
+                    >
+                      <ChartBarSquareIcon className="w-5" />
+                      Dashboard
+                    </Link>
+                    <Link
+                      to={uriPaths.UPDATE_PROFILE}
+                      className="px-3 py-2 hover:bg-dgLightPurple rounded flex items-center gap-3"
+                    >
+                      <UserIcon className="w-5" />
+                      Update Profile
+                    </Link>
+                    <span
+                      onClick={() => handleLogout()}
+                      className="px-3 py-2 hover:bg-dgLightPurple rounded select-none cursor-pointer flex items-center gap-3"
+                    >
+                      <TrashIcon className="w-5" />
+                      Logout
+                    </span>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Button name="Sign Up" href={uriPaths.SIGN_UP} />
+            )}
           </div>
         </div>
       </div>
@@ -145,21 +162,57 @@ const Navbar = () => {
               </div>
               <div className="mt-6">
                 <nav className="grid gap-y-8">
-                  {NAV_ITEMS.map((item) => (
-                    <Link
-                      key={item.name}
-                      to={item.href}
-                      className="-m-3 flex items-center rounded-md p-3 hover:bg-dgLightPurple"
-                    >
-                      <item.icon
-                        className="h-6 w-6 flex-shrink-0 "
-                        aria-hidden="true"
-                      />
-                      <span className="ml-3 text-base font-medium text-dgDarkPurple_Opacity">
-                        {item.name}
+                  {NAV_ITEMS.map((item) =>
+                    userId && item.href === uriPaths.SIGN_UP ? (
+                      ""
+                    ) : (
+                      <Link
+                        key={item.name}
+                        to={item.href}
+                        className="-m-3 flex items-center rounded-md p-3 hover:bg-dgLightPurple"
+                      >
+                        <item.icon
+                          className="h-6 w-6 flex-shrink-0 "
+                          aria-hidden="true"
+                        />
+                        <span className="ml-3 text-base font-medium text-dgDarkPurple_Opacity">
+                          {item.name}
+                        </span>
+                      </Link>
+                    )
+                  )}
+                  {userId ? (
+                    <React.Fragment>
+                      <Link
+                        key={"dashboard"}
+                        to={uriPaths.DASHBOARD}
+                        className="-m-3 flex items-center rounded-md p-3 hover:bg-dgLightPurple"
+                      >
+                        <ChartBarSquareIcon
+                          className="h-6 w-6 flex-shrink-0 "
+                          aria-hidden="true"
+                        />
+                        <span className="ml-3 text-base font-medium text-dgDarkPurple_Opacity">
+                          Dashboard
+                        </span>
+                      </Link>
+                      <span
+                        key={"logout"}
+                        onClick={() => handleLogout()}
+                        className="-m-3 flex items-center cursor-pointer select-none rounded-md p-3 hover:bg-dgLightPurple"
+                      >
+                        <TrashIcon
+                          className="h-6 w-6 flex-shrink-0 "
+                          aria-hidden="true"
+                        />
+                        <span className="ml-3 text-base font-medium text-dgDarkPurple_Opacity">
+                          Logout
+                        </span>
                       </span>
-                    </Link>
-                  ))}
+                    </React.Fragment>
+                  ) : (
+                    ""
+                  )}
                 </nav>
               </div>
             </div>

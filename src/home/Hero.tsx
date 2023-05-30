@@ -1,7 +1,7 @@
 import * as React from "react";
 import Button from "../components/Button";
 import { Link } from "react-router-dom";
-import * as uriPaths from "../assets/data/constants";
+import * as uriPaths from "../assets/data/uriPaths";
 
 const Hero = () => {
   return (

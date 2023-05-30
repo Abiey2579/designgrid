@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import OnboardProgressBar from "../components/OnboardindProgressBar";
-import * as uriPaths from "../assets/data/constants";
+import * as uriPaths from "../assets/data/uriPaths";
 import { q2List } from "../assets/data/onboardingQuestions";
 import ToastWarning from "../components/ToastWarning";
 import { account } from "../assets/config/appwrite-auth";

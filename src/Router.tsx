@@ -13,7 +13,7 @@ import UpdateProfile from "./dashboard/UpdateProfile";
 import ErrorElement from "./components/ErrorElement";
 import Blogs from "./community/Blogs";
 import BlogPost from "./community/BlogPost";
-import * as uriPaths from "./assets/data/constants";
+import * as uriPaths from "./assets/data/uriPaths";
 
 const router = createBrowserRouter([
   {

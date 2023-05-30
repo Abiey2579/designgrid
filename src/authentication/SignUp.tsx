@@ -2,7 +2,7 @@ import * as React from "react";
 import CoffeeCup from "../assets/svgs/CoffeeCup.svg";
 import { Link } from "react-router-dom";
 import { account } from "../assets/config/appwrite-auth";
-import * as uriPaths from "../assets/data/constants";
+import * as uriPaths from "../assets/data/uriPaths";
 
 import Google from "../assets/svgs/google-auth.svg";
 import GitHub from "../assets/svgs/github.svg";

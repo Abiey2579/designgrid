@@ -7,7 +7,7 @@ import ToastSuccess from "../components/ToastSuccess";
 import ToastWarning from "../components/ToastWarning";
 import Spinner from "../components/Spinner";
 import { finishOnboarding } from "../assets/config/functions";
-import * as uriPaths from "../assets/data/constants";
+import * as uriPaths from "../assets/data/uriPaths";
 
 const OnboardingFour = () => {
   const [selectedID, setSelectedID] = useState<number>(0);

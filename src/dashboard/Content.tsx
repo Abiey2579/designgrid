@@ -2,7 +2,7 @@ import * as React from "react";
 import UserProfile from "../assets/svgs/user-profile-lg.svg";
 import Topic from "./Topic";
 import { Link } from "react-router-dom";
-import * as uriPaths from "../assets/data/constants";
+import * as uriPaths from "../assets/data/uriPaths";
 
 const ReactIcon = () => {
   return (
