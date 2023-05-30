@@ -1,7 +1,8 @@
 import * as React from "react";
 import CoffeeCup from "../assets/svgs/CoffeeCup.svg";
 import { Link } from "react-router-dom";
-import { account } from "./appwrite-auth";
+import { account } from "../assets/config/appwrite-auth";
+import * as uriPaths from "../assets/data/constants";
 
 import Google from "../assets/svgs/google-auth.svg";
 import GitHub from "../assets/svgs/github.svg";
@@ -12,13 +13,14 @@ const SignUp = () => {
     try {
       await account.createOAuth2Session(
         service,
-        "http://localhost:3000/frontend",
-        "http://localhost:3000/signup"
+        `http://localhost:3000${uriPaths.ONBOARDING_1}`,
+        `http://localhost:3000${uriPaths.SIGN_UP}`
       );
     } catch (error) {
       alert(error);
     }
   };
+
   return (
     <div className="lg:px-24 md:px-10 px-6 min-h-screen flex justify-around items-center">
       <div className="max-w-md">

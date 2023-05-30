@@ -1,7 +1,7 @@
 import * as React from "react";
 import StarbucksCup from "../assets/svgs/StarbucksCup.svg";
 import { Link } from "react-router-dom";
-import { account } from "./appwrite-auth";
+import { account } from "../assets/config/appwrite-auth";
 
 import Google from "../assets/svgs/google-auth.svg";
 import GitHub from "../assets/svgs/github.svg";

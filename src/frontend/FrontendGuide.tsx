@@ -3,7 +3,7 @@ import Sidebar from "./Sidebar";
 import Topnav from "../components/Topnav";
 import GuideDocs from "./GuideDocs";
 import SmartScroll from "./SmartScroll";
-import { account } from "../authentication/appwrite-auth";
+import { account } from "../assets/config/appwrite-auth";
 
 const FrontendGuide = () => {
   const [showSidebar, setShowSidebar] = useState<boolean>(false);

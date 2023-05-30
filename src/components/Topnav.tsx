@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { account } from "../authentication/appwrite-auth";
+import { account } from "../assets/config/appwrite-auth";
 
 import {
   Bars3Icon,
