@@ -1,0 +1,39 @@
+.Markdown h1 {
+  font-size: 36px !important;
+  font-weight: bold;
+  color: #241f38;
+  margin-bottom: 12px;
+}
+
+.Markdown h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #241f38;
+  margin-bottom: 12px;
+}
+
+.Markdown h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #241f38;
+  margin-bottom: 12px;
+}
+
+.Markdown p {
+  font-size: 16;
+  color: #241f38d9;
+  line-height: 1.625;
+  margin-bottom: 20px;
+}
+
+.Markdown ul,
+ol {
+  list-style-type: disc !important;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.Markdown a {
+  color: #7026ed !important;
+  text-decoration: underline;
+}

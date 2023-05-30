@@ -5,10 +5,10 @@ import ImageTwo from "../assets/images/2.jpg";
 import ImageThree from "../assets/images/3.jpg";
 import { FolderIcon, CalendarIcon, ClockIcon } from "@heroicons/react/24/solid";
 import UserProfile from "../assets/svgs/user-profile.svg";
-import BlogCardOne from "./BlogCardOne";
+import BlogCardOne from "./components/BlogCardOne";
 import Footer from "../home/Footer";
 import Copyright from "../home/Copyright";
-import BlogPostContent from "./BlogPostContent";
+import BlogPostContent from "./components/BlogMarkdown";
 
 interface BlogPostTagsProps {
   icon: any;
@@ -37,7 +37,7 @@ const BlogPost = () => {
           <BlogPostTags icon={CalendarIcon} name="May 28, 2023" />
           <BlogPostTags icon={ClockIcon} name="8min read" />
         </div>
-        <div className="flex items-center cursor-pointer mb-5">
+        <div className="flex items-center cursor-pointer mb-5 w-max">
           <img src={UserProfile} alt="UserProfile" className="select-none" />
           <h3 className="text-xl font-bold ml-3 select-none">Yahya M. Bello</h3>
         </div>

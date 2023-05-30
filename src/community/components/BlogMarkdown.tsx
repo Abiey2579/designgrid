@@ -1,14 +1,14 @@
 import * as React from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { MD } from "../assets/data/test";
-import "../assets/css/BlogPostContent.module.css";
+import { MD } from "../../assets/data/Markdown";
+import "../assets/css/BlogPostContent.css";
 
 const BlogPostContent = () => {
   return (
-    <React.Fragment>
+    <div className="Markdown">
       <ReactMarkdown children={MD} remarkPlugins={[remarkGfm]} />
-    </React.Fragment>
+    </div>
   );
 };
 

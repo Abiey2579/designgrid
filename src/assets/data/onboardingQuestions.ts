@@ -59,8 +59,13 @@ const q1 = sessionStorage.getItem("q1") ?? "";
 const q2 = sessionStorage.getItem("q2") ?? "";
 const q3 = sessionStorage.getItem("q3") ?? "";
 
+// export const qListAnswers = {
+//   1: q1List.filter((e) => e.subId === parseInt(q1))[0].potentialAnswer,
+//   2: q2List.filter((e) => e.subId === parseInt(q2))[0].potentialAnswer,
+//   3: q3List.filter((e) => e.subId === parseInt(q3))[0].potentialAnswer,
+// };
 export const qListAnswers = {
-  1: q1List.filter((e) => e.subId === parseInt(q1))[0].potentialAnswer,
-  2: q2List.filter((e) => e.subId === parseInt(q2))[0].potentialAnswer,
-  3: q3List.filter((e) => e.subId === parseInt(q3))[0].potentialAnswer,
+  1: "q1List.filter((e) => e.subId === parseInt(q1))[0].potentialAnswer",
+  2: "q2List.filter((e) => e.subId === parseInt(q2))[0].potentialAnswer",
+  3: "q3List.filter((e) => e.subId === parseInt(q3))[0].potentialAnswer",
 };
