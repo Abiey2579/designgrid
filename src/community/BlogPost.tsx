@@ -8,6 +8,7 @@ import UserProfile from "../assets/svgs/user-profile.svg";
 import BlogCardOne from "./BlogCardOne";
 import Footer from "../home/Footer";
 import Copyright from "../home/Copyright";
+import BlogPostContent from "./BlogPostContent";
 
 interface BlogPostTagsProps {
   icon: any;
@@ -20,63 +21,6 @@ const BlogPostTags = (props: BlogPostTagsProps) => {
       <props.icon className="text-dgLightPurple w-4" />
       <p className="text-dgLightPurple text-sm font-semibold">{props.name}</p>
     </div>
-  );
-};
-
-const BlogPostContent = () => {
-  return (
-    <React.Fragment>
-      <h2 className="mb-3 text-4xl font-bold text-dgDarkPurple">
-        👋 Hi there, Yahaya
-      </h2>
-      <p className="text-base text-dgDarkPurple_Opacity leading-relaxed mb-6">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna liqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis ute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat upidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.Lorem ipsum dolor sit amet, onsectetur
-        dipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud xercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-        in reprehenderit in voluptate elit sse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
-        qui officia deserunt mollit anim id est laborum.
-      </p>
-      <h2 className="mb-3 text-xl font-bold text-dgDarkPurple">
-        How it going to work
-      </h2>
-      <p className="text-base text-dgDarkPurple_Opacity leading-relaxed mb-6">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna liqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis ute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur.
-      </p>
-      <h2 className="mb-3 text-xl font-bold text-dgDarkPurple">
-        What need to be done
-      </h2>
-      <p className="text-base text-dgDarkPurple_Opacity leading-relaxed mb-6">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna liqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis ute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. laboris nisi ut
-        aliquip ex ea commodo consequat. Duis ute irure dolor in reprehenderit
-        in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-      </p>
-      <h2 className="mb-3 text-xl font-bold text-dgDarkPurple">Conclusion</h2>
-      <p className="text-base text-dgDarkPurple_Opacity leading-relaxed mb-6">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna liqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis ute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. laboris nisi ut
-        aliquip ex ea commodo consequat. Duis ute irure dolor in reprehenderit
-        in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-      </p>
-    </React.Fragment>
   );
 };
 
