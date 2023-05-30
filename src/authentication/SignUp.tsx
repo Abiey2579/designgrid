@@ -13,8 +13,8 @@ const SignUp = () => {
     try {
       await account.createOAuth2Session(
         service,
-        `http://localhost:3000${uriPaths.ONBOARDING_1}`,
-        `http://localhost:3000${uriPaths.SIGN_UP}`
+        `https://designgrid.vercel.app${uriPaths.ONBOARDING_1}`,
+        `https://designgrid.vercel.app${uriPaths.SIGN_UP}`
       );
     } catch (error) {
       alert(error);
