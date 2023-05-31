@@ -14,7 +14,6 @@ const OnboardingOne = () => {
   const [errorToast, setErrorToast] = useState<boolean>(false);
   const [emptyOptionErrorToast, setEmptyOptionErrorToast] =
     useState<boolean>(false);
-  const [userId, setUserId] = useState<string>("");
 
   const navigate = useNavigate();
 
@@ -24,22 +23,22 @@ const OnboardingOne = () => {
       setSelectedID(parseInt(q1));
     }
 
-    account.getSession("current").then((e) => setUserId(e.userId));
+    const createAccount = async () => {
+      const session = await account.getSession("current");
 
-    if (userId) {
-      const promise = createUserProfile({
-        uid: userId,
-      });
-
-      if (promise !== null) {
-        setSuccessToast(true);
+      if (session) {
+        const promise = await createUserProfile({
+          uid: session.userId,
+        });
+        if (promise !== null) {
+          setSuccessToast(true);
+        }
       } else {
-        console.log(promise);
-        setErrorToast(true);
+        navigate(uriPaths.SIGN_UP);
       }
-    } else {
-      navigate(uriPaths.SIGN_UP);
-    }
+    };
+
+    createAccount();
   }, []);
 
   const handleSelect = (id: number) => {

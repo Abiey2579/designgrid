@@ -10,7 +10,6 @@ const OnboardingTwo = () => {
   const [selectedID, setSelectedID] = useState<number>(0);
   const [emptyOptionErrorToast, setEmptyOptionErrorToast] =
     useState<boolean>(false);
-  const [userId, setUserId] = useState<string>("");
 
   const navigate = useNavigate();
 
@@ -20,10 +19,13 @@ const OnboardingTwo = () => {
       setSelectedID(parseInt(q2));
     }
 
-    account.getSession("current").then((e) => setUserId(e.userId));
-    if (!userId) {
-      navigate(uriPaths.SIGN_UP);
-    }
+    const checkSession = async () => {
+      const session = await account.getSession("current");
+      if (!session) {
+        navigate(uriPaths.SIGN_UP);
+      }
+    };
+    checkSession();
   }, []);
 
   const handleSelect = (id: number) => {
