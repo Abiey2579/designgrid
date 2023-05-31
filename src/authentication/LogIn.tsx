@@ -2,18 +2,18 @@ import * as React from "react";
 import StarbucksCup from "../assets/svgs/StarbucksCup.svg";
 import { Link } from "react-router-dom";
 import { account } from "../assets/config/appwrite-auth";
+import * as uriPaths from "../assets/data/uriPaths";
 
 import Google from "../assets/svgs/google-auth.svg";
 import GitHub from "../assets/svgs/github.svg";
-import LinkedIn from "../assets/svgs/linkedin-in.svg";
 
 const LogIn = () => {
   const handleOAuth = async (service: string) => {
     try {
       await account.createOAuth2Session(
         service,
-        "http://localhost:3000/frontend",
-        "http://localhost:3000/signup"
+        `http://localhost:3000${uriPaths.DASHBOARD}`,
+        `http://localhost:3000${uriPaths.SIGN_UP}`
       );
     } catch (error) {
       alert(error);
@@ -45,15 +45,6 @@ const LogIn = () => {
             <img src={GitHub} alt={"GitHub"} className="m-auto" />
           </div>
           <p className="w-fit py-4">Continue with GitHub</p>
-        </button>
-        <button
-          onClick={() => handleOAuth("linkedin")}
-          className={`bg-dgFacebook font-normal text-dgLightPurple rounded-full text-base w-[300px] flex outline-0 mb-5`}
-        >
-          <div className="w-20 text-center py-4">
-            <img src={LinkedIn} alt={"LinkedIn"} className="m-auto" />
-          </div>
-          <p className="w-fit py-4">Continue with LinkedIn</p>
         </button>
 
         <p className="text-dgDarkPurple text-base mb-6">

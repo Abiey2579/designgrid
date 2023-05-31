@@ -10,6 +10,8 @@ const OnboardingThree = () => {
   const [selectedID, setSelectedID] = useState<number>(0);
   const [emptyOptionErrorToast, setEmptyOptionErrorToast] =
     useState<boolean>(false);
+  const [preventView, setPreventView] = useState<boolean>(true);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,8 +21,10 @@ const OnboardingThree = () => {
     }
 
     const checkSession = async () => {
-      const session = await account.getSession("current");
-      if (!session) {
+      try {
+        await account.getSession("current");
+        setPreventView(false);
+      } catch (err) {
         navigate(uriPaths.SIGN_UP);
       }
     };
@@ -46,41 +50,46 @@ const OnboardingThree = () => {
           close={() => setEmptyOptionErrorToast(false)}
         />
       )}
-      <div className="lg:px-24 md:px-10 px-6 min-h-screen flex flex-col justify-center items-center">
-        <h1 className="text-dgDarkPurple text-4xl font-bold mb-5">
-          Question 3
-        </h1>
-        <p className="text-dgDarkPurple_Opacity text-base mb-5">
-          What are your goals in learning frontend development?
-        </p>
-        {q3List.map((q) => (
-          <p
-            key={q.subId}
-            onClick={() => handleSelect(q.subId)}
-            className={`lg:min-w-[360px] md:min-w-[360px] min-w-full transition-all cursor-pointer select-none px-5 py-3 ${
-              selectedID === q.subId
-                ? "bg-dgPurple text-dgLightPurple"
-                : "bg-dgLightPurple text-dgDarkPurple border border-slate-300"
-            } border-dgBorder border rounded font-medium mb-2`}
-          >
-            {q.potentialAnswer}
+
+      {preventView === false ? (
+        <div className="lg:px-24 md:px-10 px-6 min-h-screen flex flex-col justify-center items-center">
+          <h1 className="text-dgDarkPurple text-4xl font-bold mb-5">
+            Question 3
+          </h1>
+          <p className="text-dgDarkPurple_Opacity text-base mb-5">
+            What are your goals in learning frontend development?
           </p>
-        ))}
-        <div className="mb-10">
-          <Link to={uriPaths.ONBOARDING_2}>
-            <button className="px-6 py-1 mr-5 text-center text-base bg-dgLightPurple text-dgDarkPurple font-medium rounded border-dgBorder border outline-0">
-              Back
+          {q3List.map((q) => (
+            <p
+              key={q.subId}
+              onClick={() => handleSelect(q.subId)}
+              className={`lg:min-w-[360px] md:min-w-[360px] min-w-full transition-all cursor-pointer select-none px-5 py-3 ${
+                selectedID === q.subId
+                  ? "bg-dgPurple text-dgLightPurple"
+                  : "bg-dgLightPurple text-dgDarkPurple border border-slate-300"
+              } border-dgBorder border rounded font-medium mb-2`}
+            >
+              {q.potentialAnswer}
+            </p>
+          ))}
+          <div className="mb-10">
+            <Link to={uriPaths.ONBOARDING_2}>
+              <button className="px-6 py-1 mr-5 text-center text-base bg-dgLightPurple text-dgDarkPurple font-medium rounded border-dgBorder border outline-0">
+                Back
+              </button>
+            </Link>
+            <button
+              onClick={() => handleNext()}
+              className="px-6 py-1 text-center text-base bg-dgPurple text-dgLightPurple font-medium rounded border-0 outline-0"
+            >
+              Next
             </button>
-          </Link>
-          <button
-            onClick={() => handleNext()}
-            className="px-6 py-1 text-center text-base bg-dgPurple text-dgLightPurple font-medium rounded border-0 outline-0"
-          >
-            Next
-          </button>
+          </div>
+          <OnboardProgressBar stage={3} selected={selectedID !== 0} />
         </div>
-        <OnboardProgressBar stage={3} selected={selectedID !== 0} />
-      </div>
+      ) : (
+        ""
+      )}
     </React.Fragment>
   );
 };

@@ -6,7 +6,6 @@ import * as uriPaths from "../assets/data/uriPaths";
 
 import Google from "../assets/svgs/google-auth.svg";
 import GitHub from "../assets/svgs/github.svg";
-import LinkedIn from "../assets/svgs/linkedin-in.svg";
 
 const SignUp = () => {
   const handleOAuth = async (service: string) => {
@@ -46,15 +45,6 @@ const SignUp = () => {
             <img src={GitHub} alt={"GitHub"} className="m-auto" />
           </div>
           <p className="w-fit py-4">Sign Up with GitHub</p>
-        </button>
-        <button
-          onClick={() => handleOAuth("linkedin")}
-          className={`bg-dgFacebook font-normal text-dgLightPurple rounded-full text-base w-[300px] flex outline-0 mb-5`}
-        >
-          <div className="w-20 text-center py-4">
-            <img src={LinkedIn} alt={"LinkedIn"} className="m-auto" />
-          </div>
-          <p className="w-fit py-4">Sign Up with LinkedIn</p>
         </button>
         <p className="text-dgDarkPurple text-base mb-6">
           Already have an account?{" "}
