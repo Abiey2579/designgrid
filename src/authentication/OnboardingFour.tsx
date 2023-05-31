@@ -16,7 +16,6 @@ const OnboardingFour = () => {
   const [selectTagValue, setSelectTagValue] = useState<string>("");
   const [textareaValue, setTextareaValue] = useState<string>("");
   const [spin, setSpin] = useState<boolean>(false);
-  const [userId, setUserId] = useState<string>("");
   const navigate = useNavigate();
 
   const handleSelectTag = (e: any) => {
@@ -30,14 +29,15 @@ const OnboardingFour = () => {
 
   const handleFinishOnboarding = async () => {
     setSpin(true);
-    account.getSession("current").then((e) => setUserId(e.userId));
+    const session = await account.getSession("current");
 
-    if (userId) {
+    if (session) {
+      console.log(qListAnswers);
       const promise = await finishOnboarding({
-        uid: userId,
-        q1: qListAnswers[1].potentialAnswer,
-        q2: qListAnswers[2].potentialAnswer,
-        q3: qListAnswers[3].potentialAnswer,
+        uid: session.userId,
+        q1: qListAnswers[1],
+        q2: qListAnswers[2],
+        q3: qListAnswers[3],
         feedback_q1: selectTagValue,
         feedback_q2: textareaValue,
       });
@@ -53,7 +53,7 @@ const OnboardingFour = () => {
     } else {
       setSpin(false);
       setErrorToast(true);
-      // navigate(uriPaths.SIGN_UP);
+      navigate(uriPaths.SIGN_UP);
     }
   };
 

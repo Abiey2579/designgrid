@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Search from "../assets/svgs/search.svg";
 import { tableOfContent } from "../assets/data/tableOfContent";
+import { frontend101TOC } from "../assets/TOC/frontend101TOC";
 import {
   BookOpenIcon,
   CodeBracketIcon,
@@ -19,8 +20,8 @@ interface SidebarProps {
 
 const Sidebar = (props: SidebarProps) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const filteredHackathons = tableOfContent.filter((item) =>
-    item.header.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredHackathons = frontend101TOC.filter((item) =>
+    item.topic.toLowerCase().includes(searchQuery.toLowerCase())
   );
   const d = props.sidebarControl
     ? "fixed z-10 h-screen"
@@ -57,59 +58,32 @@ const Sidebar = (props: SidebarProps) => {
           {filteredHackathons.map((item) => (
             <React.Fragment>
               <p
-                key={item.header}
+                key={item.topic}
                 className="flex items-center justify-between font-semibold text-dgLightPurple text-base my-3 py-1 border-slate-300 border-b"
               >
-                <span>{item.header}</span>
-                {item.header === "Introduction" ? (
+                <span>{item.topic}</span>
+                {item.topic === "Introduction" ? (
                   <h5 className="text-sm flex gap-1 items-center">
-                    4/{item.subContent.length}
+                    4/{item.lessons.length}
                     <CheckBadgeIcon className="w-5 text-dgPurple" />
                   </h5>
                 ) : (
                   <h5 className="text-sm flex gap-1 items-center">
-                    0/{item.subContent.length}
+                    0/{item.lessons.length}
                   </h5>
                 )}
               </p>
-              {item.subContent.map((subItem) => (
+              {item.lessons.map((lesson) => (
                 <span
-                  key={subItem.title}
-                  title={subItem.title}
-                  className={`pl-3 py-3 flex items-center select-none cursor-pointer rounded mb-1 text-sm block w-full transition-all hover:bg-dgPurple  ${
-                    item.active
-                      ? "bg-dgPurple text-dgLightPurple font-semibold"
-                      : "text-dgLightPurple"
-                  }`}
+                  key={lesson.title}
+                  title={lesson.title}
+                  className={`pl-3 py-3 flex items-center select-none cursor-pointer text-dgLightPurple rounded mb-1 text-sm block w-full transition-all hover:bg-dgPurple`}
                 >
-                  {subItem.icon === "BookOpenIcon" ? (
-                    <BookOpenIcon className="mr-2 w-4" />
-                  ) : (
-                    ""
-                  )}
-                  {subItem.icon === "CodeBracketIcon" ? (
-                    <CodeBracketIcon className="mr-2 w-4" />
-                  ) : (
-                    ""
-                  )}
-                  {subItem.icon === "CommandLineIcon" ? (
-                    <CommandLineIcon className="mr-2 w-4" />
-                  ) : (
-                    ""
-                  )}
-                  {subItem.icon === "ShareIcon" ? (
-                    <ShareIcon className="mr-2 w-4" />
-                  ) : (
-                    ""
-                  )}
-                  {subItem.icon === "UsersIcon" ? (
-                    <UsersIcon className="mr-2 w-4" />
-                  ) : (
-                    ""
-                  )}
-                  {subItem.title.length > 30
-                    ? subItem.title.substring(0, 30) + "..."
-                    : subItem.title}
+                  <lesson.icon className="mr-2 w-4" />
+
+                  {lesson.title.length > 30
+                    ? lesson.title.substring(0, 30) + "..."
+                    : lesson.title}
                 </span>
               ))}
             </React.Fragment>

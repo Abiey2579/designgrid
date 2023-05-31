@@ -12,15 +12,16 @@ export interface FinishOnboarding {
 }
 
 export interface UpdateProfile {
-  firstName: string;
-  lastName: string;
   country: string;
   dob: string;
-  email: string;
-  phoneNumber: string;
+  phone_number: string;
 }
 
 export interface BlogPostTagProps {
   icon: any;
   name: string;
+}
+
+export interface CheckIfUserExist {
+  uid: string;
 }

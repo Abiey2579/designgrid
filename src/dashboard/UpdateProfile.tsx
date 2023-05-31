@@ -10,11 +10,8 @@ import ToastWarning from "../components/ToastWarning";
 import Spinner from "../components/Spinner";
 
 const UpdateProfile = () => {
-  const [firstName, setFirstName] = useState<string>("");
-  const [lastName, setLastName] = useState<string>("");
   const [country, setCountry] = useState<string>("");
   const [DOB, setDOB] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
   const [phomeNumber, setPhomeNumber] = useState<string>("");
   const navigate = useNavigate();
   const [userId, setUserId] = useState<string>("");
@@ -24,28 +21,45 @@ const UpdateProfile = () => {
     useState<boolean>(false);
   const [spin, setSpin] = useState<boolean>(false);
 
+  type FetchedUser = {
+    [key: string]: any;
+  };
+  const [userData, setUserData] = useState<FetchedUser>();
+
   useEffect(() => {
-    account.getSession("current").then((e) => setUserId(e.userId));
-    if (!userId) {
-      navigate(uriPaths.SIGN_UP);
-    }
+    const checkSession = async () => {
+      const session = await account.getSession("current");
+      if (!session) {
+        navigate(uriPaths.SIGN_UP);
+      }
+      setUserId(session.userId);
+      const user = await account.get();
+      setUserData(user);
+    };
+    checkSession();
   }, []);
 
   const handleUpdateProfile = async () => {
-    if (firstName.trim() === "" || lastName.trim() === "") {
+    if (
+      country.trim() === "" ||
+      phomeNumber.trim() === "" ||
+      DOB.trim() === ""
+    ) {
       setrequiredFieldsToast(true);
       return;
     }
     setSpin(true);
     try {
-      const promise = await updateProfile({
-        firstName: firstName,
-        lastName: lastName,
-        country: country,
-        dob: DOB,
-        email: email,
-        phoneNumber: phomeNumber,
-      });
+      const promise = await updateProfile(
+        {
+          country: country,
+          dob: DOB,
+          phone_number: phomeNumber,
+        },
+        userId
+      );
+
+      console.log(promise);
 
       if (promise !== null) {
         setSuccessToast(true);
@@ -66,7 +80,7 @@ const UpdateProfile = () => {
         <React.Fragment>
           {successToast && (
             <ToastSuccess
-              title="Your accout is created"
+              title="Account Updated Successfully"
               close={() => setSuccessToast(false)}
             />
           )}
@@ -78,7 +92,7 @@ const UpdateProfile = () => {
           )}
           {requiredFieldsToast && (
             <ToastWarning
-              title="First and Last name are required"
+              title="Fields with * are required"
               close={() => setrequiredFieldsToast(false)}
             />
           )}
@@ -105,21 +119,32 @@ const UpdateProfile = () => {
               <div>
                 <span className="mb-1 block">First Name</span>
                 <input
-                  onChange={(e) => setFirstName(e.target.value)}
                   type="text"
+                  readOnly
+                  value={
+                    userData !== undefined ? userData.name.split(" ")[0] : ""
+                  }
                   className="border border-slate-400 rounded font-medium outline-0 px-3 py-2 md:min-w-[340px] w-full bg-dgLightPurple text-dgDarkPurple "
                 />
               </div>
               <div>
                 <span className="mb-1 block">Last Name</span>
                 <input
-                  onChange={(e) => setLastName(e.target.value)}
                   type="text"
+                  readOnly
+                  value={
+                    userData !== undefined
+                      ? userData.name
+                          .split(" ")
+                          .slice(1, userData.name.split(" ").length)
+                          .join(" ")
+                      : ""
+                  }
                   className="border border-slate-400 rounded font-medium outline-0 px-3 py-2 md:min-w-[340px] w-full bg-dgLightPurple text-dgDarkPurple "
                 />
               </div>
               <div>
-                <span className="mb-1 block">Country</span>
+                <span className="mb-1 block">Country *</span>
                 <select
                   onChange={(e) => setCountry(e.target.value)}
                   className="border border-slate-400 rounded font-medium outline-0 px-3 py-[10px] md:min-w-[340px] w-full bg-dgLightPurple text-dgDarkPurple"
@@ -133,7 +158,7 @@ const UpdateProfile = () => {
                 </select>
               </div>
               <div>
-                <span className="mb-1 block">Date of Birth</span>
+                <span className="mb-1 block">Date of Birth *</span>
                 <input
                   onChange={(e) => setDOB(e.target.value)}
                   type="date"
@@ -148,13 +173,14 @@ const UpdateProfile = () => {
               <div>
                 <span className="mb-1 block">Email</span>
                 <input
-                  onChange={(e) => setEmail(e.target.value)}
                   type="email"
+                  readOnly
+                  value={userData !== undefined ? userData.email : ""}
                   className="border border-slate-400 rounded font-medium outline-0 px-3 py-2 md:min-w-[340px] w-full bg-dgLightPurple text-dgDarkPurple "
                 />
               </div>
               <div>
-                <span className="mb-1 block">Phone Number</span>
+                <span className="mb-1 block">Phone Number *</span>
                 <input
                   onChange={(e) => setPhomeNumber(e.target.value)}
                   type="text"

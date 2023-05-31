@@ -6,7 +6,7 @@ import {
   USER_PROFILE_COLLECTION,
   ONBOARDING_QA_COLLECTION,
 } from "./appwrite-auth";
-import { ID } from "appwrite";
+import { ID, Query } from "appwrite";
 
 export const createUserProfile = async (DataModel: Model.CreateUserProfile) => {
   try {
@@ -15,13 +15,10 @@ export const createUserProfile = async (DataModel: Model.CreateUserProfile) => {
       USER_PROFILE_COLLECTION,
       ID.unique(),
       {
-        ...DataModel,
+        uid: DataModel.uid,
         country: "",
         dob: "",
-        email: "",
         phone_number: "",
-        first_name: "",
-        last_name: "",
       }
     );
 
@@ -46,18 +43,36 @@ export const finishOnboarding = async (DataModel: Model.FinishOnboarding) => {
   }
 };
 
-export const updateProfile = async (DataModel: Model.UpdateProfile) => {
+export const updateProfile = async (
+  DataModel: Model.UpdateProfile,
+  uid: string
+) => {
   try {
-    const promise = await database.createDocument(
+    // Find the document using the unique attribute
+    const searchResponse = await database.listDocuments(
       DATABASE_ID,
-      ONBOARDING_QA_COLLECTION,
-      ID.unique(),
+      USER_PROFILE_COLLECTION,
+      [Query.equal("uid", uid)]
+    );
+
+    if (searchResponse.documents.length === 0) {
+      return null;
+    }
+
+    const documentId = searchResponse.documents[0].$id;
+
+    console.log(documentId);
+
+    const promise = await database.updateDocument(
+      DATABASE_ID,
+      USER_PROFILE_COLLECTION,
+      documentId,
       DataModel
     );
 
     return promise;
   } catch (error) {
-    return null;
+    return error;
   }
 };
 

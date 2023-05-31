@@ -11,7 +11,6 @@ const OnboardingThree = () => {
   const [emptyOptionErrorToast, setEmptyOptionErrorToast] =
     useState<boolean>(false);
   const navigate = useNavigate();
-  const [userId, setUserId] = useState<string>("");
 
   useEffect(() => {
     let q3 = sessionStorage.getItem("q3");
@@ -19,10 +18,13 @@ const OnboardingThree = () => {
       setSelectedID(parseInt(q3));
     }
 
-    account.getSession("current").then((e) => setUserId(e.userId));
-    if (!userId) {
-      navigate(uriPaths.SIGN_UP);
-    }
+    const checkSession = async () => {
+      const session = await account.getSession("current");
+      if (!session) {
+        navigate(uriPaths.SIGN_UP);
+      }
+    };
+    checkSession();
   }, []);
 
   const handleSelect = (id: number) => {

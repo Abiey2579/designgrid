@@ -55,17 +55,12 @@ export const q3List = [
   },
 ];
 
-const q1 = sessionStorage.getItem("q1") ?? "";
-const q2 = sessionStorage.getItem("q2") ?? "";
-const q3 = sessionStorage.getItem("q3") ?? "";
+const q1 = parseInt(sessionStorage.getItem("q1") || "") || 0;
+const q2 = parseInt(sessionStorage.getItem("q2") || "") || 0;
+const q3 = parseInt(sessionStorage.getItem("q3") || "") || 0;
 
-// export const qListAnswers = {
-//   1: q1List.filter((e) => e.subId === parseInt(q1))[0].potentialAnswer,
-//   2: q2List.filter((e) => e.subId === parseInt(q2))[0].potentialAnswer,
-//   3: q3List.filter((e) => e.subId === parseInt(q3))[0].potentialAnswer,
-// };
 export const qListAnswers = {
-  1: q1List.filter((e) => e.subId === parseInt(q1))[0],
-  2: q2List.filter((e) => e.subId === parseInt(q2))[0],
-  3: q3List.filter((e) => e.subId === parseInt(q3))[0],
+  1: q1List.find((e) => e.subId === q1)?.potentialAnswer || "",
+  2: q2List.find((e) => e.subId === q2)?.potentialAnswer || "",
+  3: q3List.find((e) => e.subId === q3)?.potentialAnswer || "",
 };
