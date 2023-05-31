@@ -195,7 +195,7 @@ export const frontend101TOC = [
     ],
   },
   {
-    topic: "Conclusion",
+    topic: "Congratulations",
     lessons: [{ title: "Choose Your Path Forward", icon: BookOpenIcon }],
   },
 ];
