@@ -20,8 +20,9 @@ const OnboardingTwo = () => {
     }
 
     const checkSession = async () => {
-      const session = await account.getSession("current");
-      if (!session) {
+      try {
+        await account.getSession("current");
+      } catch (err) {
         navigate(uriPaths.SIGN_UP);
       }
     };
@@ -47,6 +48,7 @@ const OnboardingTwo = () => {
           close={() => setEmptyOptionErrorToast(false)}
         />
       )}
+
       <div className="lg:px-24 md:px-10 px-6 min-h-screen flex flex-col justify-center items-center">
         <h1 className="text-dgDarkPurple text-4xl font-bold mb-5">
           Question 2

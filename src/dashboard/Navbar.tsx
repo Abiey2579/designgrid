@@ -39,7 +39,7 @@ const NAV_ITEMS = [
   },
 ];
 
-const Navbar = (props: { pageURI: string }) => {
+const Navbar = (props: { pageURI: string; userName: string | undefined }) => {
   const [showProfileImageMenu, setshowProfileImageMenu] =
     useState<boolean>(false);
   const navigate = useNavigate();
@@ -97,12 +97,12 @@ const Navbar = (props: { pageURI: string }) => {
                   className="select-none w-9"
                 />
                 <p className="text-base font-medium select-none">
-                  Yahya M. Bello
+                  {props.userName}
                 </p>
                 <ChevronDownIcon className="select-none w-5" />
               </div>
               {showProfileImageMenu && (
-                <div className="absolute w-full top-full bg-dgWhite shadow mt-3 p-3 gap-2 flex flex-col rounded">
+                <div className="absolute w-full min-w-[185px] top-full bg-dgWhite shadow mt-3 p-3 gap-2 flex flex-col rounded">
                   {props.pageURI === uriPaths.DASHBOARD ? (
                     ""
                   ) : (

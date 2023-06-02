@@ -14,7 +14,7 @@ const UpdateProfile = () => {
   const [DOB, setDOB] = useState<string>("");
   const [phomeNumber, setPhomeNumber] = useState<string>("");
   const navigate = useNavigate();
-  const [userId, setUserId] = useState<string>("");
+  const [preventView, setPreventView] = useState<boolean>(true);
   const [successToast, setSuccessToast] = useState<boolean>(false);
   const [errorToast, setErrorToast] = useState<boolean>(false);
   const [requiredFieldsToast, setrequiredFieldsToast] =
@@ -22,19 +22,24 @@ const UpdateProfile = () => {
   const [spin, setSpin] = useState<boolean>(false);
 
   type FetchedUser = {
-    [key: string]: any;
+    $createdAt: string;
+    $id: string;
+    $updatedAt: string;
+    email: string;
+    name: string;
   };
   const [userData, setUserData] = useState<FetchedUser>();
 
   useEffect(() => {
     const checkSession = async () => {
-      const session = await account.getSession("current");
-      if (!session) {
+      try {
+        const session = await account.getSession("current");
+        setPreventView(false);
+        const user = await account.get();
+        setUserData(user);
+      } catch (err) {
         navigate(uriPaths.SIGN_UP);
       }
-      setUserId(session.userId);
-      const user = await account.get();
-      setUserData(user);
     };
     checkSession();
   }, []);
@@ -56,10 +61,8 @@ const UpdateProfile = () => {
           dob: DOB,
           phone_number: phomeNumber,
         },
-        userId
+        userData?.$id ?? ""
       );
-
-      console.log(promise);
 
       if (promise !== null) {
         setSuccessToast(true);
@@ -71,32 +74,31 @@ const UpdateProfile = () => {
     } catch (error) {
       setErrorToast(true);
       setSpin(false);
-      console.log(error);
     }
   };
   return (
     <React.Fragment>
-      {userId && (
+      {successToast && (
+        <ToastSuccess
+          title="Account Updated Successfully"
+          close={() => setSuccessToast(false)}
+        />
+      )}
+      {errorToast && (
+        <ToastWarning
+          title="An unexpected error occured"
+          close={() => setErrorToast(false)}
+        />
+      )}
+      {requiredFieldsToast && (
+        <ToastWarning
+          title="Fields with * are required"
+          close={() => setrequiredFieldsToast(false)}
+        />
+      )}
+      {preventView === false ? (
         <React.Fragment>
-          {successToast && (
-            <ToastSuccess
-              title="Account Updated Successfully"
-              close={() => setSuccessToast(false)}
-            />
-          )}
-          {errorToast && (
-            <ToastWarning
-              title="An unexpected error occured"
-              close={() => setErrorToast(false)}
-            />
-          )}
-          {requiredFieldsToast && (
-            <ToastWarning
-              title="Fields with * are required"
-              close={() => setrequiredFieldsToast(false)}
-            />
-          )}
-          <Navbar pageURI={uriPaths.UPDATE_PROFILE} />
+          <Navbar pageURI={uriPaths.UPDATE_PROFILE} userName={userData?.name} />
           <div className="lg:px-24 md:px-10 px-6 max-w-4xl mx-auto my-16">
             <h1 className="font-bold text-dgDarkPurple text-2xl mb-5">
               Profile
@@ -200,6 +202,10 @@ const UpdateProfile = () => {
             </button>
           </div>
         </React.Fragment>
+      ) : (
+        <div className="w-screen h-screen flex justify-center items-center">
+          <Spinner className="w-10 fill-dgLightPurple text-dgPurple" />
+        </div>
       )}
     </React.Fragment>
   );

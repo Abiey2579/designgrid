@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import OnboardProgressBar from "../components/OnboardindProgressBar";
 import { qListAnswers } from "../assets/data/onboardingQuestions";
@@ -26,6 +26,17 @@ const OnboardingFour = () => {
     setSelectedID(100);
     setTextareaValue(e);
   };
+
+  useEffect(() => {
+    const checkSession = async () => {
+      try {
+        await account.getSession("current");
+      } catch (err) {
+        navigate(uriPaths.SIGN_UP);
+      }
+    };
+    checkSession();
+  }, []);
 
   const handleFinishOnboarding = async () => {
     setSpin(true);
