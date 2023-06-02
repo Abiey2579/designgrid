@@ -14,7 +14,7 @@ const UpdateProfile = () => {
   const [DOB, setDOB] = useState<string>("");
   const [phomeNumber, setPhomeNumber] = useState<string>("");
   const navigate = useNavigate();
-  const [preventView, setPreventView] = useState<string>("");
+  const [preventView, setPreventView] = useState<boolean>(true);
   const [successToast, setSuccessToast] = useState<boolean>(false);
   const [errorToast, setErrorToast] = useState<boolean>(false);
   const [requiredFieldsToast, setrequiredFieldsToast] =
@@ -34,7 +34,7 @@ const UpdateProfile = () => {
     const checkSession = async () => {
       try {
         const session = await account.getSession("current");
-        setPreventView(session.userId);
+        setPreventView(false);
         const user = await account.get();
         setUserData(user);
       } catch (err) {
@@ -96,9 +96,9 @@ const UpdateProfile = () => {
           close={() => setrequiredFieldsToast(false)}
         />
       )}
-      {preventView && (
+      {preventView === false ? (
         <React.Fragment>
-          <Navbar pageURI={uriPaths.UPDATE_PROFILE} />
+          <Navbar pageURI={uriPaths.UPDATE_PROFILE} userName={userData?.name} />
           <div className="lg:px-24 md:px-10 px-6 max-w-4xl mx-auto my-16">
             <h1 className="font-bold text-dgDarkPurple text-2xl mb-5">
               Profile
@@ -202,6 +202,10 @@ const UpdateProfile = () => {
             </button>
           </div>
         </React.Fragment>
+      ) : (
+        <div className="w-screen h-screen flex justify-center items-center">
+          <Spinner className="w-10 fill-dgLightPurple text-dgPurple" />
+        </div>
       )}
     </React.Fragment>
   );

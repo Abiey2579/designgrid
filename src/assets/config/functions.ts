@@ -61,8 +61,6 @@ export const updateProfile = async (
 
     const documentId = searchResponse.documents[0].$id;
 
-    console.log(documentId);
-
     const promise = await database.updateDocument(
       DATABASE_ID,
       USER_PROFILE_COLLECTION,
@@ -82,5 +80,43 @@ export const logout = () => {
     return promise;
   } catch (err) {
     return null;
+  }
+};
+
+export const checkIfUserExist = async (uid: string) => {
+  try {
+    // Find the document using the unique attribute
+    const searchResponse = await database.listDocuments(
+      DATABASE_ID,
+      USER_PROFILE_COLLECTION,
+      [Query.equal("uid", uid)]
+    );
+
+    if (searchResponse.documents.length === 1) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    return false;
+  }
+};
+
+export const checkIfCompletedOnboarding = async (uid: string) => {
+  try {
+    // Find the document using the unique attribute
+    const searchResponse = await database.listDocuments(
+      DATABASE_ID,
+      ONBOARDING_QA_COLLECTION,
+      [Query.equal("uid", uid)]
+    );
+
+    if (searchResponse.documents.length === 1) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    return false;
   }
 };

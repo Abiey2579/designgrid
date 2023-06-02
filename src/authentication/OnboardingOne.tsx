@@ -6,7 +6,12 @@ import { account } from "../assets/config/appwrite-auth";
 import ToastSuccess from "../components/ToastSuccess";
 import ToastWarning from "../components/ToastWarning";
 import { q1List } from "../assets/data/onboardingQuestions";
-import { createUserProfile } from "../assets/config/functions";
+import Spinner from "../components/Spinner";
+import {
+  createUserProfile,
+  checkIfUserExist,
+  checkIfCompletedOnboarding,
+} from "../assets/config/functions";
 
 const OnboardingOne = () => {
   const [selectedID, setSelectedID] = useState<number>(0);
@@ -27,7 +32,6 @@ const OnboardingOne = () => {
     const checkSession = async () => {
       try {
         await account.getSession("current");
-        setPreventView(false);
       } catch (err) {
         navigate(uriPaths.SIGN_UP);
       }
@@ -36,12 +40,26 @@ const OnboardingOne = () => {
 
     const createAccount = async () => {
       const session = await account.getSession("current");
+      const userExist = await checkIfUserExist(session.userId);
+      const completedOnboarding = await checkIfCompletedOnboarding(
+        session.userId
+      );
 
-      const promise = await createUserProfile({
-        uid: session.userId,
-      });
-      if (promise !== null) {
-        setSuccessToast(true);
+      if (userExist) {
+        if (completedOnboarding) {
+          navigate(uriPaths.DASHBOARD);
+          return;
+        } else {
+          setPreventView(false);
+        }
+      } else {
+        setPreventView(false);
+        const promise = await createUserProfile({
+          uid: session.userId,
+        });
+        if (promise !== null) {
+          setSuccessToast(true);
+        }
       }
     };
 
@@ -111,7 +129,9 @@ const OnboardingOne = () => {
           <OnboardProgressBar stage={1} selected={selectedID !== 0} />
         </div>
       ) : (
-        ""
+        <div className="w-screen h-screen flex justify-center items-center">
+          <Spinner className="w-10 fill-dgLightPurple text-dgPurple" />
+        </div>
       )}
     </React.Fragment>
   );
