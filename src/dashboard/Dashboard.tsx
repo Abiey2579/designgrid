@@ -25,7 +25,7 @@ const Dashboard = () => {
   useEffect(() => {
     const checkSession = async () => {
       try {
-        const session = await account.getSession("current");
+        await account.getSession("current");
         const user = await account.get();
         setUserData(user);
       } catch (err) {
