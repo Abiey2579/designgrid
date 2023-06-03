@@ -15,6 +15,11 @@ import {
 } from "../assets/config/functions";
 import Spinner from "../components/Spinner";
 import { Blog } from "../assets/Model/model";
+import {
+  storage,
+  PROFILE_PICTURE_BUCKET,
+} from "../assets/config/appwrite-auth";
+import { AVATAR } from "../assets/data/constants";
 
 const Blogs = () => {
   const [preventView, setPreventView] = useState<boolean>(true);
@@ -27,6 +32,8 @@ const Blogs = () => {
     name: string;
   };
   const [userData, setUserData] = useState<FetchedUser>();
+  const [profileImage, setProfileImage] = useState<string>("");
+  const [profileImageError, setProfileImageError] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -69,12 +76,36 @@ const Blogs = () => {
     };
 
     fetchBlogs();
+
+    const getProfilePicture = async () => {
+      try {
+        const user = await account.get();
+        const files = await storage.listFiles(PROFILE_PICTURE_BUCKET);
+        const existingFile = files.files.find(
+          (file) => file.name === user?.$id
+        );
+
+        if (existingFile) {
+          const previewLink = await storage.getFilePreview(
+            PROFILE_PICTURE_BUCKET,
+            existingFile.$id
+          );
+          setProfileImage(previewLink.href);
+        } else {
+          setProfileImage(AVATAR);
+        }
+      } catch (err) {
+        setProfileImageError(true);
+      }
+    };
+
+    getProfilePicture();
   }, []);
   return (
     <React.Fragment>
       {preventView === false ? (
         <React.Fragment>
-          <Navbar userName={userData?.name} />
+          <Navbar userName={userData?.name} profilePicture={profileImage} />
           <div className="lg:px-24 md:px-10 px-6 max-w-6xl mx-auto my-16">
             <h1 className="font-bold text-dgDarkPurple text-2xl mb-5">
               Filter

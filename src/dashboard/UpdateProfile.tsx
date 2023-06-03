@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import Navbar from "./Navbar";
-import UserProfile from "../assets/svgs/user-profile-lg.svg";
 import * as uriPaths from "../assets/data/uriPaths";
 import { account } from "../assets/config/appwrite-auth";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +7,12 @@ import { updateProfile } from "../assets/config/functions";
 import ToastSuccess from "../components/ToastSuccess";
 import ToastWarning from "../components/ToastWarning";
 import Spinner from "../components/Spinner";
+import {
+  storage,
+  PROFILE_PICTURE_BUCKET,
+} from "../assets/config/appwrite-auth";
+import { ID } from "appwrite";
+import { AVATAR } from "../assets/data/constants";
 
 const UpdateProfile = () => {
   const [country, setCountry] = useState<string>("");
@@ -19,7 +24,9 @@ const UpdateProfile = () => {
   const [errorToast, setErrorToast] = useState<boolean>(false);
   const [requiredFieldsToast, setrequiredFieldsToast] =
     useState<boolean>(false);
-  const [spin, setSpin] = useState<boolean>(false);
+  const [saveChangesSpinner, setSaveChangesSpinner] = useState<boolean>(false);
+  const [saveProfilePictureSpinner, setSaveProfilePictureSpinner] =
+    useState<boolean>(false);
 
   type FetchedUser = {
     $createdAt: string;
@@ -31,8 +38,37 @@ const UpdateProfile = () => {
   const [userData, setUserData] = useState<FetchedUser>();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [imagePreview, setImagePreview] = useState("");
+  const [profileImageSuccess, setProfileImageSuccess] =
+    useState<boolean>(false);
+  const [profileImageError, setProfileImageError] = useState<boolean>(false);
+  const [profileImage, setProfileImage] = useState<string>("");
 
   useEffect(() => {
+    const getProfilePicture = async () => {
+      try {
+        const user = await account.get();
+        const files = await storage.listFiles(PROFILE_PICTURE_BUCKET);
+        const existingFile = files.files.find(
+          (file) => file.name === user?.$id
+        );
+
+        if (existingFile) {
+          const previewLink = await storage.getFilePreview(
+            PROFILE_PICTURE_BUCKET,
+            existingFile.$id
+          );
+          setProfileImage(previewLink.href);
+        } else {
+          setProfileImage(AVATAR);
+        }
+      } catch (err) {
+        setProfileImageError(true);
+        console.log(err);
+      }
+    };
+
+    getProfilePicture();
+
     const checkSession = async () => {
       try {
         const session = await account.getSession("current");
@@ -55,7 +91,7 @@ const UpdateProfile = () => {
       setrequiredFieldsToast(true);
       return;
     }
-    setSpin(true);
+    setSaveChangesSpinner(true);
     try {
       const promise = await updateProfile(
         {
@@ -68,14 +104,14 @@ const UpdateProfile = () => {
 
       if (promise !== null) {
         setSuccessToast(true);
-        setSpin(false);
+        setSaveChangesSpinner(false);
       } else {
         setErrorToast(true);
-        setSpin(false);
+        setSaveChangesSpinner(false);
       }
     } catch (error) {
       setErrorToast(true);
-      setSpin(false);
+      setSaveChangesSpinner(false);
     }
   };
 
@@ -85,23 +121,60 @@ const UpdateProfile = () => {
     }
   };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const selectedFile = event.target.files?.[0];
 
     if (selectedFile) {
+      setSaveProfilePictureSpinner(true);
       const reader = new FileReader();
 
-      reader.onload = () => {
+      reader.onload = async () => {
         setImagePreview(reader.result as string);
       };
 
       reader.readAsDataURL(selectedFile);
+
+      // Check if the file already exists
+      try {
+        if (userData?.$id) {
+          const files = await storage.listFiles(PROFILE_PICTURE_BUCKET);
+          const existingFile = files.files.find(
+            (file) => file.name === userData?.$id
+          );
+
+          if (existingFile) {
+            // Delete the existing file
+            await storage.deleteFile(PROFILE_PICTURE_BUCKET, existingFile.$id);
+          }
+
+          // Upload the new file
+          const file = new File([selectedFile], userData?.$id);
+          const fileId = await storage.createFile(
+            PROFILE_PICTURE_BUCKET,
+            ID.unique(),
+            file
+          );
+
+          const previewLink = await storage.getFilePreview(
+            PROFILE_PICTURE_BUCKET,
+            fileId.$id
+          );
+
+          // Handle the successful file upload
+          setProfileImageSuccess(true);
+          setSaveProfilePictureSpinner(false);
+          setProfileImage(previewLink.href);
+        }
+      } catch (error) {
+        // Handle any errors that occur during the file upload
+        setProfileImageError(true);
+        setSaveProfilePictureSpinner(false);
+      }
     }
   };
 
-  const handleUploadProfilePicture = async () => {
-    console.log("uploaded");
-  };
   return (
     <React.Fragment>
       {successToast && (
@@ -122,9 +195,25 @@ const UpdateProfile = () => {
           close={() => setrequiredFieldsToast(false)}
         />
       )}
+      {profileImageSuccess && (
+        <ToastSuccess
+          title="Profile Picture Uploaded"
+          close={() => setProfileImageSuccess(false)}
+        />
+      )}
+      {profileImageError && (
+        <ToastWarning
+          title="Error Fetching Profile Picture"
+          close={() => setProfileImageError(false)}
+        />
+      )}
       {preventView === false ? (
         <React.Fragment>
-          <Navbar pageURI={uriPaths.UPDATE_PROFILE} userName={userData?.name} />
+          <Navbar
+            pageURI={uriPaths.UPDATE_PROFILE}
+            userName={userData?.name}
+            profilePicture={profileImage}
+          />
           <div className="lg:px-24 md:px-10 px-6 max-w-4xl mx-auto my-16">
             <h1 className="font-bold text-dgDarkPurple text-2xl mb-5">
               Profile
@@ -133,7 +222,9 @@ const UpdateProfile = () => {
               <div className=" border-2 border-dgPurple border-spacing-1 p-1 rounded-full">
                 <div
                   className="profile-picture w-[132px] h-[132px] bg-center bg-no-repeat bg-cover rounded-full"
-                  style={{ backgroundImage: `url(${imagePreview})` }}
+                  style={{
+                    backgroundImage: `url(${profileImage ?? imagePreview})`,
+                  }}
                 ></div>
               </div>
 
@@ -142,19 +233,18 @@ const UpdateProfile = () => {
                   type="file"
                   style={{ display: "none" }}
                   ref={fileInputRef}
-                  onChange={handleFileChange}
+                  onChange={(e) => handleFileChange(e)}
+                  multiple={false}
                 />
                 <button
                   onClick={handleButtonClick}
                   className="bg-dgPurple select-none rounded-full border-0 outline-0 px-4 py-2 text-base font-medium text-dgLightPurple"
                 >
-                  Change
-                </button>
-                <button
-                  onClick={handleUploadProfilePicture}
-                  className="bg-dgLightPurple select-none rounded-full border border-slate-400 outline-0 px-4 py-2 text-base font-medium text-dgDarkPurple"
-                >
-                  Upload
+                  {saveProfilePictureSpinner === true ? (
+                    <Spinner className="w-4 h-4 fill-dgPurple text-dgWhite" />
+                  ) : (
+                    "Change"
+                  )}
                 </button>
               </div>
             </div>
@@ -238,7 +328,7 @@ const UpdateProfile = () => {
               onClick={() => handleUpdateProfile()}
               className="bg-dgPurple select-none rounded-full border-0 outline-0 px-4 py-2 text-base font-medium text-dgLightPurple"
             >
-              {spin ? (
+              {saveChangesSpinner ? (
                 <Spinner className="w-4 h-4 fill-dgPurple text-dgWhite" />
               ) : (
                 "Save changes"
