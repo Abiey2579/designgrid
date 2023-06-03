@@ -25,3 +25,18 @@ export interface BlogPostTagProps {
 export interface CheckIfUserExist {
   uid: string;
 }
+
+export interface Blog {
+  $collectionId: string;
+  $createdAt: string;
+  $databaseId: string;
+  $id: string;
+  $permissions: [];
+  $updatedAt: string;
+  category: string;
+  cover_image_url: string;
+  name: string;
+  owner_id: string;
+  partial_description: string;
+  readtime: string;
+}

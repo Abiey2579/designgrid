@@ -8,6 +8,10 @@ import ToastWarning from "../components/ToastWarning";
 import Spinner from "../components/Spinner";
 import { finishOnboarding } from "../assets/config/functions";
 import * as uriPaths from "../assets/data/uriPaths";
+import {
+  checkIfUserExist,
+  checkIfCompletedOnboarding,
+} from "../assets/config/functions";
 
 const OnboardingFour = () => {
   const [selectedID, setSelectedID] = useState<number>(0);
@@ -17,6 +21,7 @@ const OnboardingFour = () => {
   const [textareaValue, setTextareaValue] = useState<string>("");
   const [spin, setSpin] = useState<boolean>(false);
   const navigate = useNavigate();
+  const [preventView, setPreventView] = useState<boolean>(true);
 
   const handleSelectTag = (e: any) => {
     setSelectedID(100);
@@ -30,7 +35,21 @@ const OnboardingFour = () => {
   useEffect(() => {
     const checkSession = async () => {
       try {
-        await account.getSession("current");
+        const session = await account.getSession("current");
+        const userExist = await checkIfUserExist(session.userId);
+        const completedOnboarding = await checkIfCompletedOnboarding(
+          session.userId
+        );
+
+        if (userExist) {
+          if (completedOnboarding) {
+            navigate(uriPaths.DASHBOARD);
+          } else {
+            setPreventView(false);
+          }
+        } else {
+          navigate(uriPaths.SIGN_UP);
+        }
       } catch (err) {
         navigate(uriPaths.SIGN_UP);
       }
@@ -82,50 +101,58 @@ const OnboardingFour = () => {
           close={() => setErrorToast(false)}
         />
       )}
-      <div className="lg:px-24 md:px-10 px-3 min-h-screen flex flex-col justify-center items-center">
-        <h1 className="text-dgDarkPurple text-4xl font-bold mb-5">Feedback</h1>
-        <p className="lg:min-w-[360px] md:min-w-[360px] min-w-full text-left text-dgDarkPurple_Opacity text-base mb-2">
-          How did you here about us? Optional
-        </p>
-        <select
-          onChange={(e) => handleSelectTag(e.target.value)}
-          className="lg:min-w-[360px] md:min-w-[360px] min-w-full border border-slate-300 outline-0 cursor-pointer px-5 py-3 bg-dgLightPurple border-dgBorder border rounded font-medium text-dgDarkPurple mb-4"
-        >
-          <option value="">Choose</option>
-          <option value="Google Search">Google Search</option>
-          <option value="LinkedIn">LinkedIn</option>
-          <option value="Facebook">Facebook</option>
-          <option value="Ads">Ads</option>
-          <option value="Friends">Friends</option>
-        </select>
-        <p className="lg:min-w-[360px] md:min-w-[360px] min-w-full text-left text-dgDarkPurple_Opacity text-base mb-2">
-          How did you here about us? Optional
-        </p>
-        <textarea
-          placeholder="Write here..."
-          onChange={(e) => handleTextarea(e.target.value)}
-          className="lg:min-w-[360px] md:min-w-[360px] min-w-full border border-slate-300 outline-0 cursor-pointer px-5 py-3 bg-dgLightPurple border-dgBorder border rounded font-medium text-dgDarkPurple mb-4"
-        ></textarea>
-
-        <div className="mb-10">
-          <Link to={"/auth/onboarding/3"}>
-            <button className="px-6 py-1 mr-5 text-center text-base bg-dgLightPurple text-dgDarkPurple font-medium rounded border-dgBorder border outline-0">
-              Back
-            </button>
-          </Link>
-          <button
-            onClick={() => handleFinishOnboarding()}
-            className="px-6 py-1 text-center text-base bg-dgPurple text-dgLightPurple font-medium rounded border-0 outline-0"
+      {preventView === false ? (
+        <div className="lg:px-24 md:px-10 px-3 min-h-screen flex flex-col justify-center items-center">
+          <h1 className="text-dgDarkPurple text-4xl font-bold mb-5">
+            Feedback
+          </h1>
+          <p className="lg:min-w-[360px] md:min-w-[360px] min-w-full text-left text-dgDarkPurple_Opacity text-base mb-2">
+            How did you here about us? Optional
+          </p>
+          <select
+            onChange={(e) => handleSelectTag(e.target.value)}
+            className="lg:min-w-[360px] md:min-w-[360px] min-w-full border border-slate-300 outline-0 cursor-pointer px-5 py-3 bg-dgLightPurple border-dgBorder border rounded font-medium text-dgDarkPurple mb-4"
           >
-            {spin ? (
-              <Spinner className="w-4 h-4 fill-dgPurple text-dgWhite" />
-            ) : (
-              "Finish"
-            )}
-          </button>
+            <option value="">Choose</option>
+            <option value="Google Search">Google Search</option>
+            <option value="LinkedIn">LinkedIn</option>
+            <option value="Facebook">Facebook</option>
+            <option value="Ads">Ads</option>
+            <option value="Friends">Friends</option>
+          </select>
+          <p className="lg:min-w-[360px] md:min-w-[360px] min-w-full text-left text-dgDarkPurple_Opacity text-base mb-2">
+            How did you here about us? Optional
+          </p>
+          <textarea
+            placeholder="Write here..."
+            onChange={(e) => handleTextarea(e.target.value)}
+            className="lg:min-w-[360px] md:min-w-[360px] min-w-full border border-slate-300 outline-0 cursor-pointer px-5 py-3 bg-dgLightPurple border-dgBorder border rounded font-medium text-dgDarkPurple mb-4"
+          ></textarea>
+
+          <div className="mb-10">
+            <Link to={"/auth/onboarding/3"}>
+              <button className="px-6 py-1 mr-5 text-center text-base bg-dgLightPurple text-dgDarkPurple font-medium rounded border-dgBorder border outline-0">
+                Back
+              </button>
+            </Link>
+            <button
+              onClick={() => handleFinishOnboarding()}
+              className="px-6 py-1 text-center text-base bg-dgPurple text-dgLightPurple font-medium rounded border-0 outline-0"
+            >
+              {spin ? (
+                <Spinner className="w-4 h-4 fill-dgPurple text-dgWhite" />
+              ) : (
+                "Finish"
+              )}
+            </button>
+          </div>
+          <OnboardProgressBar stage={4} selected={selectedID !== 0} />
         </div>
-        <OnboardProgressBar stage={4} selected={selectedID !== 0} />
-      </div>
+      ) : (
+        <div className="w-screen h-screen flex justify-center items-center">
+          <Spinner className="w-10 fill-dgLightPurple text-dgPurple" />
+        </div>
+      )}
     </React.Fragment>
   );
 };

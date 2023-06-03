@@ -66,7 +66,7 @@ const router = createBrowserRouter([
     element: <Blogs />,
   },
   {
-    path: `${uriPaths.COMMUNITY_BLOG_POST}:id`,
+    path: `${uriPaths.COMMUNITY_BLOG_POST}:category/:name`,
     element: <BlogPost />,
   },
 ]);
