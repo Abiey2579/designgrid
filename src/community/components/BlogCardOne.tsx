@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
 import * as CommonFunctions from "../../assets/common/functions";
 
 interface BlogCardOneProps {
@@ -24,7 +23,10 @@ const BlogCardOne = (props: BlogCardOneProps) => {
 
   return (
     <div>
-      <img src={props.image} alt="ImageOne" className="rounded-lg mb-1" />
+      <div
+        className="profile-picture w-full min-h-[240px] bg-center bg-no-repeat bg-cover rounded-lg mb-1"
+        style={{ backgroundImage: `url(${props.image})` }}
+      ></div>
       <div className="flex gap-2 items-center">
         <span className="text-sm font-semibold text-dgPurple">
           {CommonFunctions.capitalizeWords(props.category)}
@@ -41,12 +43,12 @@ const BlogCardOne = (props: BlogCardOneProps) => {
         <span className="text-sm font-normal">{props.readtime}min read</span>
       </div>
       <h1 className="text-xl font-semibold text-dgDarkPurple mb-1">
-        <Link
-          to={`/community/blog/${category}/${name}`}
+        <a
+          href={`/community/blog/${category}/${name}`}
           onClick={() => handleSelectedBlog()}
         >
           {CommonFunctions.capitalizeWords(props.title)}
-        </Link>
+        </a>
       </h1>
       <p className="text-sm text-dgDarkPurple_Opacity leading-5">
         {props.partialDesc.length > 90

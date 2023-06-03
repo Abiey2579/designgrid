@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
-import ImageOne from "../assets/images/1.jpg";
-import ImageTwo from "../assets/images/2.jpg";
-import ImageThree from "../assets/images/3.jpg";
 import { FolderIcon, CalendarIcon, ClockIcon } from "@heroicons/react/24/solid";
 import UserProfile from "../assets/svgs/user-profile.svg";
-import BlogCardOne from "./components/BlogCardOne";
 import Footer from "../home/Footer";
 import Copyright from "../home/Copyright";
 import BlogMarkdown from "./components/BlogMarkdown";
@@ -18,9 +14,9 @@ import {
 import { account } from "../assets/config/appwrite-auth";
 import * as uriPaths from "../assets/data/uriPaths";
 import Spinner from "../components/Spinner";
-import { Blog } from "../assets/Model/model";
 
 import * as CommonFunctions from "../assets/common/functions";
+import Relatedblogs from "./RelatedBlogs";
 
 const BlogPostTag = (props: BlogPostTagProps) => {
   return (
@@ -39,6 +35,14 @@ const BlogPost = () => {
   const [blogCategory, setBlogCategory] = useState<string>("");
   const [blogReadtime, setBlogReadtime] = useState<string>("");
   const [blogDate, setBlogDate] = useState<string>("");
+  type FetchedUser = {
+    $createdAt: string;
+    $id: string;
+    $updatedAt: string;
+    email: string;
+    name: string;
+  };
+  const [userData, setUserData] = useState<FetchedUser>();
 
   const { category, name } = useParams();
 
@@ -81,11 +85,12 @@ const BlogPost = () => {
         setBlogDate(Date);
 
         setMarkdownStorage(markdownText);
+        const user = await account.get();
+        setUserData(user);
         setPreventView(false);
       } catch (err) {
         setPreventView(false);
-        console.log(err);
-        // navigate(uriPaths.COMMUNITY_BLOGS);
+        navigate(uriPaths.COMMUNITY_BLOGS);
       }
     };
 
@@ -95,11 +100,12 @@ const BlogPost = () => {
     <React.Fragment>
       {preventView === false ? (
         <React.Fragment>
-          <Navbar />
+          <Navbar userName={userData?.name} />
           <div className="lg:px-24 md:px-10 px-6 max-w-6xl mx-auto my-10">
-            <div className="max-w-[960px] max-h-[532px] overflow-hidden rounded-lg mx-auto mb-5">
-              <img src={blogImage} alt="" />
-            </div>
+            <div
+              className="w-full lg:h-[532px] md:h-[360px] h-[240px] bg-center bg-no-repeat bg-cover rounded-lg mx-auto mb-5"
+              style={{ backgroundImage: `url(${blogImage})` }}
+            ></div>
             <div className="flex lg:flex-row md:flex-row flex-col flex-wrap lg:gap-3 md:gap-2 gap-1 mb-5">
               <BlogPostTag
                 icon={FolderIcon}
@@ -121,41 +127,7 @@ const BlogPost = () => {
             <hr className="bg-slate-300 block mb-5" />
             <BlogMarkdown md={markdownStorage} />
             <hr className="bg-slate-300 block mb-8" />
-            <h2 className="mb-4 text-xl font-bold text-dgDarkPurple">
-              Related Blogs
-            </h2>
-            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
-              <BlogCardOne
-                category={"Interview Guide"}
-                image={ImageOne}
-                date={"April 12"}
-                readtime={"2"}
-                title={"Restaurant Landing Page"}
-                partialDesc={
-                  "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididus ..."
-                }
-              />
-              <BlogCardOne
-                category={"Best practice"}
-                image={ImageTwo}
-                date={"May 21"}
-                readtime={"4"}
-                title={"Separation of Concern"}
-                partialDesc={
-                  "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididus ..."
-                }
-              />
-              <BlogCardOne
-                category={"Problem solving"}
-                image={ImageThree}
-                date={"February 1"}
-                readtime={"1"}
-                title={"Separation of Concern"}
-                partialDesc={
-                  "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididus ..."
-                }
-              />
-            </div>
+            <Relatedblogs category={blogCategory} />
           </div>
           <Footer />
           <Copyright />

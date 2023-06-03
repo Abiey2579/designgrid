@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Navbar from "./Navbar";
 import UserProfile from "../assets/svgs/user-profile-lg.svg";
 import * as uriPaths from "../assets/data/uriPaths";
@@ -29,6 +29,8 @@ const UpdateProfile = () => {
     name: string;
   };
   const [userData, setUserData] = useState<FetchedUser>();
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [imagePreview, setImagePreview] = useState("");
 
   useEffect(() => {
     const checkSession = async () => {
@@ -76,6 +78,30 @@ const UpdateProfile = () => {
       setSpin(false);
     }
   };
+
+  const handleButtonClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = event.target.files?.[0];
+
+    if (selectedFile) {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        setImagePreview(reader.result as string);
+      };
+
+      reader.readAsDataURL(selectedFile);
+    }
+  };
+
+  const handleUploadProfilePicture = async () => {
+    console.log("uploaded");
+  };
   return (
     <React.Fragment>
       {successToast && (
@@ -104,13 +130,31 @@ const UpdateProfile = () => {
               Profile
             </h1>
             <div className="flex items-center gap-5 mb-14">
-              <img src={UserProfile} alt="UserProfile" />
+              <div className=" border-2 border-dgPurple border-spacing-1 p-1 rounded-full">
+                <div
+                  className="profile-picture w-[132px] h-[132px] bg-center bg-no-repeat bg-cover rounded-full"
+                  style={{ backgroundImage: `url(${imagePreview})` }}
+                ></div>
+              </div>
+
               <div className="flex md:flex-row flex-col gap-5">
-                <button className="bg-dgPurple select-none rounded-full border-0 outline-0 px-4 py-2 text-base font-medium text-dgLightPurple">
+                <input
+                  type="file"
+                  style={{ display: "none" }}
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                />
+                <button
+                  onClick={handleButtonClick}
+                  className="bg-dgPurple select-none rounded-full border-0 outline-0 px-4 py-2 text-base font-medium text-dgLightPurple"
+                >
                   Change
                 </button>
-                <button className="bg-dgLightPurple select-none rounded-full border border-slate-400 outline-0 px-4 py-2 text-base font-medium text-dgDarkPurple">
-                  Remove
+                <button
+                  onClick={handleUploadProfilePicture}
+                  className="bg-dgLightPurple select-none rounded-full border border-slate-400 outline-0 px-4 py-2 text-base font-medium text-dgDarkPurple"
+                >
+                  Upload
                 </button>
               </div>
             </div>
