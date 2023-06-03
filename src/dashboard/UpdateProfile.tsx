@@ -8,10 +8,13 @@ import ToastSuccess from "../components/ToastSuccess";
 import ToastWarning from "../components/ToastWarning";
 import Spinner from "../components/Spinner";
 import {
+  database,
   storage,
   PROFILE_PICTURE_BUCKET,
+  USER_PROFILE_COLLECTION,
+  DATABASE_ID,
 } from "../assets/config/appwrite-auth";
-import { ID } from "appwrite";
+import { ID, Query } from "appwrite";
 import { AVATAR } from "../assets/data/constants";
 
 const UpdateProfile = () => {
@@ -35,6 +38,15 @@ const UpdateProfile = () => {
     email: string;
     name: string;
   };
+
+  type UserProfileData = {
+    $createdAt: string;
+    $id: string;
+    $updatedAt: string;
+    country?: string;
+    dob?: string;
+    phone_number?: string;
+  };
   const [userData, setUserData] = useState<FetchedUser>();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [imagePreview, setImagePreview] = useState("");
@@ -42,6 +54,7 @@ const UpdateProfile = () => {
     useState<boolean>(false);
   const [profileImageError, setProfileImageError] = useState<boolean>(false);
   const [profileImage, setProfileImage] = useState<string>("");
+  const [userProfile, setUserProfile] = useState<UserProfileData>();
 
   useEffect(() => {
     const getProfilePicture = async () => {
@@ -71,9 +84,24 @@ const UpdateProfile = () => {
 
     const checkSession = async () => {
       try {
-        const session = await account.getSession("current");
-        setPreventView(false);
+        await account.getSession("current");
         const user = await account.get();
+        const searchResponse = await database.listDocuments(
+          DATABASE_ID,
+          USER_PROFILE_COLLECTION,
+          [Query.equal("uid", user.$id), Query.limit(1)]
+        );
+
+        const data = searchResponse.documents;
+
+        if (data.length > 0) {
+          const userProfileData = data[0] as UserProfileData;
+          setUserProfile(userProfileData);
+        } else {
+          setUserProfile(undefined);
+        }
+
+        setPreventView(false);
         setUserData(user);
       } catch (err) {
         navigate(uriPaths.SIGN_UP);
@@ -283,6 +311,7 @@ const UpdateProfile = () => {
                 <span className="mb-1 block">Country *</span>
                 <select
                   onChange={(e) => setCountry(e.target.value)}
+                  value={userProfile?.country}
                   className="border border-slate-400 rounded font-medium outline-0 px-3 py-[10px] md:min-w-[340px] w-full bg-dgLightPurple text-dgDarkPurple"
                 >
                   <option value="">Choose</option>
@@ -297,6 +326,7 @@ const UpdateProfile = () => {
                 <span className="mb-1 block">Date of Birth *</span>
                 <input
                   onChange={(e) => setDOB(e.target.value)}
+                  value={userProfile?.dob}
                   type="date"
                   className="border border-slate-400 rounded font-medium outline-0 px-3 py-2 md:min-w-[340px] w-full bg-dgLightPurple text-dgDarkPurple "
                 />
@@ -319,6 +349,7 @@ const UpdateProfile = () => {
                 <span className="mb-1 block">Phone Number *</span>
                 <input
                   onChange={(e) => setPhomeNumber(e.target.value)}
+                  value={userProfile?.phone_number}
                   type="text"
                   className="border border-slate-400 rounded font-medium outline-0 px-3 py-2 md:min-w-[340px] w-full bg-dgLightPurple text-dgDarkPurple "
                 />
