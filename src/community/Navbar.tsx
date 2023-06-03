@@ -21,7 +21,7 @@ import UserProfile from "../assets/svgs/user-profile.svg";
 
 const NAV_ITEMS = [
   {
-    name: "Blog",
+    name: "Blogs",
     href: uriPaths.COMMUNITY_BLOGS,
     icon: BookOpenIcon,
   },
@@ -37,7 +37,7 @@ const NAV_ITEMS = [
   },
 ];
 
-const Navbar = () => {
+const Navbar = (props: { pageURI?: string; userName?: string | undefined }) => {
   const [showProfileImageMenu, setshowProfileImageMenu] =
     useState<boolean>(false);
   const navigate = useNavigate();
@@ -100,7 +100,7 @@ const Navbar = () => {
                     className="select-none w-9"
                   />
                   <p className="text-base font-medium select-none">
-                    Yahya M. Bello
+                    {props.userName}
                   </p>
                   <ChevronDownIcon className="select-none w-5" />
                 </div>

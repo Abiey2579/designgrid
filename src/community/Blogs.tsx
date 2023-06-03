@@ -19,6 +19,14 @@ import { Blog } from "../assets/Model/model";
 const Blogs = () => {
   const [preventView, setPreventView] = useState<boolean>(true);
   const [blogLists, setBlogLists] = useState<Blog[]>([]);
+  type FetchedUser = {
+    $createdAt: string;
+    $id: string;
+    $updatedAt: string;
+    email: string;
+    name: string;
+  };
+  const [userData, setUserData] = useState<FetchedUser>();
 
   const navigate = useNavigate();
 
@@ -52,6 +60,8 @@ const Blogs = () => {
         );
         const blogDocuments: Blog[] = promise.documents as Blog[];
         setBlogLists(blogDocuments);
+        const user = await account.get();
+        setUserData(user);
         setPreventView(false);
       } catch (err) {
         setPreventView(false);
@@ -64,7 +74,7 @@ const Blogs = () => {
     <React.Fragment>
       {preventView === false ? (
         <React.Fragment>
-          <Navbar />
+          <Navbar userName={userData?.name} />
           <div className="lg:px-24 md:px-10 px-6 max-w-6xl mx-auto my-16">
             <h1 className="font-bold text-dgDarkPurple text-2xl mb-5">
               Filter

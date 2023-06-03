@@ -38,3 +38,14 @@ ol {
   color: #7026ed !important;
   text-decoration: underline;
 }
+
+.Markdown pre {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+  text-wrap: wrap !important;
+  padding: 4px;
+  color: #241f38;
+  border-left-color: #241f38;
+  border-left-width: 2px;
+}
