@@ -9,6 +9,12 @@ import {
   checkIfUserExist,
   checkIfCompletedOnboarding,
 } from "../assets/config/functions";
+import {
+  storage,
+  PROFILE_PICTURE_BUCKET,
+} from "../assets/config/appwrite-auth";
+import ToastWarning from "../components/ToastWarning";
+import { AVATAR } from "../assets/data/constants";
 
 const Dashboard = () => {
   const [preventView, setPreventView] = useState<boolean>(true);
@@ -21,6 +27,8 @@ const Dashboard = () => {
     name: string;
   };
   const [userData, setUserData] = useState<FetchedUser>();
+  const [profileImage, setProfileImage] = useState<string>("");
+  const [profileImageError, setProfileImageError] = useState<boolean>(false);
 
   useEffect(() => {
     const checkSession = async () => {
@@ -53,13 +61,47 @@ const Dashboard = () => {
     };
 
     checkUser();
+
+    const getProfilePicture = async () => {
+      try {
+        const user = await account.get();
+        const files = await storage.listFiles(PROFILE_PICTURE_BUCKET);
+        const existingFile = files.files.find(
+          (file) => file.name === user?.$id
+        );
+
+        if (existingFile) {
+          const previewLink = await storage.getFilePreview(
+            PROFILE_PICTURE_BUCKET,
+            existingFile.$id
+          );
+          setProfileImage(previewLink.href);
+        } else {
+          setProfileImage(AVATAR);
+        }
+      } catch (err) {
+        setProfileImageError(true);
+      }
+    };
+
+    getProfilePicture();
   }, []);
   return (
     <React.Fragment>
+      {profileImageError && (
+        <ToastWarning
+          title="Error Fetching Profile Picture"
+          close={() => setProfileImageError(false)}
+        />
+      )}
       {preventView === false ? (
         <React.Fragment>
-          <Navbar pageURI={uriPaths.DASHBOARD} userName={userData?.name} />
-          <Content />
+          <Navbar
+            pageURI={uriPaths.DASHBOARD}
+            userName={userData?.name}
+            profilePicture={profileImage}
+          />
+          <Content profilePicture={profileImage} />
         </React.Fragment>
       ) : (
         <div className="w-screen h-screen flex justify-center items-center">

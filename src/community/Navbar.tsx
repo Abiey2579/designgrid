@@ -37,7 +37,11 @@ const NAV_ITEMS = [
   },
 ];
 
-const Navbar = (props: { pageURI?: string; userName?: string | undefined }) => {
+const Navbar = (props: {
+  pageURI?: string;
+  userName?: string | undefined;
+  profilePicture: string;
+}) => {
   const [showProfileImageMenu, setshowProfileImageMenu] =
     useState<boolean>(false);
   const navigate = useNavigate();
@@ -58,7 +62,7 @@ const Navbar = (props: { pageURI?: string; userName?: string | undefined }) => {
     }
   };
   return (
-    <Popover className="relative bg-dgLightPurple z-50 border-b border-dgBorder">
+    <Popover className="relative bg-dgLightPurple z-20 border-b border-dgBorder">
       <div className="lg:px-24 md:px-10 px-6 ">
         <div className="flex items-center justify-between py-1 md:justify-start md:space-x-10 h-20">
           <div className="flex justify-start lg:w-0 lg:flex-1">
@@ -94,18 +98,17 @@ const Navbar = (props: { pageURI?: string; userName?: string | undefined }) => {
                   className="flex items-center gap-3 cursor-pointer"
                   onClick={() => handleProfileImageMenu()}
                 >
-                  <img
-                    src={UserProfile}
-                    alt="UserProfile"
-                    className="select-none w-9"
-                  />
+                  <div
+                    className="profile-picture select-none w-9 h-9 bg-center bg-no-repeat bg-cover rounded-full"
+                    style={{ backgroundImage: `url(${props.profilePicture})` }}
+                  ></div>
                   <p className="text-base font-medium select-none">
                     {props.userName}
                   </p>
                   <ChevronDownIcon className="select-none w-5" />
                 </div>
                 {showProfileImageMenu && (
-                  <div className="absolute w-full top-full bg-dgWhite shadow mt-3 p-3 gap-2 flex flex-col rounded">
+                  <div className="absolute w-full min-w-[185px] top-full bg-dgWhite shadow mt-3 p-3 gap-2 flex flex-col rounded">
                     <Link
                       to={uriPaths.DASHBOARD}
                       className="px-3 py-2 hover:bg-dgLightPurple rounded flex items-center gap-3"

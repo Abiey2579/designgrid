@@ -14,9 +14,13 @@ import {
 import { account } from "../assets/config/appwrite-auth";
 import * as uriPaths from "../assets/data/uriPaths";
 import Spinner from "../components/Spinner";
-
 import * as CommonFunctions from "../assets/common/functions";
 import Relatedblogs from "./RelatedBlogs";
+import {
+  storage,
+  PROFILE_PICTURE_BUCKET,
+} from "../assets/config/appwrite-auth";
+import { AVATAR } from "../assets/data/constants";
 
 const BlogPostTag = (props: BlogPostTagProps) => {
   return (
@@ -43,6 +47,8 @@ const BlogPost = () => {
     name: string;
   };
   const [userData, setUserData] = useState<FetchedUser>();
+  const [profileImage, setProfileImage] = useState<string>("");
+  const [profileImageError, setProfileImageError] = useState<boolean>(false);
 
   const { category, name } = useParams();
 
@@ -95,12 +101,36 @@ const BlogPost = () => {
     };
 
     fetchBlogs();
+
+    const getProfilePicture = async () => {
+      try {
+        const user = await account.get();
+        const files = await storage.listFiles(PROFILE_PICTURE_BUCKET);
+        const existingFile = files.files.find(
+          (file) => file.name === user?.$id
+        );
+
+        if (existingFile) {
+          const previewLink = await storage.getFilePreview(
+            PROFILE_PICTURE_BUCKET,
+            existingFile.$id
+          );
+          setProfileImage(previewLink.href);
+        } else {
+          setProfileImage(AVATAR);
+        }
+      } catch (err) {
+        setProfileImageError(true);
+      }
+    };
+
+    getProfilePicture();
   }, []);
   return (
     <React.Fragment>
       {preventView === false ? (
         <React.Fragment>
-          <Navbar userName={userData?.name} />
+          <Navbar userName={userData?.name} profilePicture={profileImage} />
           <div className="lg:px-24 md:px-10 px-6 max-w-6xl mx-auto my-10">
             <div
               className="w-full lg:h-[532px] md:h-[360px] h-[240px] bg-center bg-no-repeat bg-cover rounded-lg mx-auto mb-5"

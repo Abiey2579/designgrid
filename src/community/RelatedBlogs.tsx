@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import BlogCardOne from "./components/BlogCardOne";
-import ImageOne from "../assets/images/1.jpg";
 import {
-  account,
   database,
   DATABASE_ID,
   COMMUNITY_BLOGS_COLLECTION,
