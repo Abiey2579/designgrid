@@ -34,7 +34,9 @@ p,
 span,
 button,
 a,
-input {
+input,
+ul,
+ol {
   font-family: "Catamaran" !important;
 }
 
