@@ -26,10 +26,10 @@ const Frontend = () => {
     <React.Fragment>
       {userId && (
         <div className="flex">
-          <Sidebar
+          {/* <Sidebar
             sidebarControl={showSidebar}
             handleSidebarMenu={toggleSidebar}
-          />
+          /> */}
           <div className="flex-1 max-h-screen ">
             <Topnav handleSidebarMenu={toggleSidebar} />
             <div className="flex">

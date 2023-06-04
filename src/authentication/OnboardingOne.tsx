@@ -11,6 +11,7 @@ import {
   createUserProfile,
   checkIfUserExist,
   checkIfCompletedOnboarding,
+  enrollFrontend101,
 } from "../assets/config/functions";
 
 const OnboardingOne = () => {
@@ -54,10 +55,15 @@ const OnboardingOne = () => {
         }
       } else {
         setPreventView(false);
-        const promise = await createUserProfile({
+        const accountCreation = await createUserProfile({
           uid: session.userId,
         });
-        if (promise !== null) {
+
+        const courseEnrollment = await enrollFrontend101({
+          uid: session.userId,
+        });
+
+        if (accountCreation !== null && courseEnrollment !== null) {
           setSuccessToast(true);
         }
       }
