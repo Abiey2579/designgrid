@@ -20,9 +20,9 @@ interface SidebarProps {
 
 const Sidebar = (props: SidebarProps) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const filteredHackathons = frontend101TOC.filter((item) =>
-    item.topic.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  // const filteredHackathons = frontend101TOC.filter((item) =>
+  //   item.topic.toLowerCase().includes(searchQuery.toLowerCase())
+  // );
   const d = props.sidebarControl
     ? "fixed z-10 h-screen"
     : "lg:block md:hidden hidden";
@@ -54,7 +54,7 @@ const Sidebar = (props: SidebarProps) => {
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
-        <div className="SidebarMenu max-h-[75vh] overflow-y-scroll">
+        {/* <div className="SidebarMenu max-h-[75vh] overflow-y-scroll">
           {filteredHackathons.map((item) => (
             <React.Fragment>
               <p
@@ -88,7 +88,7 @@ const Sidebar = (props: SidebarProps) => {
               ))}
             </React.Fragment>
           ))}
-        </div>
+        </div> */}
       </div>
       {props.sidebarControl && (
         <div

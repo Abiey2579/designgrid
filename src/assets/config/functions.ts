@@ -5,12 +5,16 @@ import {
   DATABASE_ID,
   USER_PROFILE_COLLECTION,
   ONBOARDING_QA_COLLECTION,
+  FRONTEND_101_TOC,
 } from "./appwrite-auth";
 import { ID, Query } from "appwrite";
+import { frontend101TOC } from "../TOC/frontend101TOC";
+import { firestore, FRONTEND_101_TOC_COLLECTION } from "./firebase-db";
+import { doc, setDoc } from "firebase/firestore";
 
 export const createUserProfile = async (DataModel: Model.CreateUserProfile) => {
   try {
-    const promise = await database.createDocument(
+    await database.createDocument(
       DATABASE_ID,
       USER_PROFILE_COLLECTION,
       ID.unique(),
@@ -22,8 +26,13 @@ export const createUserProfile = async (DataModel: Model.CreateUserProfile) => {
       }
     );
 
-    return promise;
+    await database.createDocument(DATABASE_ID, FRONTEND_101_TOC, ID.unique(), {
+      uid: DataModel.uid,
+    });
+
+    return true;
   } catch (err) {
+    console.log(err);
     return null;
   }
 };
@@ -39,6 +48,17 @@ export const finishOnboarding = async (DataModel: Model.FinishOnboarding) => {
 
     return promise;
   } catch (err) {
+    return null;
+  }
+};
+
+export const enrollFrontend101 = async (DataModel: Model.CreateUserProfile) => {
+  try {
+    // Get a reference to the document you want to set
+    const docRef = doc(firestore, FRONTEND_101_TOC_COLLECTION, DataModel.uid);
+    await setDoc(docRef, frontend101TOC, { merge: true });
+    return true;
+  } catch (error) {
     return null;
   }
 };
@@ -120,3 +140,17 @@ export const checkIfCompletedOnboarding = async (uid: string) => {
     return false;
   }
 };
+
+/*
+
+
+  welcome: [
+    {
+      lesson_id: "",
+      lesson_name: "",
+      active: false,
+      completed: false,
+    }
+  ]
+
+*/
