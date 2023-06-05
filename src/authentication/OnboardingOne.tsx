@@ -59,9 +59,7 @@ const OnboardingOne = () => {
           uid: session.userId,
         });
 
-        const courseEnrollment = await enrollFrontend101({
-          uid: session.userId,
-        });
+        const courseEnrollment = await enrollFrontend101(session.userId);
 
         if (accountCreation !== null && courseEnrollment !== null) {
           setSuccessToast(true);

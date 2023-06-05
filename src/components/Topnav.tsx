@@ -13,6 +13,14 @@ import { logout } from "../assets/config/functions";
 
 export interface TopnavProps {
   handleSidebarMenu: Function;
+  userData?: {
+    $createdAt: string;
+    $id: string;
+    $updatedAt: string;
+    email: string;
+    name: string;
+  };
+  profilePicture: string;
 }
 
 const Topnav = (props: TopnavProps) => {
@@ -41,16 +49,17 @@ const Topnav = (props: TopnavProps) => {
           className="flex items-center gap-3 cursor-pointer"
           onClick={() => handleProfileImageMenu()}
         >
-          <img
-            src={UserProfile}
-            alt="UserProfile"
-            className="select-none w-9"
-          />
-          <p className="text-base font-medium select-none">Yahya M. Bello</p>
+          <div
+            className="profile-picture select-none w-9 h-9 bg-center bg-no-repeat bg-cover rounded-full"
+            style={{ backgroundImage: `url(${props.profilePicture})` }}
+          ></div>
+          <p className="text-base font-medium select-none">
+            {props.userData?.name}
+          </p>
           <ChevronDownIcon className="select-none w-5" />
         </div>
         {showProfileImageMenu && (
-          <div className="absolute w-full top-full bg-dgWhite shadow mt-3 p-3 gap-2 flex flex-col rounded">
+          <div className="absolute w-full min-w-[185px] top-full bg-dgWhite shadow mt-3 p-3 gap-2 flex flex-col rounded">
             <Link
               to={uriPaths.DASHBOARD}
               className="px-3 py-2 hover:bg-dgLightPurple rounded flex items-center gap-3"
