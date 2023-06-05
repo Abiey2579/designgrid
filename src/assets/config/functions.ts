@@ -10,7 +10,7 @@ import {
 import { ID, Query } from "appwrite";
 import { frontend101TOC } from "../TOC/frontend101TOC";
 import { firestore, FRONTEND_101_TOC_COLLECTION } from "./firebase-db";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 
 export const createUserProfile = async (DataModel: Model.CreateUserProfile) => {
   try {
@@ -52,14 +52,46 @@ export const finishOnboarding = async (DataModel: Model.FinishOnboarding) => {
   }
 };
 
-export const enrollFrontend101 = async (DataModel: Model.CreateUserProfile) => {
+export const enrollFrontend101 = async (uid: string) => {
   try {
     // Get a reference to the document you want to set
-    const docRef = doc(firestore, FRONTEND_101_TOC_COLLECTION, DataModel.uid);
+    const docRef = doc(firestore, FRONTEND_101_TOC_COLLECTION, uid);
     await setDoc(docRef, frontend101TOC, { merge: true });
     return true;
   } catch (error) {
     return null;
+  }
+};
+
+export const checkIfEnrolled_Frontend101 = async (uid: string) => {
+  try {
+    // Get a reference to the document you want to set
+    const docRef = doc(firestore, FRONTEND_101_TOC_COLLECTION, uid);
+    const snapshot = await getDoc(docRef);
+
+    if (snapshot.exists()) {
+      return true;
+    }
+
+    return false;
+  } catch (error) {
+    return false;
+  }
+};
+export const getUserTOC = async (uid: string) => {
+  try {
+    // Get a reference to the document you want to set
+    const docRef = doc(firestore, FRONTEND_101_TOC_COLLECTION, uid);
+    const snapshot = await getDoc(docRef);
+
+    if (snapshot.exists()) {
+      const data = snapshot.data();
+      return data;
+    }
+
+    return false;
+  } catch (error) {
+    return false;
   }
 };
 

@@ -1,11 +1,6 @@
 // import {
-//   "BookOpenIcon",
-//   "PlayCircleIcon",
-//   "CodeBracketIcon",
-// } from "@heroicons/react/24/outline";
-
 export const frontend101TOC = {
-  Welcome: {
+  "1-Welcome": {
     lessons: [
       {
         title: "Course Overview",
@@ -45,7 +40,7 @@ export const frontend101TOC = {
       },
     ],
   },
-  Introduction: {
+  "2-Introduction": {
     lessons: [
       {
         title: "Intro to Web Development",
@@ -61,7 +56,7 @@ export const frontend101TOC = {
       },
     ],
   },
-  "Course Requirements": {
+  "3-Course Requirements": {
     lessons: [
       {
         title: "Choosing Browser",
@@ -89,7 +84,7 @@ export const frontend101TOC = {
       },
     ],
   },
-  "Introduction to HTML": {
+  "4-Introduction to HTML": {
     lessons: [
       {
         title: "Overview: Basic HTML Structure",
@@ -159,7 +154,7 @@ export const frontend101TOC = {
       },
     ],
   },
-  "Introduction to CSS": {
+  "5-Introduction to CSS": {
     lessons: [
       {
         title: "Testing Background Color",
@@ -217,7 +212,7 @@ export const frontend101TOC = {
       },
     ],
   },
-  "Flexbox and Grid": {
+  "6-Flexbox and Grid": {
     lessons: [
       {
         title: "Flexbox Overview",
@@ -263,7 +258,7 @@ export const frontend101TOC = {
       },
     ],
   },
-  "Introduction to JavaScript": {
+  "7-Introduction to JavaScript": {
     lessons: [
       {
         title: "Overview: Basic Concepts",
@@ -345,7 +340,7 @@ export const frontend101TOC = {
       },
     ],
   },
-  "Project Phase": {
+  "8-Project Phase": {
     lessons: [
       {
         title: "Calculator",
@@ -391,7 +386,7 @@ export const frontend101TOC = {
       },
     ],
   },
-  Congratulations: {
+  "9-Congratulations": {
     lessons: [
       {
         title: "Choose Your Path Forward",
