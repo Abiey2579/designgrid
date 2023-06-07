@@ -5,8 +5,8 @@ export const frontend101TOC = {
       {
         title: "Course Overview",
         icon: "BookOpenIcon",
-        active: false,
-        completed: false,
+        active: true,
+        completed: true,
       },
       {
         title: "Course Structure",
