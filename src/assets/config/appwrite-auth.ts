@@ -3,7 +3,7 @@ import { Client, Account, Databases, Storage } from "appwrite";
 const client = new Client();
 
 client
-  .setEndpoint("https://designgrid.vercel.app") // Your API Endpoint
+  .setEndpoint("https://designgrid.vercel.app/v1") // Your API Endpoint
   .setProject("645dd92a90424d7387a7"); // Your project ID
 
 export const account = new Account(client);
