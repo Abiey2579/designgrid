@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import Search from "../assets/svgs/search.svg";
 import {
   BookOpenIcon,
   CodeBracketIcon,
-  MagnifyingGlassIcon,
   XMarkIcon,
   PlayCircleIcon,
 } from "@heroicons/react/24/outline";
@@ -25,18 +23,13 @@ interface UserTOCProps {
   };
 }
 
-// Define a type for the icon components
 type IconComponents = {
   [key: string]: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 };
 
 const Sidebar = (props: SidebarProps) => {
-  const [searchQuery, setSearchQuery] = useState<string>("");
   const [spin, setSpin] = useState<string>("");
 
-  // const filteredHackathons = frontend101TOC.filter((item) =>
-  //   item.topic.toLowerCase().includes(searchQuery.toLowerCase())
-  // );
   const getSectionProgress = (section: any) => {
     const completedLessons = section.lessons.filter(
       (lesson: any) => lesson.completed
@@ -45,20 +38,17 @@ const Sidebar = (props: SidebarProps) => {
     return progress;
   };
 
-  // Sort the TOC keys based on the number prefix
   const sortedTOC = Object.keys(props.tableOfContent).sort((a, b) => {
     const aNum = parseInt(a.split("-")[0]);
     const bNum = parseInt(b.split("-")[0]);
     return aNum - bNum;
   });
 
-  // Mapping of icon names to their corresponding components
   const IconComponent: IconComponents = {
     CheckBadgeIcon,
     BookOpenIcon,
     PlayCircleIcon,
     CodeBracketIcon,
-    // add other icon components here
   };
 
   const d = props.sidebarControl
@@ -83,23 +73,15 @@ const Sidebar = (props: SidebarProps) => {
             />
           )}
         </div>
-        <div className="bg-dgWhite rounded flex mb-3 px-3 ">
-          <MagnifyingGlassIcon className="w-5" />
-          <input
-            type="text"
-            className="pl-3 py-3 border-0 outline-0 text-base flex-1 bg-dgWhite "
-            placeholder="Search ..."
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-        </div>
-        <div className="SidebarMenu max-h-[75vh] overflow-y-scroll">
+
+        <div className="SidebarMenu max-h-[85vh] overflow-y-scroll border-t border-slate-500">
           {sortedTOC.map((key) => {
             const section = props.tableOfContent[key];
             return (
               <React.Fragment>
                 <p
                   key={Math.random() * 9999999}
-                  className="flex items-center justify-between font-semibold text-dgLightPurple text-base my-3 py-1 border-slate-300 border-b"
+                  className="flex items-center justify-between font-semibold text-dgLightPurple text-base my-3 py-1 border-slate-500 border-b"
                 >
                   <span>{key.replace(/[\d-]+/g, "")}</span>
 
