@@ -15,8 +15,8 @@ const LogIn = () => {
     try {
       await account.createOAuth2Session(
         service,
-        `http://localhost:3000${uriPaths.DASHBOARD}`,
-        `http://localhost:3000${uriPaths.SIGN_UP}`
+        `https://designgrid.vercel.app${uriPaths.DASHBOARD}`,
+        `https://designgrid.vercel.app${uriPaths.LOG_IN}`
       );
     } catch (error) {
       setErrorToast(true);
