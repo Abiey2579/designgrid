@@ -10,7 +10,7 @@ import {
 import { ID, Query } from "appwrite";
 import { frontend101TOC } from "../TOC/frontend101TOC";
 import { firestore, FRONTEND_101_TOC_COLLECTION } from "./firebase-db";
-import { doc, setDoc, getDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 
 export const createUserProfile = async (DataModel: Model.CreateUserProfile) => {
   try {
@@ -78,6 +78,7 @@ export const checkIfEnrolled_Frontend101 = async (uid: string) => {
     return false;
   }
 };
+
 export const getUserTOC = async (uid: string) => {
   try {
     // Get a reference to the document you want to set
@@ -169,6 +170,50 @@ export const checkIfCompletedOnboarding = async (uid: string) => {
       return false;
     }
   } catch (error) {
+    return false;
+  }
+};
+
+export const changeActiveLesson = async (uid: string, lessonId: string) => {
+  try {
+    // Get a reference to the user's TOC document
+    const docRef = doc(firestore, FRONTEND_101_TOC_COLLECTION, uid);
+    const snapshot = await getDoc(docRef);
+
+    if (snapshot.exists()) {
+      const userTOC = snapshot.data();
+
+      // Iterate through the topics in the TOC
+      for (const topicKey in userTOC) {
+        const topic = userTOC[topicKey];
+
+        // Iterate through the lessons in the topic
+        for (const lesson of topic.lessons) {
+          // Update the lesson based on the provided lessonId
+          const lessonTitle = lesson.title
+            .replace(/,|:/g, "")
+            .toLowerCase()
+            .split(" ")
+            .join("-");
+          if (lessonTitle === lessonId) {
+            // Set the lesson as active:true
+            lesson.active = true;
+            lesson.completed = true;
+          } else {
+            // Set all other lessons as active:false
+            lesson.active = false;
+          }
+        }
+      }
+
+      // Update the user's TOC document with the modified data
+      await updateDoc(docRef, userTOC);
+      return true;
+    }
+
+    return false;
+  } catch (error) {
+    console.log(error);
     return false;
   }
 };

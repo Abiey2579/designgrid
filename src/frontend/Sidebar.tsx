@@ -8,6 +8,9 @@ import {
   PlayCircleIcon,
 } from "@heroicons/react/24/outline";
 import { CheckBadgeIcon } from "@heroicons/react/24/solid";
+import { changeActiveLesson } from "../assets/config/functions";
+import { account } from "../assets/config/appwrite-auth";
+import Spinner from "../components/Spinner";
 
 interface SidebarProps {
   sidebarControl: boolean;
@@ -29,6 +32,8 @@ type IconComponents = {
 
 const Sidebar = (props: SidebarProps) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [spin, setSpin] = useState<string>("");
+
   // const filteredHackathons = frontend101TOC.filter((item) =>
   //   item.topic.toLowerCase().includes(searchQuery.toLowerCase())
   // );
@@ -93,7 +98,7 @@ const Sidebar = (props: SidebarProps) => {
             return (
               <React.Fragment>
                 <p
-                  key={key}
+                  key={Math.random() * 9999999}
                   className="flex items-center justify-between font-semibold text-dgLightPurple text-base my-3 py-1 border-slate-300 border-b"
                 >
                   <span>{key.replace(/[\d-]+/g, "")}</span>
@@ -117,31 +122,87 @@ const Sidebar = (props: SidebarProps) => {
                   const Icon = IconComponent[lesson.icon];
 
                   return (
-                    <span
-                      key={lesson.title}
-                      title={lesson.title}
-                      onClick={() =>
-                        props.handleFetchLesson(
-                          key
-                            .replace(/[\d-]+/g, "")
-                            .toLocaleLowerCase()
-                            .split(" ")
-                            .join("-"),
+                    <React.Fragment>
+                      <span
+                        key={Math.random() * 9999999}
+                        title={lesson.title}
+                        onClick={async () => {
+                          if (lesson.completed) {
+                            try {
+                              setSpin(
+                                lesson.title
+                                  .replace(/,|:/g, "")
+                                  .toLowerCase()
+                                  .split(" ")
+                                  .join("-")
+                              );
+                              const session = await account.getSession(
+                                "current"
+                              );
+                              await changeActiveLesson(
+                                session.userId,
+                                lesson.title
+                                  .replace(/,|:/g, "")
+                                  .toLowerCase()
+                                  .split(" ")
+                                  .join("-")
+                              );
+
+                              props.handleFetchLesson(
+                                key
+                                  .replace(/[\d-]+/g, "")
+                                  .toLowerCase()
+                                  .split(" ")
+                                  .join("-"),
+                                lesson.title
+                                  .replace(/,|:/g, "")
+                                  .toLowerCase()
+                                  .split(" ")
+                                  .join("-")
+                              );
+                              setSpin("");
+                              window.location.reload();
+                            } catch (err) {
+                              console.log(err);
+                              setSpin("");
+                            }
+                          } else {
+                            console.log(
+                              "You need to complete previous lessons"
+                            );
+                          }
+                        }}
+                        className={`pl-3 py-3 flex items-center select-none cursor-pointer ${
+                          lesson.active ? "bg-dgPurple" : "hover:bg-dgPurple"
+                        } rounded mb-1 text-sm block w-full transition-all text-dgLightPurple`}
+                      >
+                        {spin &&
+                        spin ===
                           lesson.title
                             .replace(/,|:/g, "")
-                            .toLocaleLowerCase()
+                            .toLowerCase()
                             .split(" ")
-                            .join("-")
-                        )
-                      }
-                      className={`pl-3 py-3 flex items-center select-none cursor-pointer text-dgLightPurple rounded mb-1 text-sm block w-full transition-all hover:bg-dgPurple`}
-                    >
-                      {Icon && <Icon className="mr-2 w-4" />}
+                            .join("-") ? (
+                          <Spinner className="w-4 h-4 fill-dgWhite text-dgPurple" />
+                        ) : (
+                          <React.Fragment>
+                            {Icon && (
+                              <Icon
+                                className={`mr-2 w-4 ${
+                                  lesson.completed && !lesson.active
+                                    ? "text-dgPurple"
+                                    : "text-dgLightPurple"
+                                }`}
+                              />
+                            )}
 
-                      {lesson.title.length > 30
-                        ? lesson.title.substring(0, 30) + "..."
-                        : lesson.title}
-                    </span>
+                            {lesson.title.length > 30
+                              ? lesson.title.substring(0, 30) + "..."
+                              : lesson.title}
+                          </React.Fragment>
+                        )}
+                      </span>
+                    </React.Fragment>
                   );
                 })}
               </React.Fragment>

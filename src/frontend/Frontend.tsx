@@ -15,15 +15,12 @@ import {
 } from "../assets/config/functions";
 import { logout } from "../assets/config/functions";
 import {
-  database,
   storage,
   PROFILE_PICTURE_BUCKET,
-  USER_PROFILE_COLLECTION,
-  DATABASE_ID,
 } from "../assets/config/appwrite-auth";
 import ToastWarning from "../components/ToastWarning";
 import { AVATAR } from "../assets/data/constants";
-import { object } from "prop-types";
+import DirectionButton from "./DirectionButtons";
 
 interface UserTOCProps {
   [key: string]: {
@@ -47,6 +44,7 @@ const Frontend = () => {
   const [profileImageError, setProfileImageError] = useState<boolean>(false);
   const [userToc, setUserToc] = useState<UserTOCProps>();
   const [fetchedLesson, setFetchedLesson] = useState<string>("");
+  const [reload, setReload] = useState<boolean>(false);
 
   const toggleSidebar = () => {
     return setShowSidebar(!showSidebar);
@@ -115,19 +113,55 @@ const Frontend = () => {
       }
     };
     getProfilePicture();
+
     const getToc = async () => {
-      const session = await account.getSession("current");
       try {
+        const session = await account.getSession("current");
         const userToc = await getUserTOC(session.userId);
+
         if (userToc === false) {
           logout();
           navigate(uriPaths.LOG_IN);
-        } else {
-          setUserToc(userToc);
+          return;
+        }
+
+        setUserToc(userToc);
+
+        const fetchActiveLesson = async (topic: string, lesson: string) => {
+          try {
+            const activeTopic = topic
+              .replace(/[\d-]+/g, "")
+              .toLowerCase()
+              .split(" ")
+              .join("-");
+            const activeLesson = lesson
+              .replace(/,|:/g, "")
+              .toLowerCase()
+              .split(" ")
+              .join("-");
+            await fetchLesson(activeTopic, activeLesson);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+
+        const sortedTOC = Object.keys(userToc).sort((a, b) => {
+          const aNum = parseInt(a.split("-")[0]);
+          const bNum = parseInt(b.split("-")[0]);
+          return aNum - bNum;
+        });
+
+        for (const topic of sortedTOC) {
+          const section = userToc[topic];
+          const lesson = section.lessons.find(
+            (lesson: any) => lesson.active === true
+          );
+          if (lesson) {
+            await fetchActiveLesson(topic, lesson.title);
+          }
         }
       } catch (error) {
-        logout();
-        navigate(uriPaths.LOG_IN);
+        console.log(error);
       }
     };
 
@@ -135,8 +169,11 @@ const Frontend = () => {
   }, []);
 
   const fetchLesson = async (topic: string, lesson: string) => {
-    console.log(`${topic}/${lesson}`);
     try {
+      if (topic === "" && lesson === "") {
+        topic = "welcome";
+        lesson = "course-overview";
+      }
       const uri = `https://raw.githubusercontent.com/Abiey2579/designgriddata/master/learnpath/frontend101/${topic}/${lesson}.md`;
       const mdResponse = await fetch(uri);
       const markdownText = await mdResponse.text();
@@ -173,8 +210,14 @@ const Frontend = () => {
               userData={userData}
               profilePicture={profileImage}
             />
-            <div className="flex">
+            <div className="flex flex-col FrontendMarkdown max-h-[88.4vh] overflow-y-scroll">
               <FrontendMarkdown lessonMarkdown={fetchedLesson} />
+              {userToc && (
+                <DirectionButton
+                  tableOfContent={userToc}
+                  handleFetchLesson={fetchLesson}
+                />
+              )}
             </div>
           </div>
         </div>

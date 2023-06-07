@@ -40,3 +40,21 @@ export interface Blog {
   partial_description: string;
   readtime: string;
 }
+
+export interface UserTOCProps {
+  [key: string]: {
+    [key: string]: any[];
+  };
+}
+
+export interface DirectionButtonProps {
+  tableOfContent: UserTOCProps;
+  handleFetchLesson: Function;
+}
+
+export interface Lesson {
+  title: string;
+  icon: string;
+  active: boolean;
+  completed: boolean;
+}
