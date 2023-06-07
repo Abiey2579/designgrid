@@ -1,7 +1,7 @@
 import * as React from "react";
 
 interface TopicProps {
-  percent: number;
+  percent: number | string;
   name: string;
   icon?: JSX.Element;
 }
@@ -19,7 +19,9 @@ const Topic = (props: TopicProps) => {
           </h1>
         )}
       </div>
-      <h3 className="text-xl font-medium text-dgDarkPurple">{props.name}</h3>
+      <h3 className="text-xl font-medium text-dgDarkPurple text-center">
+        {props.name.replace(/[\d-]+/g, "")}
+      </h3>
     </div>
   );
 };

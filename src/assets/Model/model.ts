@@ -58,3 +58,14 @@ export interface Lesson {
   active: boolean;
   completed: boolean;
 }
+
+export interface SidebarProps {
+  sidebarControl: boolean;
+  handleSidebarMenu: Function;
+  tableOfContent: UserTOCProps;
+  handleFetchLesson: Function;
+}
+
+export interface IconComponentsProps {
+  [key: string]: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+}

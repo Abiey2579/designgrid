@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { changeActiveLesson } from "../assets/config/functions";
 import { account } from "../assets/config/appwrite-auth";
-import {
-  UserTOCProps,
-  Lesson,
-  DirectionButtonProps,
-} from "../assets/Model/model";
+import { Lesson, DirectionButtonProps } from "../assets/Model/model";
 import Spinner from "../components/Spinner";
+import ToastWarning from "../components/ToastWarning";
 
 const DirectionButton = (props: DirectionButtonProps) => {
   const [previousLessonState, setPreviousLessonState] =
     useState<[string, Lesson]>();
   const [nextLessonState, setNextLessonState] = useState<[string, Lesson]>();
-  const [previousTopic, setPreviousTopic] = useState<string>("");
-  const [nextTopic, setNextTopic] = useState<string>("");
   const [spinNext, setSpinNext] = useState<boolean>(false);
   const [spinPrevious, setSpinPrevious] = useState<boolean>(false);
-  const [reload, setReload] = useState<boolean>(false);
+  const [nextErrorToast, setNextErrorToast] = useState<boolean>(false);
+  const [previousErrorToast, setPreviousErrorToast] = useState<boolean>(false);
 
   const sortedTOC = Object.keys(props.tableOfContent).sort((a, b) => {
     const aNum = parseInt(a.split("-")[0]);
@@ -50,6 +46,8 @@ const DirectionButton = (props: DirectionButtonProps) => {
         console.log(err);
         setSpinNext(false);
       }
+    } else {
+      setNextErrorToast(true);
     }
   };
 
@@ -79,6 +77,8 @@ const DirectionButton = (props: DirectionButtonProps) => {
         console.log(err);
         setSpinPrevious(false);
       }
+    } else {
+      setPreviousErrorToast(true);
     }
   };
 
@@ -93,17 +93,6 @@ const DirectionButton = (props: DirectionButtonProps) => {
       const previousTopic = sortedTOC[previousTopicIndex];
       const nextTopicIndex = sortedTOC.indexOf(activeTopic) + 1;
       const nextTopic = sortedTOC[nextTopicIndex];
-      if (previousTopic !== undefined) {
-        setPreviousTopic(previousTopic);
-      } else {
-        setPreviousTopic("");
-      }
-
-      if (nextTopic !== undefined) {
-        setNextTopic(nextTopic);
-      } else {
-        setNextTopic("");
-      }
 
       // NOW LET'S FIND ACTIVE LESSON
       const activeSection = props.tableOfContent[activeTopic];
@@ -143,43 +132,61 @@ const DirectionButton = (props: DirectionButtonProps) => {
         setNextLessonState([activeTopic, nextLesson]);
       }
     }
-  }, []);
+  }, [sortedTOC, props.tableOfContent]);
 
   return (
-    <div className="w-full lg:px-10 md:px-7 px-5 py-5 flex lg:flex-row md:flex-row sm:flex-row gap-5 flex-col justify-between items-center">
-      <div
-        onClick={handlePreviousLesson}
-        className="min-w-[240px] cursor-pointer select-none h-16 bg-dgLightPurple border flex flex-col gap-1 border-slate-300 rounded px-4 py-2"
-      >
-        {spinPrevious === true ? (
-          <Spinner className="w-4 h-4 fill-dgWhite text-dgPurple" />
-        ) : (
-          <React.Fragment>
-            <h3 className="text-base font-semibold text-dgDarkPurple">
-              Previous
-            </h3>
-            <p className="text-sm font-normal text-dgDarkPurple_Opacity">
-              {previousLessonState && previousLessonState[1].title}
-            </p>
-          </React.Fragment>
-        )}
+    <>
+      {nextErrorToast && (
+        <ToastWarning
+          title="No Next Lesson"
+          key={"Next Lesson Error"}
+          close={() => setNextErrorToast(false)}
+        />
+      )}
+      {previousErrorToast && (
+        <ToastWarning
+          title="No Previous Lesson"
+          key={"Previous Lesson Error"}
+          close={() => setPreviousErrorToast(false)}
+        />
+      )}
+      <div className="w-full lg:px-10 md:px-7 px-5 py-5 flex lg:flex-row md:flex-row sm:flex-row gap-5 flex-col justify-between items-center">
+        <div
+          onClick={handlePreviousLesson}
+          className="min-w-[240px] cursor-pointer select-none h-16 bg-dgLightPurple border flex flex-col gap-1 border-slate-300 rounded px-4 py-2"
+        >
+          {spinPrevious === true ? (
+            <Spinner className="w-4 h-4 fill-dgWhite text-dgPurple" />
+          ) : (
+            <React.Fragment>
+              <h3 className="text-base font-semibold text-dgDarkPurple">
+                Previous
+              </h3>
+              <p className="text-sm font-normal text-dgDarkPurple_Opacity">
+                {previousLessonState && previousLessonState[1].title}
+              </p>
+            </React.Fragment>
+          )}
+        </div>
+        <div
+          onClick={handleNextLesson}
+          className="min-w-[240px] cursor-pointer select-none h-16 bg-dgPurple flex flex-col gap-1 rounded px-4 py-2"
+        >
+          {spinNext === true ? (
+            <Spinner className="w-4 h-4 fill-dgPurple text-dgWhite" />
+          ) : (
+            <React.Fragment>
+              <h3 className="text-base font-semibold text-dgLightPurple">
+                Next
+              </h3>
+              <p className="text-sm font-normal text-dgLightPurple">
+                {nextLessonState && nextLessonState[1].title}
+              </p>
+            </React.Fragment>
+          )}
+        </div>
       </div>
-      <div
-        onClick={handleNextLesson}
-        className="min-w-[240px] cursor-pointer select-none h-16 bg-dgPurple flex flex-col gap-1 rounded px-4 py-2"
-      >
-        {spinNext === true ? (
-          <Spinner className="w-4 h-4 fill-dgPurple text-dgWhite" />
-        ) : (
-          <React.Fragment>
-            <h3 className="text-base font-semibold text-dgLightPurple">Next</h3>
-            <p className="text-sm font-normal text-dgLightPurple">
-              {nextLessonState && nextLessonState[1].title}
-            </p>
-          </React.Fragment>
-        )}
-      </div>
-    </div>
+    </>
   );
 };
 

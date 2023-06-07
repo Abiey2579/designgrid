@@ -8,6 +8,8 @@ import Spinner from "../components/Spinner";
 import {
   checkIfUserExist,
   checkIfCompletedOnboarding,
+  getUserTOC,
+  logout,
 } from "../assets/config/functions";
 import {
   storage,
@@ -15,6 +17,7 @@ import {
 } from "../assets/config/appwrite-auth";
 import ToastWarning from "../components/ToastWarning";
 import { AVATAR } from "../assets/data/constants";
+import { UserTOCProps } from "../assets/Model/model";
 
 const Dashboard = () => {
   const [preventView, setPreventView] = useState<boolean>(true);
@@ -29,6 +32,7 @@ const Dashboard = () => {
   const [userData, setUserData] = useState<FetchedUser>();
   const [profileImage, setProfileImage] = useState<string>("");
   const [profileImageError, setProfileImageError] = useState<boolean>(false);
+  const [userToc, setUserToc] = useState<UserTOCProps>();
 
   useEffect(() => {
     const checkSession = async () => {
@@ -85,7 +89,26 @@ const Dashboard = () => {
     };
 
     getProfilePicture();
-  }, []);
+
+    const getToc = async () => {
+      try {
+        const session = await account.getSession("current");
+        const userToc = await getUserTOC(session.userId);
+
+        if (userToc === false) {
+          logout();
+          navigate(uriPaths.LOG_IN);
+          return;
+        }
+
+        setUserToc(userToc);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getToc();
+  });
   return (
     <React.Fragment>
       {profileImageError && (
@@ -101,7 +124,9 @@ const Dashboard = () => {
             userName={userData?.name}
             profilePicture={profileImage}
           />
-          <Content profilePicture={profileImage} />
+          {userToc && (
+            <Content profilePicture={profileImage} tableOfContent={userToc} />
+          )}
         </React.Fragment>
       ) : (
         <div className="w-screen h-screen flex justify-center items-center">

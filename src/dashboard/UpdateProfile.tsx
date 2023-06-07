@@ -17,10 +17,27 @@ import {
 import { ID, Query } from "appwrite";
 import { AVATAR } from "../assets/data/constants";
 
+type FetchedUser = {
+  $createdAt: string;
+  $id: string;
+  $updatedAt: string;
+  email: string;
+  name: string;
+};
+
+type UserProfileData = {
+  $createdAt: string;
+  $id: string;
+  $updatedAt: string;
+  country?: string;
+  dob?: string;
+  phone_number?: string;
+};
+
 const UpdateProfile = () => {
   const [country, setCountry] = useState<string>("");
   const [DOB, setDOB] = useState<string>("");
-  const [phomeNumber, setPhomeNumber] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
   const navigate = useNavigate();
   const [preventView, setPreventView] = useState<boolean>(true);
   const [successToast, setSuccessToast] = useState<boolean>(false);
@@ -31,22 +48,6 @@ const UpdateProfile = () => {
   const [saveProfilePictureSpinner, setSaveProfilePictureSpinner] =
     useState<boolean>(false);
 
-  type FetchedUser = {
-    $createdAt: string;
-    $id: string;
-    $updatedAt: string;
-    email: string;
-    name: string;
-  };
-
-  type UserProfileData = {
-    $createdAt: string;
-    $id: string;
-    $updatedAt: string;
-    country?: string;
-    dob?: string;
-    phone_number?: string;
-  };
   const [userData, setUserData] = useState<FetchedUser>();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [imagePreview, setImagePreview] = useState("");
@@ -54,7 +55,6 @@ const UpdateProfile = () => {
     useState<boolean>(false);
   const [profileImageError, setProfileImageError] = useState<boolean>(false);
   const [profileImage, setProfileImage] = useState<string>("");
-  const [userProfile, setUserProfile] = useState<UserProfileData>();
 
   useEffect(() => {
     const getProfilePicture = async () => {
@@ -96,9 +96,9 @@ const UpdateProfile = () => {
 
         if (data.length > 0) {
           const userProfileData = data[0] as UserProfileData;
-          setUserProfile(userProfileData);
-        } else {
-          setUserProfile(undefined);
+          setPhoneNumber(userProfileData.phone_number ?? "");
+          setDOB(userProfileData.dob ?? "");
+          setCountry(userProfileData.country ?? "");
         }
 
         setPreventView(false);
@@ -108,12 +108,12 @@ const UpdateProfile = () => {
       }
     };
     checkSession();
-  }, []);
+  });
 
   const handleUpdateProfile = async () => {
     if (
       country.trim() === "" ||
-      phomeNumber.trim() === "" ||
+      phoneNumber.trim() === "" ||
       DOB.trim() === ""
     ) {
       setrequiredFieldsToast(true);
@@ -125,7 +125,7 @@ const UpdateProfile = () => {
         {
           country: country,
           dob: DOB,
-          phone_number: phomeNumber,
+          phone_number: phoneNumber,
         },
         userData?.$id ?? ""
       );
@@ -311,7 +311,7 @@ const UpdateProfile = () => {
                 <span className="mb-1 block">Country *</span>
                 <select
                   onChange={(e) => setCountry(e.target.value)}
-                  value={userProfile?.country}
+                  value={country}
                   className="border border-slate-400 rounded font-medium outline-0 px-3 py-[10px] md:min-w-[340px] w-full bg-dgLightPurple text-dgDarkPurple"
                 >
                   <option value="">Choose</option>
@@ -326,7 +326,7 @@ const UpdateProfile = () => {
                 <span className="mb-1 block">Date of Birth *</span>
                 <input
                   onChange={(e) => setDOB(e.target.value)}
-                  value={userProfile?.dob}
+                  value={DOB}
                   type="date"
                   className="border border-slate-400 rounded font-medium outline-0 px-3 py-2 md:min-w-[340px] w-full bg-dgLightPurple text-dgDarkPurple "
                 />
@@ -348,8 +348,8 @@ const UpdateProfile = () => {
               <div>
                 <span className="mb-1 block">Phone Number *</span>
                 <input
-                  onChange={(e) => setPhomeNumber(e.target.value)}
-                  value={userProfile?.phone_number}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  value={phoneNumber}
                   type="text"
                   className="border border-slate-400 rounded font-medium outline-0 px-3 py-2 md:min-w-[340px] w-full bg-dgLightPurple text-dgDarkPurple "
                 />

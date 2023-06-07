@@ -17,18 +17,17 @@ import * as uriPaths from "../assets/data/uriPaths";
 import { logout } from "../assets/config/functions";
 import { account } from "../assets/config/appwrite-auth";
 import Button from "../components/Button";
-import UserProfile from "../assets/svgs/user-profile.svg";
 
 const NAV_ITEMS = [
-  {
-    name: "Blogs",
-    href: uriPaths.COMMUNITY_BLOGS,
-    icon: BookOpenIcon,
-  },
   {
     name: "Learning Path",
     href: uriPaths.LEARNING_PATH,
     icon: PresentationChartLineIcon,
+  },
+  {
+    name: "Blogs",
+    href: uriPaths.COMMUNITY_BLOGS,
+    icon: BookOpenIcon,
   },
   {
     name: "Sign Up",
@@ -80,14 +79,14 @@ const Navbar = (props: {
             </Popover.Button>
           </div>
           <Popover.Group as="nav" className="hidden space-x-10 md:flex">
-            <Link to={uriPaths.COMMUNITY_BLOGS}>
-              <span className="text-base font-medium text-dgDarkPurple_Opacity hover:text-dgDarkPurple_Opacity">
-                Blogs
-              </span>
-            </Link>
             <Link to={uriPaths.LEARNING_PATH}>
               <span className="text-base font-medium text-dgDarkPurple_Opacity hover:text-dgDarkPurple_Opacity">
                 Learning Path
+              </span>
+            </Link>
+            <Link to={uriPaths.COMMUNITY_BLOGS}>
+              <span className="text-base font-medium text-dgDarkPurple_Opacity hover:text-dgDarkPurple_Opacity">
+                Blogs
               </span>
             </Link>
           </Popover.Group>

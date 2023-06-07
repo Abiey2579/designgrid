@@ -12,7 +12,6 @@ import {
   ChartBarSquareIcon,
   ChevronDownIcon,
 } from "@heroicons/react/24/outline";
-import UserProfile from "../assets/svgs/user-profile.svg";
 import * as uriPaths from "../assets/data/uriPaths";
 import { logout } from "../assets/config/functions";
 
@@ -23,7 +22,7 @@ const NAV_ITEMS = [
     icon: PresentationChartLineIcon,
   },
   {
-    name: "Blog",
+    name: "Blogs",
     href: uriPaths.COMMUNITY_BLOGS,
     icon: BookOpenIcon,
   },
@@ -85,7 +84,7 @@ const Navbar = (props: {
             </Link>
             <Link to={uriPaths.COMMUNITY_BLOGS}>
               <span className="text-base font-medium text-dgDarkPurple_Opacity hover:text-dgDarkPurple_Opacity">
-                Blog
+                Blogs
               </span>
             </Link>
           </Popover.Group>

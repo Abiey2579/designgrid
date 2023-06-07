@@ -9,26 +9,13 @@ import { CheckBadgeIcon } from "@heroicons/react/24/solid";
 import { changeActiveLesson } from "../assets/config/functions";
 import { account } from "../assets/config/appwrite-auth";
 import Spinner from "../components/Spinner";
+import ToastWarning from "../components/ToastWarning";
+import { SidebarProps, IconComponentsProps } from "../assets/Model/model";
 
-interface SidebarProps {
-  sidebarControl: boolean;
-  handleSidebarMenu: Function;
-  tableOfContent: UserTOCProps;
-  handleFetchLesson: Function;
-}
-
-interface UserTOCProps {
-  [key: string]: {
-    [key: string]: any[];
-  };
-}
-
-type IconComponents = {
-  [key: string]: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-};
-
-const Sidebar = (props: SidebarProps) => {
+const Sidebar: React.FC<SidebarProps> = (props) => {
   const [spin, setSpin] = useState<string>("");
+  const [unCompletedLessonError, setUnCompletedLessonError] =
+    useState<boolean>(false);
 
   const getSectionProgress = (section: any) => {
     const completedLessons = section.lessons.filter(
@@ -44,20 +31,59 @@ const Sidebar = (props: SidebarProps) => {
     return aNum - bNum;
   });
 
-  const IconComponent: IconComponents = {
+  const IconComponent: IconComponentsProps = {
     CheckBadgeIcon,
     BookOpenIcon,
     PlayCircleIcon,
     CodeBracketIcon,
   };
 
-  const d = props.sidebarControl
-    ? "fixed z-30 h-screen"
-    : "lg:block md:hidden hidden";
+  const handleLessonClick = async (lesson: any, key: string) => {
+    if (lesson.completed) {
+      try {
+        setSpin(
+          lesson.title.replace(/,|:/g, "").toLowerCase().split(" ").join("-")
+        );
+        const session = await account.getSession("current");
+        await changeActiveLesson(
+          session.userId,
+          lesson.title.replace(/,|:/g, "").toLowerCase().split(" ").join("-")
+        );
+
+        props.handleFetchLesson(
+          key
+            .replace(/[\d-]+/g, "")
+            .toLowerCase()
+            .split(" ")
+            .join("-"),
+          lesson.title.replace(/,|:/g, "").toLowerCase().split(" ").join("-")
+        );
+        setSpin("");
+        window.location.reload();
+      } catch (err) {
+        console.log(err);
+        setSpin("");
+      }
+    } else {
+      setUnCompletedLessonError(true);
+    }
+  };
+
   return (
-    <React.Fragment>
+    <>
+      {unCompletedLessonError && (
+        <ToastWarning
+          title="Follow Lessons in Order"
+          key={"Next Lesson Error"}
+          close={() => setUnCompletedLessonError(false)}
+        />
+      )}
       <div
-        className={`min-w-[20%] max-w-[340px] h-screen bg-dgDarkPurple pl-5 pr-5 ${d}`}
+        className={`min-w-[20%] max-w-[340px] h-screen bg-dgDarkPurple pl-5 pr-5 ${
+          props.sidebarControl
+            ? "fixed z-30 h-screen"
+            : "lg:block md:hidden hidden"
+        }`}
       >
         <div className="flex items-center justify-between py-7 mb-3">
           <h1 className="text-dgLightPurple text-xl font-bold">
@@ -77,25 +103,21 @@ const Sidebar = (props: SidebarProps) => {
         <div className="SidebarMenu max-h-[85vh] overflow-y-scroll border-t border-slate-500">
           {sortedTOC.map((key) => {
             const section = props.tableOfContent[key];
+            const progress = getSectionProgress(section);
+            const isSectionCompleted =
+              parseInt(progress) === section.lessons.length;
+
             return (
-              <React.Fragment>
-                <p
-                  key={Math.random() * 9999999}
-                  className="flex items-center justify-between font-semibold text-dgLightPurple text-base my-3 py-1 border-slate-500 border-b"
-                >
+              <React.Fragment key={key}>
+                <p className="flex items-center justify-between font-semibold text-dgLightPurple text-base my-3 py-1 border-slate-500 border-b">
                   <span>{key.replace(/[\d-]+/g, "")}</span>
 
                   <h5 className="text-sm flex gap-1 items-center">
                     {/* TOPIC PROGRESS TRACKER */}
-                    {getSectionProgress(section)}
-                    {section.length}
-
+                    {progress}
                     {/* TOPIC COMPLETION ICON */}
-                    {parseInt(getSectionProgress(section)) ===
-                    section.lessons.length ? (
+                    {isSectionCompleted && (
                       <CheckBadgeIcon className="w-5 text-dgPurple" />
-                    ) : (
-                      ""
                     )}
                   </h5>
                 </p>
@@ -104,87 +126,39 @@ const Sidebar = (props: SidebarProps) => {
                   const Icon = IconComponent[lesson.icon];
 
                   return (
-                    <React.Fragment>
-                      <span
-                        key={Math.random() * 9999999}
-                        title={lesson.title}
-                        onClick={async () => {
-                          if (lesson.completed) {
-                            try {
-                              setSpin(
-                                lesson.title
-                                  .replace(/,|:/g, "")
-                                  .toLowerCase()
-                                  .split(" ")
-                                  .join("-")
-                              );
-                              const session = await account.getSession(
-                                "current"
-                              );
-                              await changeActiveLesson(
-                                session.userId,
-                                lesson.title
-                                  .replace(/,|:/g, "")
-                                  .toLowerCase()
-                                  .split(" ")
-                                  .join("-")
-                              );
+                    <span
+                      key={Math.random() * 9999999}
+                      title={lesson.title}
+                      onClick={() => handleLessonClick(lesson, key)}
+                      className={`pl-3 py-3 flex items-center select-none cursor-pointer ${
+                        lesson.active ? "bg-dgPurple" : "hover:bg-dgPurple"
+                      } rounded mb-1 text-sm block w-full transition-all text-dgLightPurple`}
+                    >
+                      {spin ===
+                      lesson.title
+                        .replace(/,|:/g, "")
+                        .toLowerCase()
+                        .split(" ")
+                        .join("-") ? (
+                        <Spinner className="w-4 h-4 fill-dgWhite text-dgPurple" />
+                      ) : (
+                        <>
+                          {Icon && (
+                            <Icon
+                              className={`mr-2 w-4 ${
+                                lesson.completed && !lesson.active
+                                  ? "text-dgPurple"
+                                  : "text-dgLightPurple"
+                              }`}
+                            />
+                          )}
 
-                              props.handleFetchLesson(
-                                key
-                                  .replace(/[\d-]+/g, "")
-                                  .toLowerCase()
-                                  .split(" ")
-                                  .join("-"),
-                                lesson.title
-                                  .replace(/,|:/g, "")
-                                  .toLowerCase()
-                                  .split(" ")
-                                  .join("-")
-                              );
-                              setSpin("");
-                              window.location.reload();
-                            } catch (err) {
-                              console.log(err);
-                              setSpin("");
-                            }
-                          } else {
-                            console.log(
-                              "You need to complete previous lessons"
-                            );
-                          }
-                        }}
-                        className={`pl-3 py-3 flex items-center select-none cursor-pointer ${
-                          lesson.active ? "bg-dgPurple" : "hover:bg-dgPurple"
-                        } rounded mb-1 text-sm block w-full transition-all text-dgLightPurple`}
-                      >
-                        {spin &&
-                        spin ===
-                          lesson.title
-                            .replace(/,|:/g, "")
-                            .toLowerCase()
-                            .split(" ")
-                            .join("-") ? (
-                          <Spinner className="w-4 h-4 fill-dgWhite text-dgPurple" />
-                        ) : (
-                          <React.Fragment>
-                            {Icon && (
-                              <Icon
-                                className={`mr-2 w-4 ${
-                                  lesson.completed && !lesson.active
-                                    ? "text-dgPurple"
-                                    : "text-dgLightPurple"
-                                }`}
-                              />
-                            )}
-
-                            {lesson.title.length > 30
-                              ? lesson.title.substring(0, 30) + "..."
-                              : lesson.title}
-                          </React.Fragment>
-                        )}
-                      </span>
-                    </React.Fragment>
+                          {lesson.title.length > 30
+                            ? lesson.title.substring(0, 30) + "..."
+                            : lesson.title}
+                        </>
+                      )}
+                    </span>
                   );
                 })}
               </React.Fragment>
@@ -199,7 +173,7 @@ const Sidebar = (props: SidebarProps) => {
           onClick={() => props.handleSidebarMenu()}
         ></div>
       )}
-    </React.Fragment>
+    </>
   );
 };
 
