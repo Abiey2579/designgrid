@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Popover, Transition } from "@headlessui/react";
@@ -11,7 +10,6 @@ import {
   HomeModernIcon,
   UserPlusIcon,
 } from "@heroicons/react/24/outline";
-import Button from "../components/Button";
 import * as uriPaths from "../assets/data/uriPaths";
 
 const NAV_ITEMS = [
@@ -40,7 +38,7 @@ const NAV_ITEMS = [
 
 const Navbar = () => {
   return (
-    <Popover className="relative bg-dgLightPurple z-50 border-b border-dgBorder">
+    <Popover className="relative bg-dgWhite z-50">
       <div className="lg:px-24 md:px-10 px-6 ">
         <div className="flex items-center justify-between py-1 md:justify-start md:space-x-10 h-20">
           <div className="flex justify-start lg:w-0 lg:flex-1">
@@ -80,7 +78,13 @@ const Navbar = () => {
             </Link>
           </Popover.Group>
           <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-            <Button name="Sign Up" href={uriPaths.SIGN_UP} />
+            <Link to={uriPaths.SIGN_UP}>
+              <span
+                className={`bg-dgPurple inline-block px-6 py-3 font-medium text-dgLightPurple rounded text-base`}
+              >
+                Sign Up
+              </span>
+            </Link>
           </div>
         </div>
       </div>
@@ -114,7 +118,7 @@ const Navbar = () => {
                     <Link
                       key={item.name}
                       to={item.href}
-                      className="-m-3 flex items-center rounded-md p-3 hover:bg-dgLightPurple"
+                      className="-m-3 flex items-center rounded p-3 hover:bg-dgLightPurple"
                     >
                       <item.icon
                         className="h-6 w-6 flex-shrink-0 "
@@ -125,10 +129,11 @@ const Navbar = () => {
                       </span>
                     </Link>
                   ))}
+
                   <Link
                     key={"signup"}
                     to={uriPaths.SIGN_UP}
-                    className="-m-3 flex items-center rounded-md p-3 bg-dgPurple"
+                    className="-m-3 flex items-center rounded p-3 bg-dgPurple"
                   >
                     <UserPlusIcon
                       className="h-6 w-6 flex-shrink-0 text-dgLightPurple"

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import CoffeeCup from "../assets/svgs/CoffeeCup.svg";
 import { Link } from "react-router-dom";
 import { account } from "../assets/config/appwrite-auth";
 import * as uriPaths from "../assets/data/uriPaths";
@@ -32,15 +31,15 @@ const SignUp = () => {
         />
       )}
       <div className="lg:px-24 md:px-10 px-6 min-h-screen flex justify-around items-center">
-        <div className="max-w-md">
+        <div className="max-w-md bg-dgWhite lg:border border-0 border-slate-200 lg:p-7 p-0 rounded">
           <h2 className="text-dgDarkPurple font-bold text-3xl mb-6">Sign Up</h2>
-          <p className="text-dgDarkPurple text-base mb-6">
+          <p className="text-dgDarkPurple text-base mb-6 w-[300px]">
             By signing up you agree to be receiving our newsletters, and updates
             about design
           </p>
           <button
             onClick={() => handleOAuth("google")}
-            className={`bg-dgWhite font-normal text-dgDarkPurple rounded-full text-base w-[300px] flex outline-0 mb-5`}
+            className={`bg-dgLightPurple text-dgDarkPurple rounded w-[300px] flex outline-0 mb-4`}
           >
             <div className="w-20 text-center py-4">
               <img src={Google} alt={"Google"} className="m-auto" />
@@ -49,7 +48,7 @@ const SignUp = () => {
           </button>
           <button
             onClick={() => handleOAuth("github")}
-            className={`bg-dgDarkPurple font-normal text-dgLightPurple rounded-full text-base w-[300px] flex outline-0 mb-5`}
+            className={`bg-dgDarkPurple text-dgLightPurple rounded w-[300px] flex outline-0 mb-4`}
           >
             <div className="w-20 text-center py-4">
               <img src={GitHub} alt={"GitHub"} className="m-auto" />
@@ -66,11 +65,6 @@ const SignUp = () => {
             </Link>
           </p>
         </div>
-        <img
-          src={CoffeeCup}
-          alt="DocsImage"
-          className="w-fit lg:flex md:hidden hidden"
-        />
       </div>
     </React.Fragment>
   );

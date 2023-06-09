@@ -13,6 +13,8 @@ module.exports = {
         dgDarkPurple_Opacity: "#241F38d9",
         dgFacebook: "#0981EC",
         dgBorder: "rbga(21,4,37,12%)",
+        dgLightPurple_Opacity: "#f3effe1f",
+        dgPurple_Opacity: "#7026ed1f",
       },
     },
   },

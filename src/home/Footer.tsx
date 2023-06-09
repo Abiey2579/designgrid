@@ -1,52 +1,58 @@
 import * as React from "react";
-import Twitter from "../assets/svgs/Twitter.svg";
-import Facebook from "../assets/svgs/Facebook.svg";
-import Instagram from "../assets/svgs/Instagram.svg";
-import Discord from "../assets/svgs/Discord.svg";
+import Twitter from "../assets/svgs/footer-twitter.svg";
+import Facebook from "../assets/svgs/footer-facebook-f.svg";
+import Instagram from "../assets/svgs/footer-instagram.svg";
+import Discord from "../assets/svgs/footer-discord.svg";
 
-import AngleRight from "../assets/svgs/angle-right.svg";
-import MapMarker from "../assets/svgs/map-marker-alt.svg";
-import PhoneAlt from "../assets/svgs/phone-alt.svg";
-import Envelop from "../assets/svgs/envelope.svg";
+import { EnvelopeIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 
 const Footer = () => {
   return (
     <footer className="lg:px-24 md:px-10 px-6 bg-dgDarkPurple py-20 flex lg:flex-row md:flex-col flex-col md:gap-10 gap-8 justify-between">
       <div>
         <h3 className="text-dgLightPurple text-3xl font-bold mb-10">
-          Our Community
+          DesignGrid
         </h3>
         <p className="max-w-[280px] mb-8 text-dgLightPurple">
-          Far far away, behind the world Mountains, far from the countries
-          Volkalia and Consonantia, there live the blind texts.
+          Empower yourself to shape the future of frontend development by
+          unlocking your potential and embarking on a transformative journey
+          towards building innovative and impactful web experiences.
         </p>
         <div className="flex gap-5">
-          <img src={Twitter} alt="Twitter" />
-          <img src={Facebook} alt="Facebook" />
-          <img src={Instagram} alt="Instagram" />
-          <img src={Discord} alt="Discord" />
+          <div className="w-12 h-12 rounded-full bg-dgLightPurple_Opacity grid place-items-center">
+            <img src={Twitter} alt="Twitter" className="w-6" />
+          </div>
+          <div className="w-12 h-12 rounded-full bg-dgLightPurple_Opacity grid place-items-center">
+            <img src={Facebook} alt="Facebook" className="h-6" />
+          </div>
+          <div className="w-12 h-12 rounded-full bg-dgLightPurple_Opacity grid place-items-center">
+            <img src={Instagram} alt="Instagram" className="w-6" />
+          </div>
+          <div className="w-12 h-12 rounded-full bg-dgLightPurple_Opacity grid place-items-center">
+            <img src={Discord} alt="Discord" className="w-6" />
+          </div>
         </div>
       </div>
       <div>
         <h3 className="text-dgLightPurple text-3xl font-bold mb-10">
-          What We Offer
+          Sections
         </h3>
         <div className="flex mb-8">
-          <img src={AngleRight} alt="AngleRight" className="mr-8" />
+          <ArrowRightIcon className="mr-8 w-6 text-dgLightPurple" />
           <a href="/" className="text-dgLightPurple text-base">
-            Learning Resources
+            Learning Path
           </a>
         </div>
         <div className="flex mb-8">
-          <img src={AngleRight} alt="AngleRight" className="mr-8" />
+          <ArrowRightIcon className="mr-8 w-6 text-dgLightPurple" />
           <a href="/" className="text-dgLightPurple text-base">
-            Blog
+            Community Blogs
           </a>
         </div>
         <div className="flex mb-8">
-          <img src={AngleRight} alt="AngleRight" className="mr-8" />
+          <ArrowRightIcon className="mr-8 w-6 text-dgLightPurple" />
           <a href="/" className="text-dgLightPurple text-base">
-            Newsletters
+            About Us
           </a>
         </div>
       </div>
@@ -55,17 +61,7 @@ const Footer = () => {
           Have a question?
         </h3>
         <div className="flex mb-8">
-          <img src={MapMarker} alt="AngleRight" className="mr-8" />
-          <p className="text-dgLightPurple text-base max-w-[240px]">
-            203 Fake St. Mountain View, San Francisco, Calfornia, Nigeria
-          </p>
-        </div>
-        <div className="flex mb-8">
-          <img src={PhoneAlt} alt="AngleRight" className="mr-8" />
-          <p className="text-dgLightPurple text-base">+234 9039 4028 57 </p>
-        </div>
-        <div className="flex mb-8">
-          <img src={Envelop} alt="AngleRight" className="mr-8" />
+          <EnvelopeIcon className="mr-8 w-6 text-dgLightPurple" />
           <p className="text-dgLightPurple text-base">support@designgrid.com</p>
         </div>
       </div>

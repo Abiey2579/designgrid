@@ -1,0 +1,30 @@
+.slider::before,
+.slider::after {
+  position: absolute;
+  content: "";
+
+  height: 100%;
+  width: 120px;
+  z-index: 9999;
+  top: 0;
+}
+
+.slider::before {
+  left: 0;
+  background: linear-gradient(to left, #f3effe00 0%, #f3effe 100%);
+}
+
+.slider::after {
+  right: 0;
+  background: linear-gradient(to right, #f3effe00 0%, #f3effe 100%);
+}
+
+.slider ul.brands {
+  animation: slideLeft 10s linear infinite;
+}
+
+@keyframes slideLeft {
+  100% {
+    transform: translateX(-100%);
+  }
+}
