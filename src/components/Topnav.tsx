@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import { Dropdown } from "flowbite-react";
 import {
   Bars3Icon,
   ChartBarSquareIcon,
   UserIcon,
   TrashIcon,
-  ChevronDownIcon,
 } from "@heroicons/react/24/outline";
-import UserProfile from "../assets/svgs/user-profile.svg";
 import { Link, useNavigate } from "react-router-dom";
 import * as uriPaths from "../assets/data/uriPaths";
 import { logout } from "../assets/config/functions";
@@ -24,13 +22,7 @@ export interface TopnavProps {
 }
 
 const Topnav = (props: TopnavProps) => {
-  const [showProfileImageMenu, setshowProfileImageMenu] =
-    useState<boolean>(false);
   const navigate = useNavigate();
-
-  const handleProfileImageMenu = () => {
-    return setshowProfileImageMenu(!showProfileImageMenu);
-  };
 
   const handleLogout = () => {
     const promise = logout();
@@ -44,46 +36,49 @@ const Topnav = (props: TopnavProps) => {
         onClick={() => props.handleSidebarMenu()}
         className="w-8 cursor-pointer lg:hidden md:block block"
       />
-      <div className="flex flex-col relative">
-        <div
-          className="flex items-center gap-3 cursor-pointer"
-          onClick={() => handleProfileImageMenu()}
-        >
+      <Dropdown
+        inline
+        label={
           <div
-            className="profile-picture select-none w-9 h-9 bg-center bg-no-repeat bg-cover rounded-full"
-            style={{ backgroundImage: `url(${props.profilePicture})` }}
-          ></div>
-          <p className="text-base font-medium select-none">
+            className="profile-picture w-10 h-10 bg-center bg-no-repeat bg-cover rounded-full"
+            style={{
+              backgroundImage: `url(${props.profilePicture})`,
+            }}
+          />
+        }
+      >
+        <Dropdown.Header>
+          <span className="block text-base font-bold text-dgDarkPurple">
             {props.userData?.name}
-          </p>
-          <ChevronDownIcon className="select-none w-5" />
-        </div>
-        {showProfileImageMenu && (
-          <div className="absolute w-full min-w-[185px] top-full bg-dgWhite shadow mt-3 p-3 gap-2 flex flex-col rounded">
-            <Link
-              to={uriPaths.DASHBOARD}
-              className="px-3 py-2 hover:bg-dgLightPurple rounded flex items-center gap-3"
-            >
-              <ChartBarSquareIcon className="w-5" />
-              Dashboard
-            </Link>
-            <Link
-              to={uriPaths.UPDATE_PROFILE}
-              className="px-3 py-2 hover:bg-dgLightPurple rounded flex items-center gap-3"
-            >
-              <UserIcon className="w-5" />
-              Update Profile
-            </Link>
-            <span
-              onClick={() => handleLogout()}
-              className="px-3 py-2 hover:bg-dgLightPurple rounded select-none cursor-pointer flex items-center gap-3"
-            >
-              <TrashIcon className="w-5" />
-              Logout
-            </span>
-          </div>
-        )}
-      </div>
+          </span>
+          <span className="block truncate text-dgDarkPurple_Opacity text-sm font-medium">
+            {props.userData?.email}
+          </span>
+        </Dropdown.Header>
+        <Link
+          to={uriPaths.DASHBOARD}
+          className="flex flex-row items-center text-base px-4 py-2 hover:bg-dgLightPurple"
+        >
+          <ChartBarSquareIcon className="w-5 mr-3" />
+          <span>Dashboard</span>
+        </Link>
+        <Link
+          to={uriPaths.UPDATE_PROFILE}
+          className="flex flex-row items-center text-base px-4 py-2 hover:bg-dgLightPurple"
+        >
+          <UserIcon className="w-5 mr-3" />
+          <span>Update Profile</span>
+        </Link>
+        <Dropdown.Divider />
+        <a
+          href="javascript:void(0)"
+          onClick={() => handleLogout()}
+          className="flex flex-row items-center text-base px-4 py-2 hover:bg-dgLightPurple"
+        >
+          <TrashIcon className="w-5 mr-3" />
+          <span>Sign out</span>
+        </a>
+      </Dropdown>
     </nav>
   );
 };

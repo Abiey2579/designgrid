@@ -1,27 +1,41 @@
-import * as React from "react";
-
-interface TopicProps {
-  percent: number | string;
-  name: string;
-  icon?: JSX.Element;
-}
+import { TopicProps } from "../assets/Model/model";
+import { CheckBadgeIcon } from "@heroicons/react/24/solid";
 
 const Topic = (props: TopicProps) => {
   return (
-    <div className="flex flex-col justify-center items-center">
-      <div className="flex items-center justify-center bg-dgLightPurple border-4 border-dgPurple h-[146px] w-[146px] rounded-full mb-4">
-        {props.icon !== undefined ? (
-          props.icon
+    <div className="bg-dgWhite border border-slate-300 h-[146px] min-w-[240px] rounded p-5">
+      {/* PROGRESS TRACKERS */}
+      <div className="flex justify-between items-center">
+        <div className="text-xs tracking-wider font-medium mb-1 text-dgDarkPurple flex gap-2">
+          <h5>{props.numberOfLessons}</h5> <p>LESSONS</p>
+        </div>
+        {props.numberOfLessons === props.numberOfCompletedLessons ? (
+          <CheckBadgeIcon className="w-6 text-dgPurple" />
         ) : (
-          <h1 className="text-6xl font-bold text-dgDarkPurple">
-            {props.percent}
-            <span className="text-xl">%</span>
-          </h1>
+          ""
         )}
       </div>
-      <h3 className="text-xl font-medium text-dgDarkPurple text-center">
+      <h3 className="text-xl font-bold text-dgDarkPurple_Opacity">
         {props.name.replace(/[\d-]+/g, "")}
       </h3>
+      <div className="min-w-full mt-6">
+        <div className="min-w-full block min-h-[8px] bg-dgLightPurple rounded mb-1">
+          <div
+            style={{ width: `${props.percent}%` }}
+            className={`min-h-[8px] rounded bg-dgPurple`}
+          ></div>
+        </div>
+        <div className="min-w-full block flex justify-between items-center">
+          <div className="text-sm font-medium mb-1 text-dgDarkPurple_Opacity flex gap-1">
+            <h5>{props.numberOfCompletedLessons}</h5> <p> of </p>
+            <h5>{props.numberOfLessons}</h5>
+          </div>
+          <div className="text-sm font-medium mb-1 text-dgDarkPurple_Opacity flex">
+            <h5>{props.percent}</h5>
+            <p>%</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

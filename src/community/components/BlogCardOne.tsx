@@ -22,40 +22,54 @@ const BlogCardOne = (props: BlogCardOneProps) => {
   };
 
   return (
-    <div>
+    <a
+      href={`/community/blog/${category}/${name}`}
+      onClick={() => handleSelectedBlog()}
+      className="bg-dgLightPurple rounded"
+    >
       <div
-        className="profile-picture w-full min-h-[240px] bg-center bg-no-repeat bg-cover rounded-lg mb-1"
+        className="profile-picture w-full min-h-[200px] bg-center bg-no-repeat bg-cover rounded-t mb-1"
         style={{ backgroundImage: `url(${props.image})` }}
       ></div>
-      <div className="flex gap-2 items-center">
-        <span className="text-sm font-semibold text-dgPurple">
-          {CommonFunctions.capitalizeWords(props.category)}
-        </span>
-        <span className="text-base font-bold text-dgDarkPurple select-none">
-          |
-        </span>
-        <span className="text-sm font-normal">
-          {CommonFunctions.formatDate(props.date)}
-        </span>
-        <span className="text-base font-bold text-dgDarkPurple select-none">
-          |
-        </span>
-        <span className="text-sm font-normal">{props.readtime}min read</span>
+      <div className="px-3 pt-3 pb-5">
+        <div className="flex gap-2 items-center">
+          <span className="text-sm font-semibold text-dgPurple">
+            {props.category.length > 16
+              ? CommonFunctions.capitalizeWords(props.category).substring(
+                  0,
+                  14
+                ) + "..."
+              : CommonFunctions.capitalizeWords(props.category)}
+          </span>
+          <span className="text-base font-bold text-dgDarkPurple select-none">
+            |
+          </span>
+          <span className="text-sm font-normal">
+            {CommonFunctions.formatDate(props.date)}
+          </span>
+          <span className="text-base font-bold text-dgDarkPurple select-none">
+            |
+          </span>
+          <span className="text-sm font-normal">{props.readtime}min read</span>
+        </div>
+        <h1 className="text-xl font-semibold text-dgDarkPurple mb-1">
+          <a
+            href={`/community/blog/${category}/${name}`}
+            onClick={() => handleSelectedBlog()}
+          >
+            {props.title.length > 30
+              ? CommonFunctions.capitalizeWords(props.title).substring(0, 27) +
+                "..."
+              : CommonFunctions.capitalizeWords(props.title)}
+          </a>
+        </h1>
+        <p className="text-sm text-dgDarkPurple_Opacity leading-5">
+          {props.partialDesc.length > 90
+            ? props.partialDesc.substring(0, 90) + "..."
+            : props.partialDesc}
+        </p>
       </div>
-      <h1 className="text-xl font-semibold text-dgDarkPurple mb-1">
-        <a
-          href={`/community/blog/${category}/${name}`}
-          onClick={() => handleSelectedBlog()}
-        >
-          {CommonFunctions.capitalizeWords(props.title)}
-        </a>
-      </h1>
-      <p className="text-sm text-dgDarkPurple_Opacity leading-5">
-        {props.partialDesc.length > 90
-          ? props.partialDesc.substring(0, 90) + "..."
-          : props.partialDesc}
-      </p>
-    </div>
+    </a>
   );
 };
 

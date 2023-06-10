@@ -36,81 +36,83 @@ const Blogs = () => {
   const [profileImageError, setProfileImageError] = useState<boolean>(false);
 
   const navigate = useNavigate();
+  const checkSession = async () => {
+    try {
+      const session = await account.getSession("current");
+      const userExist = await checkIfUserExist(session.userId);
+      const completedOnboarding = await checkIfCompletedOnboarding(
+        session.userId
+      );
 
-  useEffect(() => {
-    const checkSession = async () => {
-      try {
-        const session = await account.getSession("current");
-        const userExist = await checkIfUserExist(session.userId);
-        const completedOnboarding = await checkIfCompletedOnboarding(
-          session.userId
-        );
-
-        if (userExist) {
-          if (!completedOnboarding) {
-            navigate(uriPaths.ONBOARDING_1);
-          }
-        } else {
-          navigate(uriPaths.SIGN_UP);
+      if (userExist) {
+        if (!completedOnboarding) {
+          navigate(uriPaths.ONBOARDING_1);
         }
-      } catch (err) {
+      } else {
         navigate(uriPaths.SIGN_UP);
       }
-    };
-    checkSession();
+    } catch (err) {
+      navigate(uriPaths.SIGN_UP);
+    }
+  };
 
-    const fetchBlogs = async () => {
-      try {
-        const promise = await database.listDocuments(
-          DATABASE_ID,
-          COMMUNITY_BLOGS_COLLECTION
+  const fetchBlogs = async () => {
+    try {
+      const promise = await database.listDocuments(
+        DATABASE_ID,
+        COMMUNITY_BLOGS_COLLECTION
+      );
+      const blogDocuments: Blog[] = promise.documents as Blog[];
+      setBlogLists(blogDocuments);
+      const user = await account.get();
+      setUserData(user);
+      setPreventView(false);
+    } catch (err) {
+      setPreventView(false);
+    }
+  };
+
+  const getProfilePicture = async () => {
+    try {
+      const user = await account.get();
+      const files = await storage.listFiles(PROFILE_PICTURE_BUCKET);
+      const existingFile = files.files.find((file) => file.name === user?.$id);
+
+      if (existingFile) {
+        const previewLink = await storage.getFilePreview(
+          PROFILE_PICTURE_BUCKET,
+          existingFile.$id
         );
-        const blogDocuments: Blog[] = promise.documents as Blog[];
-        setBlogLists(blogDocuments);
-        const user = await account.get();
-        setUserData(user);
-        setPreventView(false);
-      } catch (err) {
-        setPreventView(false);
+        setProfileImage(previewLink.href);
+      } else {
+        setProfileImage(AVATAR);
       }
-    };
+    } catch (err) {
+      setProfileImageError(true);
+    }
+  };
 
-    fetchBlogs();
+  const fetchData = async () => {
+    await checkSession();
+    await fetchBlogs();
+    await getProfilePicture();
+  };
 
-    const getProfilePicture = async () => {
-      try {
-        const user = await account.get();
-        const files = await storage.listFiles(PROFILE_PICTURE_BUCKET);
-        const existingFile = files.files.find(
-          (file) => file.name === user?.$id
-        );
-
-        if (existingFile) {
-          const previewLink = await storage.getFilePreview(
-            PROFILE_PICTURE_BUCKET,
-            existingFile.$id
-          );
-          setProfileImage(previewLink.href);
-        } else {
-          setProfileImage(AVATAR);
-        }
-      } catch (err) {
-        setProfileImageError(true);
-      }
-    };
-
-    getProfilePicture();
+  useEffect(() => {
+    fetchData();
   }, []);
   return (
-    <React.Fragment>
+    <>
       {preventView === false ? (
-        <React.Fragment>
-          <Navbar userName={userData?.name} profilePicture={profileImage} />
+        <>
+          {userData && (
+            <Navbar userData={userData} profilePicture={profileImage} />
+          )}
           <div className="lg:px-24 md:px-10 px-6 max-w-6xl mx-auto my-16">
-            <h1 className="font-bold text-dgDarkPurple text-2xl mb-5">
+            {/* <h1 className="font-bold text-dgDarkPurple text-2xl mb-5">
               Filter
             </h1>
-            <select className="border border-slate-400 rounded font-medium outline-0 px-3 py-[10px] min-w-[240px] bg-dgLightPurple text-dgDarkPurple mb-10">
+            <select className="border border-slate-400 rounded font-medium outline-0 px-3 py-[10px] min-w-[240px] text-dgDarkPurple mb-10">
               <option value="All">All</option>
               <option value="Interview Guide">Interview Guide</option>
               <option value="Coding Best Practice">Coding Best Practice</option>
@@ -120,7 +122,7 @@ const Blogs = () => {
                 Resource Recommendation
               </option>
               <option value="Others">Others</option>
-            </select>
+            </select> */}
             <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
               {blogLists.map((blog) => (
                 <BlogCardOne
@@ -134,13 +136,13 @@ const Blogs = () => {
               ))}
             </div>
           </div>
-        </React.Fragment>
+        </>
       ) : (
         <div className="w-screen h-screen flex justify-center items-center">
-          <Spinner className="w-10 fill-dgLightPurple text-dgPurple" />
+          <Spinner className="w-10 fill-dgPurple text-dgLightPurple" />
         </div>
       )}
-    </React.Fragment>
+    </>
   );
 };
 

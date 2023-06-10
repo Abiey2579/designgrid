@@ -34,81 +34,82 @@ const Dashboard = () => {
   const [profileImageError, setProfileImageError] = useState<boolean>(false);
   const [userToc, setUserToc] = useState<UserTOCProps>();
 
-  useEffect(() => {
-    const checkSession = async () => {
-      try {
-        await account.getSession("current");
-        const user = await account.get();
-        setUserData(user);
-      } catch (err) {
-        navigate(uriPaths.SIGN_UP);
-      }
-    };
-    checkSession();
+  const checkSession = async () => {
+    try {
+      await account.getSession("current");
+      const user = await account.get();
+      setUserData(user);
+    } catch (err) {
+      navigate(uriPaths.SIGN_UP);
+    }
+  };
 
-    const checkUser = async () => {
-      const session = await account.getSession("current");
-      const userExist = await checkIfUserExist(session.userId);
-      const completedOnboarding = await checkIfCompletedOnboarding(
-        session.userId
-      );
+  const checkUser = async () => {
+    const session = await account.getSession("current");
+    const userExist = await checkIfUserExist(session.userId);
+    const completedOnboarding = await checkIfCompletedOnboarding(
+      session.userId
+    );
 
-      if (userExist) {
-        if (completedOnboarding) {
-          setPreventView(false);
-        } else {
-          navigate(uriPaths.ONBOARDING_1);
-        }
+    if (userExist) {
+      if (completedOnboarding) {
+        setPreventView(false);
       } else {
-        navigate(uriPaths.SIGN_UP);
+        navigate(uriPaths.ONBOARDING_1);
       }
-    };
+    } else {
+      navigate(uriPaths.SIGN_UP);
+    }
+  };
 
-    checkUser();
+  const getProfilePicture = async () => {
+    try {
+      const user = await account.get();
+      const files = await storage.listFiles(PROFILE_PICTURE_BUCKET);
+      const existingFile = files.files.find((file) => file.name === user?.$id);
 
-    const getProfilePicture = async () => {
-      try {
-        const user = await account.get();
-        const files = await storage.listFiles(PROFILE_PICTURE_BUCKET);
-        const existingFile = files.files.find(
-          (file) => file.name === user?.$id
+      if (existingFile) {
+        const previewLink = await storage.getFilePreview(
+          PROFILE_PICTURE_BUCKET,
+          existingFile.$id
         );
-
-        if (existingFile) {
-          const previewLink = await storage.getFilePreview(
-            PROFILE_PICTURE_BUCKET,
-            existingFile.$id
-          );
-          setProfileImage(previewLink.href);
-        } else {
-          setProfileImage(AVATAR);
-        }
-      } catch (err) {
-        setProfileImageError(true);
+        setProfileImage(previewLink.href);
+      } else {
+        setProfileImage(AVATAR);
       }
-    };
+    } catch (err) {
+      setProfileImageError(true);
+    }
+  };
 
-    getProfilePicture();
+  const getToc = async () => {
+    try {
+      const session = await account.getSession("current");
+      const userToc = await getUserTOC(session.userId);
 
-    const getToc = async () => {
-      try {
-        const session = await account.getSession("current");
-        const userToc = await getUserTOC(session.userId);
-
-        if (userToc === false) {
-          logout();
-          navigate(uriPaths.LOG_IN);
-          return;
-        }
-
-        setUserToc(userToc);
-      } catch (error) {
-        console.log(error);
+      if (userToc === false) {
+        logout();
+        navigate(uriPaths.LOG_IN);
+        return;
       }
-    };
 
-    getToc();
-  });
+      setUserToc(userToc);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchData = async () => {
+    await checkSession();
+    await checkUser();
+    await getProfilePicture();
+    await getToc();
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <React.Fragment>
       {profileImageError && (
@@ -119,18 +120,20 @@ const Dashboard = () => {
       )}
       {preventView === false ? (
         <React.Fragment>
-          <Navbar
-            pageURI={uriPaths.DASHBOARD}
-            userName={userData?.name}
-            profilePicture={profileImage}
-          />
+          {userData && (
+            <Navbar
+              pageURI={uriPaths.DASHBOARD}
+              userData={userData}
+              profilePicture={profileImage}
+            />
+          )}
           {userToc && (
             <Content profilePicture={profileImage} tableOfContent={userToc} />
           )}
         </React.Fragment>
       ) : (
         <div className="w-screen h-screen flex justify-center items-center">
-          <Spinner className="w-10 fill-dgLightPurple text-dgPurple" />
+          <Spinner className="w-10 fill-dgPurple text-dgLightPurple" />
         </div>
       )}
     </React.Fragment>

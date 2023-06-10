@@ -1,4 +1,3 @@
-import * as React from "react";
 import Topic from "./Topic";
 import { Link } from "react-router-dom";
 import * as uriPaths from "../assets/data/uriPaths";
@@ -36,7 +35,7 @@ const Content = (props: {
           ></div>
         </div>
         <Link to={uriPaths.UPDATE_PROFILE}>
-          <span className="bg-dgPurple rounded-full border-0 outline-0 px-4 py-2 text-base font-medium text-dgLightPurple">
+          <span className="bg-dgPurple rounded border-0 outline-0 px-4 py-2 text-base font-medium text-dgLightPurple">
             Update profile
           </span>
         </Link>
@@ -44,11 +43,23 @@ const Content = (props: {
       <h1 className="font-semibold text-dgDarkPurple text-xl mb-5">
         Frontend Fundamentals
       </h1>
-      <div className="grid lg:grid-cols-4 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-5">
+      <div className="grid lg:grid-cols-2 md:grid-cols-1 grid-cols-1 gap-5">
         {sortedTOC.map((topic) => {
           const section = props.tableOfContent[topic];
           const progress = calculateProgress(section.lessons);
-          return <Topic name={topic} percent={progress} />;
+          const numberOfLessons = section.lessons.length;
+          const numberOfCompletedLessons = section.lessons.filter(
+            (lesson) => lesson.completed === true
+          );
+          return (
+            <Topic
+              key={topic}
+              name={topic}
+              numberOfLessons={numberOfLessons}
+              numberOfCompletedLessons={numberOfCompletedLessons.length}
+              percent={progress}
+            />
+          );
         })}
       </div>
     </div>

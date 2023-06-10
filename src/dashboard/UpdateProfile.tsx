@@ -108,7 +108,7 @@ const UpdateProfile = () => {
       }
     };
     checkSession();
-  });
+  }, []);
 
   const handleUpdateProfile = async () => {
     if (
@@ -237,11 +237,13 @@ const UpdateProfile = () => {
       )}
       {preventView === false ? (
         <React.Fragment>
-          <Navbar
-            pageURI={uriPaths.UPDATE_PROFILE}
-            userName={userData?.name}
-            profilePicture={profileImage}
-          />
+          {userData && (
+            <Navbar
+              pageURI={uriPaths.UPDATE_PROFILE}
+              userData={userData}
+              profilePicture={profileImage}
+            />
+          )}
           <div className="lg:px-24 md:px-10 px-6 max-w-4xl mx-auto my-16">
             <h1 className="font-bold text-dgDarkPurple text-2xl mb-5">
               Profile
@@ -266,7 +268,7 @@ const UpdateProfile = () => {
                 />
                 <button
                   onClick={handleButtonClick}
-                  className="bg-dgPurple select-none rounded-full border-0 outline-0 px-4 py-2 text-base font-medium text-dgLightPurple"
+                  className="bg-dgPurple select-none rounded border-0 outline-0 px-4 py-2 text-base font-medium text-dgLightPurple"
                 >
                   {saveProfilePictureSpinner === true ? (
                     <Spinner className="w-4 h-4 fill-dgPurple text-dgWhite" />
@@ -288,7 +290,7 @@ const UpdateProfile = () => {
                   value={
                     userData !== undefined ? userData.name.split(" ")[0] : ""
                   }
-                  className="border border-slate-400 rounded font-medium outline-0 px-3 py-2 md:min-w-[340px] w-full bg-dgLightPurple text-dgDarkPurple "
+                  className="border border-slate-400 rounded font-medium outline-0 px-3 py-2 md:min-w-[340px] w-full text-dgDarkPurple "
                 />
               </div>
               <div>
@@ -304,7 +306,7 @@ const UpdateProfile = () => {
                           .join(" ")
                       : ""
                   }
-                  className="border border-slate-400 rounded font-medium outline-0 px-3 py-2 md:min-w-[340px] w-full bg-dgLightPurple text-dgDarkPurple "
+                  className="border border-slate-400 rounded font-medium outline-0 px-3 py-2 md:min-w-[340px] w-full text-dgDarkPurple "
                 />
               </div>
               <div>
@@ -312,7 +314,7 @@ const UpdateProfile = () => {
                 <select
                   onChange={(e) => setCountry(e.target.value)}
                   value={country}
-                  className="border border-slate-400 rounded font-medium outline-0 px-3 py-[10px] md:min-w-[340px] w-full bg-dgLightPurple text-dgDarkPurple"
+                  className="border border-slate-400 rounded font-medium outline-0 px-3 py-[10px] md:min-w-[340px] w-full text-dgDarkPurple"
                 >
                   <option value="">Choose</option>
                   <option value="Nigeria">Nigeria</option>
@@ -328,7 +330,7 @@ const UpdateProfile = () => {
                   onChange={(e) => setDOB(e.target.value)}
                   value={DOB}
                   type="date"
-                  className="border border-slate-400 rounded font-medium outline-0 px-3 py-2 md:min-w-[340px] w-full bg-dgLightPurple text-dgDarkPurple "
+                  className="border border-slate-400 rounded font-medium outline-0 px-3 py-2 md:min-w-[340px] w-full text-dgDarkPurple "
                 />
               </div>
             </div>
@@ -342,7 +344,7 @@ const UpdateProfile = () => {
                   type="email"
                   readOnly
                   value={userData !== undefined ? userData.email : ""}
-                  className="border border-slate-400 rounded font-medium outline-0 px-3 py-2 md:min-w-[340px] w-full bg-dgLightPurple text-dgDarkPurple "
+                  className="border border-slate-400 rounded font-medium outline-0 px-3 py-2 md:min-w-[340px] w-full text-dgDarkPurple "
                 />
               </div>
               <div>
@@ -351,13 +353,13 @@ const UpdateProfile = () => {
                   onChange={(e) => setPhoneNumber(e.target.value)}
                   value={phoneNumber}
                   type="text"
-                  className="border border-slate-400 rounded font-medium outline-0 px-3 py-2 md:min-w-[340px] w-full bg-dgLightPurple text-dgDarkPurple "
+                  className="border border-slate-400 rounded font-medium outline-0 px-3 py-2 md:min-w-[340px] w-full text-dgDarkPurple "
                 />
               </div>
             </div>
             <button
               onClick={() => handleUpdateProfile()}
-              className="bg-dgPurple select-none rounded-full border-0 outline-0 px-4 py-2 text-base font-medium text-dgLightPurple"
+              className="bg-dgPurple select-none rounded border-0 outline-0 px-4 py-2 text-base font-medium text-dgLightPurple"
             >
               {saveChangesSpinner ? (
                 <Spinner className="w-4 h-4 fill-dgPurple text-dgWhite" />
@@ -369,7 +371,7 @@ const UpdateProfile = () => {
         </React.Fragment>
       ) : (
         <div className="w-screen h-screen flex justify-center items-center">
-          <Spinner className="w-10 fill-dgLightPurple text-dgPurple" />
+          <Spinner className="w-10 fill-dgPurple text-dgLightPurple" />
         </div>
       )}
     </React.Fragment>

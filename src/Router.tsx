@@ -14,6 +14,7 @@ import ErrorElement from "./components/ErrorElement";
 import Blogs from "./community/Blogs";
 import BlogPost from "./community/BlogPost";
 import * as uriPaths from "./assets/data/uriPaths";
+import AboutUs from "./home/about-us/AboutUs";
 
 const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
   {
     path: `${uriPaths.COMMUNITY_BLOG_POST}:category/:name`,
     element: <BlogPost />,
+  },
+  {
+    path: uriPaths.ABOUT,
+    element: <AboutUs />,
   },
 ]);
 

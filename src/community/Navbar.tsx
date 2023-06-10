@@ -16,7 +16,8 @@ import {
 import * as uriPaths from "../assets/data/uriPaths";
 import { logout } from "../assets/config/functions";
 import { account } from "../assets/config/appwrite-auth";
-import Button from "../components/Button";
+import { Dropdown } from "flowbite-react";
+import { FetchedUser } from "../assets/Model/model";
 
 const NAV_ITEMS = [
   {
@@ -40,15 +41,10 @@ const Navbar = (props: {
   pageURI?: string;
   userName?: string | undefined;
   profilePicture: string;
+  userData: FetchedUser;
 }) => {
-  const [showProfileImageMenu, setshowProfileImageMenu] =
-    useState<boolean>(false);
   const navigate = useNavigate();
   const [userId, setUserId] = useState<string>("");
-
-  const handleProfileImageMenu = () => {
-    return setshowProfileImageMenu(!showProfileImageMenu);
-  };
 
   useEffect(() => {
     account.getSession("current").then((e) => setUserId(e.userId));
@@ -61,7 +57,7 @@ const Navbar = (props: {
     }
   };
   return (
-    <Popover className="relative bg-dgLightPurple z-20 border-b border-dgBorder">
+    <Popover className="relative bg-dgWhite z-20 border-b border-dgBorder">
       <div className="lg:px-24 md:px-10 px-6 ">
         <div className="flex items-center justify-between py-1 md:justify-start md:space-x-10 h-20">
           <div className="flex justify-start lg:w-0 lg:flex-1">
@@ -92,48 +88,56 @@ const Navbar = (props: {
           </Popover.Group>
           <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
             {userId ? (
-              <div className="flex flex-col relative">
-                <div
-                  className="flex items-center gap-3 cursor-pointer"
-                  onClick={() => handleProfileImageMenu()}
-                >
+              <Dropdown
+                inline
+                label={
                   <div
-                    className="profile-picture select-none w-9 h-9 bg-center bg-no-repeat bg-cover rounded-full"
-                    style={{ backgroundImage: `url(${props.profilePicture})` }}
-                  ></div>
-                  <p className="text-base font-medium select-none">
-                    {props.userName}
-                  </p>
-                  <ChevronDownIcon className="select-none w-5" />
-                </div>
-                {showProfileImageMenu && (
-                  <div className="absolute w-full min-w-[185px] top-full bg-dgWhite shadow mt-3 p-3 gap-2 flex flex-col rounded">
-                    <Link
-                      to={uriPaths.DASHBOARD}
-                      className="px-3 py-2 hover:bg-dgLightPurple rounded flex items-center gap-3"
-                    >
-                      <ChartBarSquareIcon className="w-5" />
-                      Dashboard
-                    </Link>
-                    <Link
-                      to={uriPaths.UPDATE_PROFILE}
-                      className="px-3 py-2 hover:bg-dgLightPurple rounded flex items-center gap-3"
-                    >
-                      <UserIcon className="w-5" />
-                      Update Profile
-                    </Link>
-                    <span
-                      onClick={() => handleLogout()}
-                      className="px-3 py-2 hover:bg-dgLightPurple rounded select-none cursor-pointer flex items-center gap-3"
-                    >
-                      <TrashIcon className="w-5" />
-                      Logout
-                    </span>
-                  </div>
-                )}
-              </div>
+                    className="profile-picture w-10 h-10 bg-center bg-no-repeat bg-cover rounded-full"
+                    style={{
+                      backgroundImage: `url(${props.profilePicture})`,
+                    }}
+                  />
+                }
+              >
+                <Dropdown.Header>
+                  <span className="block text-base font-bold text-dgDarkPurple">
+                    {props.userData?.name}
+                  </span>
+                  <span className="block truncate text-dgDarkPurple_Opacity text-sm font-medium">
+                    {props.userData?.email}
+                  </span>
+                </Dropdown.Header>
+                <Link
+                  to={uriPaths.DASHBOARD}
+                  className="flex flex-row items-center text-base px-4 py-2 hover:bg-dgLightPurple"
+                >
+                  <ChartBarSquareIcon className="w-5 mr-3" />
+                  <span>Dashboard</span>
+                </Link>
+                <Link
+                  to={uriPaths.UPDATE_PROFILE}
+                  className="flex flex-row items-center text-base px-4 py-2 hover:bg-dgLightPurple"
+                >
+                  <UserIcon className="w-5 mr-3" />
+                  <span>Update Profile</span>
+                </Link>
+                <Dropdown.Divider />
+                <span
+                  onClick={() => handleLogout()}
+                  className="flex flex-row items-center text-base px-4 py-2 hover:bg-dgLightPurple"
+                >
+                  <TrashIcon className="w-5 mr-3" />
+                  <span>Sign out</span>
+                </span>
+              </Dropdown>
             ) : (
-              <Button name="Sign Up" href={uriPaths.SIGN_UP} />
+              <Link to={uriPaths.SIGN_UP}>
+                <span
+                  className={`bg-dgPurple inline-block px-6 py-3 font-medium text-dgLightPurple rounded text-base`}
+                >
+                  Sign Up
+                </span>
+              </Link>
             )}
           </div>
         </div>

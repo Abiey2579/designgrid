@@ -14,6 +14,8 @@
     "@types/react-dom": "^18.0.10",
     "appwrite": "^11.0.0",
     "firebase": "^9.22.1",
+    "flowbite": "^1.6.5",
+    "flowbite-react": "^0.4.7",
     "framer-motion": "^10.12.16",
     "github-markdown-css": "^5.2.0",
     "react": "^18.2.0",

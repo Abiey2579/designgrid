@@ -69,3 +69,18 @@ export interface SidebarProps {
 export interface IconComponentsProps {
   [key: string]: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 }
+
+export interface FetchedUser {
+  $createdAt: string;
+  $id: string;
+  $updatedAt: string;
+  email: string;
+  name: string;
+}
+
+export interface TopicProps {
+  percent: number | string;
+  name: string;
+  numberOfLessons: number | string;
+  numberOfCompletedLessons: number | string;
+}

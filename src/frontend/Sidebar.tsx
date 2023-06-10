@@ -89,7 +89,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
           <h1 className="text-dgLightPurple text-xl font-bold">
             Learning Path
           </h1>
-          <button className="w-auto px-3 py-1 bg-dgPurple outline-0 text-dgLightPurple font-semibold rounded-full text-center text-sm">
+          <button className="w-auto px-3 py-1 bg-dgLightPurple_Opacity outline-0 text-dgLightPurple font-semibold rounded-full text-center text-sm">
             v1.0
           </button>
           {props.sidebarControl && (
@@ -109,7 +109,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 
             return (
               <React.Fragment key={key}>
-                <p className="flex items-center justify-between font-semibold text-dgLightPurple text-base my-3 py-1 border-slate-500 border-b">
+                <div className="flex items-center justify-between font-semibold text-dgLightPurple text-base my-3 py-1 border-slate-500 border-b">
                   <span>{key.replace(/[\d-]+/g, "")}</span>
 
                   <h5 className="text-sm flex gap-1 items-center">
@@ -120,7 +120,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                       <CheckBadgeIcon className="w-5 text-dgPurple" />
                     )}
                   </h5>
-                </p>
+                </div>
 
                 {section.lessons.map((lesson: any) => {
                   const Icon = IconComponent[lesson.icon];
@@ -131,33 +131,32 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                       title={lesson.title}
                       onClick={() => handleLessonClick(lesson, key)}
                       className={`pl-3 py-3 flex items-center select-none cursor-pointer ${
-                        lesson.active ? "bg-dgPurple" : "hover:bg-dgPurple"
+                        lesson.active
+                          ? "bg-dgLightPurple_Opacity"
+                          : "hover:bg-dgLightPurple_Opacity"
                       } rounded mb-1 text-sm block w-full transition-all text-dgLightPurple`}
                     >
-                      {spin ===
-                      lesson.title
-                        .replace(/,|:/g, "")
-                        .toLowerCase()
-                        .split(" ")
-                        .join("-") ? (
-                        <Spinner className="w-4 h-4 fill-dgWhite text-dgPurple" />
-                      ) : (
-                        <>
-                          {Icon && (
-                            <Icon
-                              className={`mr-2 w-4 ${
-                                lesson.completed && !lesson.active
-                                  ? "text-dgPurple"
-                                  : "text-dgLightPurple"
-                              }`}
-                            />
-                          )}
+                      {Icon &&
+                        (spin ===
+                        lesson.title
+                          .replace(/,|:/g, "")
+                          .toLowerCase()
+                          .split(" ")
+                          .join("-") ? (
+                          <Spinner className="w-4 h-4 fill-dgWhite text-dgLightPurple_Opacity mr-2" />
+                        ) : (
+                          <Icon
+                            className={`mr-2 w-4 ${
+                              lesson.completed && !lesson.active
+                                ? "text-dgPurple"
+                                : "text-dgLightPurple"
+                            }`}
+                          />
+                        ))}
 
-                          {lesson.title.length > 30
-                            ? lesson.title.substring(0, 30) + "..."
-                            : lesson.title}
-                        </>
-                      )}
+                      {lesson.title.length > 30
+                        ? lesson.title.substring(0, 30) + "..."
+                        : lesson.title}
                     </span>
                   );
                 })}

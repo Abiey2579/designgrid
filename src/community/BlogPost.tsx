@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import { FolderIcon, CalendarIcon, ClockIcon } from "@heroicons/react/24/solid";
-import UserProfile from "../assets/svgs/user-profile.svg";
 import Footer from "../home/Footer";
 import Copyright from "../home/Copyright";
 import BlogMarkdown from "./components/BlogMarkdown";
@@ -21,6 +20,7 @@ import {
   PROFILE_PICTURE_BUCKET,
 } from "../assets/config/appwrite-auth";
 import { AVATAR } from "../assets/data/constants";
+import Founder1 from "../assets/images/founder-1.jpg";
 
 const BlogPostTag = (props: BlogPostTagProps) => {
   return (
@@ -52,85 +52,88 @@ const BlogPost = () => {
 
   const { category, name } = useParams();
 
-  useEffect(() => {
-    const checkSession = async () => {
-      try {
-        const session = await account.getSession("current");
-        const userExist = await checkIfUserExist(session.userId);
-        const completedOnboarding = await checkIfCompletedOnboarding(
-          session.userId
-        );
+  const checkSession = async () => {
+    try {
+      const session = await account.getSession("current");
+      const userExist = await checkIfUserExist(session.userId);
+      const completedOnboarding = await checkIfCompletedOnboarding(
+        session.userId
+      );
 
-        if (userExist) {
-          if (!completedOnboarding) {
-            navigate(uriPaths.ONBOARDING_1);
-          }
-        } else {
-          navigate(uriPaths.SIGN_UP);
+      if (userExist) {
+        if (!completedOnboarding) {
+          navigate(uriPaths.ONBOARDING_1);
         }
-      } catch (err) {
+      } else {
         navigate(uriPaths.SIGN_UP);
       }
-    };
-    checkSession();
+    } catch (err) {
+      navigate(uriPaths.SIGN_UP);
+    }
+  };
 
-    const fetchBlogs = async () => {
-      try {
-        const uri = `https://raw.githubusercontent.com/Abiey2579/designgriddata/master/community/blog/${category}/${name}.md`;
-        const mdResponse = await fetch(uri);
-        const markdownText = await mdResponse.text();
+  const fetchBlogs = async () => {
+    try {
+      const uri = `https://raw.githubusercontent.com/Abiey2579/designgriddata/master/community/blog/${category}/${name}.md`;
+      const mdResponse = await fetch(uri);
+      const markdownText = await mdResponse.text();
 
-        const Image = sessionStorage.getItem("cblogImage") || "";
-        const Category = sessionStorage.getItem("cblogCategory") || "";
-        const Readtime = sessionStorage.getItem("cblogReadtime") || "";
-        const Date = sessionStorage.getItem("cblogDate") || "";
+      const Image = sessionStorage.getItem("cblogImage") || "";
+      const Category = sessionStorage.getItem("cblogCategory") || "";
+      const Readtime = sessionStorage.getItem("cblogReadtime") || "";
+      const Date = sessionStorage.getItem("cblogDate") || "";
 
-        setBlogImage(Image);
-        setBlogCategory(Category);
-        setBlogReadtime(Readtime);
-        setBlogDate(Date);
+      setBlogImage(Image);
+      setBlogCategory(Category);
+      setBlogReadtime(Readtime);
+      setBlogDate(Date);
 
-        setMarkdownStorage(markdownText);
-        const user = await account.get();
-        setUserData(user);
-        setPreventView(false);
-      } catch (err) {
-        setPreventView(false);
-        navigate(uriPaths.COMMUNITY_BLOGS);
-      }
-    };
+      setMarkdownStorage(markdownText);
+      const user = await account.get();
+      setUserData(user);
+      setPreventView(false);
+    } catch (err) {
+      setPreventView(false);
+      navigate(uriPaths.COMMUNITY_BLOGS);
+    }
+  };
 
-    fetchBlogs();
+  const getProfilePicture = async () => {
+    try {
+      const user = await account.get();
+      const files = await storage.listFiles(PROFILE_PICTURE_BUCKET);
+      const existingFile = files.files.find((file) => file.name === user?.$id);
 
-    const getProfilePicture = async () => {
-      try {
-        const user = await account.get();
-        const files = await storage.listFiles(PROFILE_PICTURE_BUCKET);
-        const existingFile = files.files.find(
-          (file) => file.name === user?.$id
+      if (existingFile) {
+        const previewLink = await storage.getFilePreview(
+          PROFILE_PICTURE_BUCKET,
+          existingFile.$id
         );
-
-        if (existingFile) {
-          const previewLink = await storage.getFilePreview(
-            PROFILE_PICTURE_BUCKET,
-            existingFile.$id
-          );
-          setProfileImage(previewLink.href);
-        } else {
-          setProfileImage(AVATAR);
-        }
-      } catch (err) {
-        setProfileImageError(true);
+        setProfileImage(previewLink.href);
+      } else {
+        setProfileImage(AVATAR);
       }
-    };
+    } catch (err) {
+      setProfileImageError(true);
+    }
+  };
 
-    getProfilePicture();
+  const fetchData = async () => {
+    await checkSession();
+    await fetchBlogs();
+    await getProfilePicture();
+  };
+
+  useEffect(() => {
+    fetchData();
   }, []);
   return (
-    <React.Fragment>
+    <>
       {preventView === false ? (
-        <React.Fragment>
-          <Navbar userName={userData?.name} profilePicture={profileImage} />
+        <>
+          {userData && (
+            <Navbar userData={userData} profilePicture={profileImage} />
+          )}
           <div className="lg:px-24 md:px-10 px-6 max-w-6xl mx-auto my-10">
             <div
               className="w-full lg:h-[532px] md:h-[360px] h-[240px] bg-center bg-no-repeat bg-cover rounded-lg mx-auto mb-5"
@@ -145,13 +148,14 @@ const BlogPost = () => {
               <BlogPostTag icon={ClockIcon} name={`${blogReadtime}min read`} />
             </div>
             <div className="flex items-center cursor-pointer mb-5 w-max">
-              <img
-                src={UserProfile}
-                alt="UserProfile"
-                className="select-none"
+              <div
+                className="profile-picture w-10 h-10 bg-center bg-no-repeat bg-cover rounded-full"
+                style={{
+                  backgroundImage: `url(${Founder1})`,
+                }}
               />
-              <h3 className="text-xl font-bold ml-3 select-none text-dgDarkPurple">
-                Yahya M. Bello
+              <h3 className="text-xl font-semibold ml-3 select-none text-dgDarkPurple">
+                Yahaya M. Bello
               </h3>
             </div>
             <hr className="bg-slate-300 block mb-5" />
@@ -161,13 +165,13 @@ const BlogPost = () => {
           </div>
           <Footer />
           <Copyright />
-        </React.Fragment>
+        </>
       ) : (
         <div className="w-screen h-screen flex justify-center items-center">
-          <Spinner className="w-10 fill-dgLightPurple text-dgPurple" />
+          <Spinner className="w-10 fill-dgPurple text-dgLightPurple" />
         </div>
       )}
-    </React.Fragment>
+    </>
   );
 };
 
