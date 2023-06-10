@@ -3,8 +3,7 @@ import { Client, Account, Databases, Storage } from "appwrite";
 const client = new Client();
 
 client
-  // .setEndpoint("designgrid.com.ng") // Your API Endpoint
-  .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+  .setEndpoint("https://appwrite.designgrid.com.ng/v1") // Your API Endpoint
   .setProject("645dd92a90424d7387a7"); // Your project ID
 
 export const account = new Account(client);
