@@ -11,7 +11,6 @@ import {
   ChartBarSquareIcon,
   UserIcon,
   TrashIcon,
-  ChevronDownIcon,
 } from "@heroicons/react/24/outline";
 import * as uriPaths from "../assets/data/uriPaths";
 import { logout } from "../assets/config/functions";

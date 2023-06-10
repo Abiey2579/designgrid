@@ -42,10 +42,14 @@ ol {
 .Markdown pre {
   margin-bottom: 10px;
   margin-top: 10px;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: #f3effe;
   text-wrap: wrap !important;
-  padding: 4px;
+  padding: 4px 4px 4px 20px;
   color: #241f38;
-  border-left-color: #241f38;
-  border-left-width: 2px;
+  border-left-color: #7026ed;
+  border-left-width: 4px;
+}
+
+.Markdown ul li p {
+  margin-bottom: 0;
 }
