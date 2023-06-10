@@ -34,7 +34,7 @@ const LogIn = () => {
       <div className="w-screen h-screen flex lg:justify-between md:justify-between justify-center items-center">
         <div className="lg:px-24 md:px-10 px-6 ">
           <h2 className="text-dgDarkPurple font-bold text-3xl mb-6">Log In</h2>
-          <p className="text-dgDarkPurple text-base mb-6 w-[300px]">
+          <p className="text-dgDarkPurple text-base mb-4 w-[300px]">
             Unlock your potential and embark on a journey of knowledge and
             growth.
           </p>
@@ -43,19 +43,19 @@ const LogIn = () => {
             onClick={() => handleOAuth("google")}
             className={`bg-dgLightPurple text-dgDarkPurple rounded w-[300px] flex outline-0 mb-4`}
           >
-            <div className="w-20 text-center py-4">
+            <div className="w-20 text-center py-3">
               <img src={Google} alt="Google" className="m-auto" />
             </div>
-            <p className="w-fit py-4">Continue with Google</p>
+            <p className="w-fit py-3">Continue with Google</p>
           </button>
           <button
             onClick={() => handleOAuth("github")}
             className={`bg-dgDarkPurple text-dgLightPurple rounded w-[300px] flex outline-0 mb-4`}
           >
-            <div className="w-20 text-center py-4">
+            <div className="w-20 text-center py-3">
               <img src={GitHub} alt="GitHub" className="m-auto" />
             </div>
-            <p className="w-fit py-4">Continue with GitHub</p>
+            <p className="w-fit py-3">Continue with GitHub</p>
           </button>
 
           <p className="text-dgDarkPurple text-base mb-6">

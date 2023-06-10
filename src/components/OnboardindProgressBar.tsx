@@ -1,5 +1,3 @@
-import * as React from "react";
-
 interface progressBarProps {
   stage: number;
   selected: boolean;
@@ -29,12 +27,10 @@ const OnboardProgressBar = (props: progressBarProps) => {
 
   return (
     <div className="lg:min-w-[360px] md:min-w-[360px] min-w-full">
-      <div className="lg:min-w-[360px] md:min-w-[360px] min-w-full block min-h-[8px] border border-slate-300 rounded mb-1">
+      <div className="lg:min-w-[360px] md:min-w-[360px] min-w-full block min-h-[8px] bg-dgLightPurple rounded mb-1">
         <div
           style={{ width: perc + "%" }}
-          className={`min-h-[8px] ${
-            perc === 0 ? "border-0" : "border"
-          } border-dgPurple rounded bg-dgPurple`}
+          className={`min-h-[8px] rounded bg-dgPurple`}
         ></div>
       </div>
       <div className="lg:min-w-[360px] md:min-w-[360px] min-w-full block flex justify-between items-center">

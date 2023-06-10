@@ -111,7 +111,7 @@ const OnboardingFour = () => {
           </p>
           <select
             onChange={(e) => handleSelectTag(e.target.value)}
-            className="lg:min-w-[360px] md:min-w-[360px] min-w-full border border-slate-300 outline-0 cursor-pointer px-5 py-3 bg-dgLightPurple border-dgBorder border rounded font-medium text-dgDarkPurple mb-4"
+            className="lg:min-w-[360px] md:min-w-[360px] min-w-full border border-slate-300 outline-0 cursor-pointer px-5 py-3 border rounded font-medium text-dgDarkPurple mb-4"
           >
             <option value="">Choose</option>
             <option value="Google Search">Google Search</option>
@@ -126,18 +126,18 @@ const OnboardingFour = () => {
           <textarea
             placeholder="Write here..."
             onChange={(e) => handleTextarea(e.target.value)}
-            className="lg:min-w-[360px] md:min-w-[360px] min-w-full border border-slate-300 outline-0 cursor-pointer px-5 py-3 bg-dgLightPurple border-dgBorder border rounded font-medium text-dgDarkPurple mb-4"
+            className="lg:min-w-[360px] md:min-w-[360px] min-w-full border border-slate-300 outline-0 cursor-pointer px-5 py-3 border rounded font-medium text-dgDarkPurple mb-4"
           ></textarea>
 
           <div className="mb-10">
             <Link to={"/auth/onboarding/3"}>
-              <button className="px-6 py-1 mr-5 text-center text-base bg-dgLightPurple text-dgDarkPurple font-medium rounded border-dgBorder border outline-0">
+              <button className="px-6 py-1 mr-5 text-center text-base bg-dgLightPurple text-dgDarkPurple font-medium rounded outline-0">
                 Back
               </button>
             </Link>
             <button
               onClick={() => handleFinishOnboarding()}
-              className="px-6 py-1 text-center text-base bg-dgPurple text-dgLightPurple font-medium rounded border-0 outline-0"
+              className="px-6 py-1 text-center text-base bg-dgPurple text-dgLightPurple font-medium rounded outline-0"
             >
               {spin ? (
                 <Spinner className="w-4 h-4 fill-dgPurple text-dgWhite" />
@@ -150,7 +150,7 @@ const OnboardingFour = () => {
         </div>
       ) : (
         <div className="w-screen h-screen flex justify-center items-center">
-          <Spinner className="w-10 fill-dgLightPurple text-dgPurple" />
+          <Spinner className="w-10 fill-dgPurple text-dgLightPurple" />
         </div>
       )}
     </React.Fragment>

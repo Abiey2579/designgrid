@@ -115,8 +115,8 @@ const OnboardingOne = () => {
               className={`lg:min-w-[360px] md:min-w-[360px] min-w-full transition-all cursor-pointer select-none px-5 py-3 ${
                 selectedID === q.subId
                   ? "bg-dgPurple text-dgLightPurple"
-                  : "bg-dgLightPurple text-dgDarkPurple border border-slate-300"
-              } border-dgBorder border rounded font-medium mb-2`}
+                  : "bg-dgLightPurple text-dgDarkPurple"
+              } rounded font-medium mb-2`}
             >
               {q.potentialAnswer}
             </p>
@@ -134,7 +134,7 @@ const OnboardingOne = () => {
         </div>
       ) : (
         <div className="w-screen h-screen flex justify-center items-center">
-          <Spinner className="w-10 fill-dgLightPurple text-dgPurple" />
+          <Spinner className="w-10 fill-dgPurple text-dgLightPurple" />
         </div>
       )}
     </React.Fragment>

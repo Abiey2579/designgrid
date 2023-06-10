@@ -83,21 +83,21 @@ const OnboardingTwo = () => {
               className={`lg:min-w-[360px] md:min-w-[360px] min-w-full transition-all cursor-pointer select-none px-5 py-3 ${
                 selectedID === q.subId
                   ? "bg-dgPurple text-dgLightPurple"
-                  : "bg-dgLightPurple text-dgDarkPurple border border-slate-300"
-              } border-dgBorder border rounded font-medium mb-2`}
+                  : "bg-dgLightPurple text-dgDarkPurple"
+              }  rounded font-medium mb-2`}
             >
               {q.potentialAnswer}
             </p>
           ))}
           <div className="mb-10">
             <Link to={uriPaths.ONBOARDING_1}>
-              <button className="px-6 py-1 mr-5 text-center text-base bg-dgLightPurple text-dgDarkPurple font-medium rounded border-dgBorder border outline-0">
+              <button className="px-6 py-1 mr-5 text-center text-base bg-dgLightPurple text-dgDarkPurple font-medium rounded  outline-0">
                 Back
               </button>
             </Link>
             <button
               onClick={() => handleNext()}
-              className="px-6 py-1 text-center text-base bg-dgPurple text-dgLightPurple font-medium rounded border-0 outline-0"
+              className="px-6 py-1 text-center text-base bg-dgPurple text-dgLightPurple font-medium rounded outline-0"
             >
               Next
             </button>
@@ -106,7 +106,7 @@ const OnboardingTwo = () => {
         </div>
       ) : (
         <div className="w-screen h-screen flex justify-center items-center">
-          <Spinner className="w-10 fill-dgLightPurple text-dgPurple" />
+          <Spinner className="w-10 fill-dgPurple text-dgLightPurple" />
         </div>
       )}
     </React.Fragment>
