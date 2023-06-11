@@ -44,14 +44,24 @@ ol {
   margin-top: 10px;
   background-color: #f3effe;
   text-wrap: wrap !important;
+  text-overflow: clip !important;
   padding: 4px 20px;
   color: #241f38;
   border-left-color: #7026ed;
   border-left-width: 4px;
 }
 
-.Markdown pre code {
+.Markdown blockquote p {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  background-color: #f3effe;
   text-wrap: wrap !important;
+  text-overflow: clip !important;
+  padding: 4px 20px;
+  border-left-color: #7026ed;
+  border-left-width: 4px;
+  font-weight: 500;
+  color: #241f38;
 }
 
 .Markdown p img {
@@ -60,7 +70,6 @@ ol {
   background-color: #f3effe;
   text-wrap: wrap !important;
   padding: 4px 20px;
-  color: #241f38;
   border-left-color: #7026ed;
   border-left-width: 4px;
   width: 100%;
