@@ -1,3 +1,5 @@
+import { useState } from "react";
+import Spinner from "../components/Spinner";
 import { Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Popover, Transition } from "@headlessui/react";
@@ -43,13 +45,17 @@ const Navbar = (props: {
   userData: FetchedUser;
   profilePicture: string;
 }) => {
+  const [spinSignOut, setSpinSignOut] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    const promise = logout();
+  const handleLogout = async () => {
+    setSpinSignOut(true);
+    const promise = await logout();
     if (promise !== null) {
+      setSpinSignOut(false);
       navigate(uriPaths.LOG_IN);
     }
+    setSpinSignOut(false);
   };
 
   return (
@@ -127,9 +133,13 @@ const Navbar = (props: {
               <Dropdown.Divider />
               <span
                 onClick={() => handleLogout()}
-                className="flex flex-row items-center text-base px-4 py-2 hover:bg-dgLightPurple"
+                className="flex flex-row items-center select-none cursor-pointer text-base px-4 py-2 hover:bg-dgLightPurple"
               >
-                <TrashIcon className="w-5 mr-3" />
+                {spinSignOut === true ? (
+                  <Spinner className="w-5 mr-3 fill-dgPurple text-dgLightPurple" />
+                ) : (
+                  <TrashIcon className="w-5 mr-3" />
+                )}
                 <span>Sign out</span>
               </span>
             </Dropdown>
@@ -190,10 +200,14 @@ const Navbar = (props: {
                     onClick={() => handleLogout()}
                     className="-m-3 flex items-center cursor-pointer select-none rounded-md p-3 hover:bg-dgLightPurple"
                   >
-                    <TrashIcon
-                      className="h-6 w-6 flex-shrink-0 "
-                      aria-hidden="true"
-                    />
+                    {spinSignOut === true ? (
+                      <Spinner className="w-6 fill-dgPurple text-dgLightPurple" />
+                    ) : (
+                      <TrashIcon
+                        className="h-6 w-6 flex-shrink-0 "
+                        aria-hidden="true"
+                      />
+                    )}
                     <span className="ml-3 text-base font-medium text-dgDarkPurple_Opacity">
                       Logout
                     </span>

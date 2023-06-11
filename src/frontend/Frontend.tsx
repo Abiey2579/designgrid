@@ -170,6 +170,7 @@ const Frontend = () => {
   };
 
   useEffect(() => {
+    window.document.body.style.overflowY = "hidden";
     fetchData();
   }, []);
 

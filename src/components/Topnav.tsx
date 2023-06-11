@@ -1,3 +1,5 @@
+import { useState } from "react";
+import Spinner from "../components/Spinner";
 import { Dropdown } from "flowbite-react";
 import {
   Bars3Icon,
@@ -23,12 +25,16 @@ export interface TopnavProps {
 
 const Topnav = (props: TopnavProps) => {
   const navigate = useNavigate();
+  const [spinSignOut, setSpinSignOut] = useState<boolean>(false);
 
-  const handleLogout = () => {
-    const promise = logout();
+  const handleLogout = async () => {
+    setSpinSignOut(true);
+    const promise = await logout();
     if (promise !== null) {
+      setSpinSignOut(false);
       navigate(uriPaths.LOG_IN);
     }
+    setSpinSignOut(false);
   };
   return (
     <nav className="lg:px-10 md:px-7 px-5 flex lg:justify-end md:justify-between justify-between items-center py-4 ">
@@ -73,9 +79,13 @@ const Topnav = (props: TopnavProps) => {
         <a
           href="javascript:void(0)"
           onClick={() => handleLogout()}
-          className="flex flex-row items-center text-base px-4 py-2 hover:bg-dgLightPurple"
+          className="flex flex-row items-center select-none cursor-pointer text-base px-4 py-2 hover:bg-dgLightPurple"
         >
-          <TrashIcon className="w-5 mr-3" />
+          {spinSignOut === true ? (
+            <Spinner className="w-5 mr-3 fill-dgPurple text-dgLightPurple" />
+          ) : (
+            <TrashIcon className="w-5 mr-3" />
+          )}
           <span>Sign out</span>
         </a>
       </Dropdown>

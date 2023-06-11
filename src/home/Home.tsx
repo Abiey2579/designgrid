@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import Navbar from "./Navbar";
 import Hero from "./Hero";
 import LikeSchool from "./LikeSchool";
@@ -9,6 +9,9 @@ import OurValues from "./OurValues";
 import OurTeam from "./OurTeam";
 
 const Home = () => {
+  useEffect(() => {
+    window.document.body.style.overflowY = "scroll";
+  }, []);
   return (
     <React.Fragment>
       <Navbar />

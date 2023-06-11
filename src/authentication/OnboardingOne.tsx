@@ -32,7 +32,8 @@ const OnboardingOne = () => {
 
     const checkSession = async () => {
       try {
-        await account.getSession("current");
+        const promise = await account.getSession("current");
+        console.log(promise);
       } catch (err) {
         navigate(uriPaths.SIGN_UP);
       }

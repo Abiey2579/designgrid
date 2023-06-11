@@ -127,9 +127,9 @@ export const updateProfile = async (
   }
 };
 
-export const logout = () => {
+export const logout = async () => {
   try {
-    const promise = account.deleteSessions();
+    const promise = await account.deleteSessions();
     return promise;
   } catch (err) {
     return null;

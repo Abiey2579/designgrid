@@ -31,56 +31,63 @@ const OnboardingFour = () => {
     setSelectedID(100);
     setTextareaValue(e);
   };
+  const checkSession = async () => {
+    try {
+      const session = await account.getSession("current");
+      const userExist = await checkIfUserExist(session.userId);
+      const completedOnboarding = await checkIfCompletedOnboarding(
+        session.userId
+      );
 
-  useEffect(() => {
-    const checkSession = async () => {
-      try {
-        const session = await account.getSession("current");
-        const userExist = await checkIfUserExist(session.userId);
-        const completedOnboarding = await checkIfCompletedOnboarding(
-          session.userId
-        );
-
-        if (userExist) {
-          if (completedOnboarding) {
-            navigate(uriPaths.DASHBOARD);
-          } else {
-            setPreventView(false);
-          }
+      if (userExist) {
+        if (completedOnboarding) {
+          navigate(uriPaths.DASHBOARD);
         } else {
-          navigate(uriPaths.SIGN_UP);
+          setPreventView(false);
         }
-      } catch (err) {
+      } else {
         navigate(uriPaths.SIGN_UP);
       }
-    };
+    } catch (err) {
+      navigate(uriPaths.SIGN_UP);
+    }
+  };
+
+  useEffect(() => {
     checkSession();
   }, []);
 
   const handleFinishOnboarding = async () => {
     setSpin(true);
-    const session = await account.getSession("current");
 
-    if (session) {
-      console.log(qListAnswers);
-      const promise = await finishOnboarding({
-        uid: session.userId,
-        q1: qListAnswers[1],
-        q2: qListAnswers[2],
-        q3: qListAnswers[3],
-        feedback_q1: selectTagValue,
-        feedback_q2: textareaValue,
-      });
+    try {
+      const session = await account.getSession("current");
 
-      if (promise !== null) {
-        setSuccessToast(true);
-        setSpin(false);
-        navigate(uriPaths.UPDATE_PROFILE);
+      if (session) {
+        console.log(qListAnswers);
+        const promise = await finishOnboarding({
+          uid: session.userId,
+          q1: qListAnswers[1],
+          q2: qListAnswers[2],
+          q3: qListAnswers[3],
+          feedback_q1: selectTagValue,
+          feedback_q2: textareaValue,
+        });
+
+        if (promise) {
+          setSuccessToast(true);
+          setSpin(false);
+          navigate(uriPaths.UPDATE_PROFILE);
+        } else {
+          setErrorToast(true);
+          setSpin(false);
+        }
       } else {
-        setErrorToast(true);
         setSpin(false);
+        setErrorToast(true);
+        navigate(uriPaths.SIGN_UP);
       }
-    } else {
+    } catch (err) {
       setSpin(false);
       setErrorToast(true);
       navigate(uriPaths.SIGN_UP);

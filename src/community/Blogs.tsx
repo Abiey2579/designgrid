@@ -99,6 +99,7 @@ const Blogs = () => {
   };
 
   useEffect(() => {
+    window.document.body.style.overflowY = "scroll";
     fetchData();
   }, []);
   return (

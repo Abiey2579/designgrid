@@ -40,7 +40,6 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
   };
 
   const handleLessonClick = async (lesson: any, key: string) => {
-    window.document.body.style.overflow = "hidden";
     if (lesson.completed) {
       try {
         setSpin(
@@ -65,11 +64,9 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
       } catch (err) {
         setSpin("");
         setFetchLessonError(true);
-        window.document.body.style.overflow = "scroll";
       }
     } else {
       setUnCompletedLessonError(true);
-      window.document.body.style.overflow = "scroll";
     }
   };
 

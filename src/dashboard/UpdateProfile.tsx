@@ -56,58 +56,60 @@ const UpdateProfile = () => {
   const [profileImageError, setProfileImageError] = useState<boolean>(false);
   const [profileImage, setProfileImage] = useState<string>("");
 
+  const getProfilePicture = async () => {
+    try {
+      const user = await account.get();
+      const files = await storage.listFiles(PROFILE_PICTURE_BUCKET);
+      const existingFile = files.files.find((file) => file.name === user?.$id);
+
+      if (existingFile) {
+        const previewLink = await storage.getFilePreview(
+          PROFILE_PICTURE_BUCKET,
+          existingFile.$id
+        );
+        setProfileImage(previewLink.href);
+      } else {
+        setProfileImage(AVATAR);
+      }
+    } catch (err) {
+      setProfileImageError(true);
+      console.log(err);
+    }
+  };
+  const checkSession = async () => {
+    try {
+      await account.getSession("current");
+      const user = await account.get();
+      const searchResponse = await database.listDocuments(
+        DATABASE_ID,
+        USER_PROFILE_COLLECTION,
+        [Query.equal("uid", user.$id), Query.limit(1)]
+      );
+
+      const data = searchResponse.documents;
+
+      if (data.length > 0) {
+        const userProfileData = data[0] as UserProfileData;
+        setPhoneNumber(userProfileData.phone_number ?? "");
+        setDOB(userProfileData.dob ?? "");
+        setCountry(userProfileData.country ?? "");
+      }
+
+      setPreventView(false);
+      setUserData(user);
+    } catch (err) {
+      navigate(uriPaths.SIGN_UP);
+    }
+  };
+
+  const fetchData = async () => {
+    await getProfilePicture();
+    await checkSession();
+  };
+
   useEffect(() => {
-    const getProfilePicture = async () => {
-      try {
-        const user = await account.get();
-        const files = await storage.listFiles(PROFILE_PICTURE_BUCKET);
-        const existingFile = files.files.find(
-          (file) => file.name === user?.$id
-        );
-
-        if (existingFile) {
-          const previewLink = await storage.getFilePreview(
-            PROFILE_PICTURE_BUCKET,
-            existingFile.$id
-          );
-          setProfileImage(previewLink.href);
-        } else {
-          setProfileImage(AVATAR);
-        }
-      } catch (err) {
-        setProfileImageError(true);
-        console.log(err);
-      }
-    };
-
-    getProfilePicture();
-
-    const checkSession = async () => {
-      try {
-        await account.getSession("current");
-        const user = await account.get();
-        const searchResponse = await database.listDocuments(
-          DATABASE_ID,
-          USER_PROFILE_COLLECTION,
-          [Query.equal("uid", user.$id), Query.limit(1)]
-        );
-
-        const data = searchResponse.documents;
-
-        if (data.length > 0) {
-          const userProfileData = data[0] as UserProfileData;
-          setPhoneNumber(userProfileData.phone_number ?? "");
-          setDOB(userProfileData.dob ?? "");
-          setCountry(userProfileData.country ?? "");
-        }
-
-        setPreventView(false);
-        setUserData(user);
-      } catch (err) {
-        navigate(uriPaths.SIGN_UP);
-      }
-    };
-    checkSession();
+    window.document.body.style.overflowY = "scroll";
+    fetchData();
   }, []);
 
   const handleUpdateProfile = async () => {

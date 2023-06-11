@@ -107,6 +107,7 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
+    window.document.body.style.overflowY = "scroll";
     fetchData();
   }, []);
 
