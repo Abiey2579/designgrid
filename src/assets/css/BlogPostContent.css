@@ -78,3 +78,9 @@ ol {
 .Markdown ul li p {
   margin-bottom: 0;
 }
+
+.Markdown iframe {
+  width: 100% !important;
+  margin-bottom: 20px !important;
+  border-radius: 4px !important;
+}
