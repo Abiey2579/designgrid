@@ -372,7 +372,7 @@ const UpdateProfile = () => {
               </button>
             </div>
           ) : (
-            <div className="w-screen h-screen flex justify-center items-center">
+            <div className="w-screen h-[85vh] flex justify-center items-center">
               <Spinner className="w-10 fill-dgPurple text-dgLightPurple" />
             </div>
           )}
