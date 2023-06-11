@@ -13,7 +13,7 @@ const OurValues = () => {
           <h2 className="text-3xl font-bold text-dgDarkPurple mb-14 max-w-[354px]">
             Fostering a melting pot for the best ideas
           </h2>
-          <div className="h-48 max-w-[540px] border-l-2 border-dgPurple flex flex-col  justify-evenly pl-14">
+          <div className="h-48 max-w-[540px] border-l-2 border-dgPurple flex flex-col  justify-evenly lg:pl-14 md:pl-10 pl-6">
             <h5 className="text-xl font-bold text-dgDarkPurple">Empowerment</h5>
             <p className="text-base text-dgDarkPurple_Opacity">
               Empowering students is a core value we uphold, enabling them to
@@ -24,7 +24,7 @@ const OurValues = () => {
               <span className="font-medium text-dgPurple">Learn More</span>
             </Link>
           </div>
-          <div className="h-48 max-w-[540px] border-l-2 border-dgLightPurple flex flex-col  justify-evenly pl-14">
+          <div className="h-48 max-w-[540px] border-l-2 border-dgLightPurple flex flex-col  justify-evenly lg:pl-14 md:pl-10 pl-6">
             <h5 className="text-xl font-bold text-dgDarkPurple">
               Accessibility
             </h5>
@@ -37,7 +37,7 @@ const OurValues = () => {
               <span className="font-medium text-dgPurple">Learn More</span>
             </Link>
           </div>
-          <div className="h-48 max-w-[540px] border-l-2 border-dgLightPurple flex flex-col  justify-evenly pl-14">
+          <div className="h-48 max-w-[540px] border-l-2 border-dgLightPurple flex flex-col  justify-evenly lg:pl-14 md:pl-10 pl-6">
             <h5 className="text-xl font-bold text-dgDarkPurple">
               Practicality
             </h5>

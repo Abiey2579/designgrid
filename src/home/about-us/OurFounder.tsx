@@ -17,7 +17,7 @@ const OurFounder = () => {
           <h2 className="text-3xl font-bold text-dgDarkPurple  mt-6 mb-14 max-w-[354px]">
             The brilliant mind behind our success
           </h2>
-          <div className="h-48 max-w-[540px] border-l-2 border-dgPurple flex flex-col  justify-evenly pl-14">
+          <div className="h-48 max-w-[540px] border-l-2 border-dgPurple flex flex-col  justify-evenly lg:pl-14 md:pl-10 pl-6">
             <h5 className="text-xl font-bold text-dgDarkPurple">About</h5>
             <p className="text-base text-dgDarkPurple_Opacity">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
@@ -28,7 +28,7 @@ const OurFounder = () => {
               <span className="font-medium text-dgPurple">Back Home</span>
             </Link>
           </div>
-          <div className="h-48 max-w-[540px] border-l-2 border-dgLightPurple flex flex-col  justify-evenly pl-14">
+          <div className="h-48 max-w-[540px] border-l-2 border-dgLightPurple flex flex-col  justify-evenly lg:pl-14 md:pl-10 pl-6">
             <h5 className="text-xl font-bold text-dgDarkPurple">Mission</h5>
             <p className="text-base text-dgDarkPurple_Opacity">
               Our mission is to empower aspiring frontend developers with the
@@ -39,7 +39,7 @@ const OurFounder = () => {
               <span className="font-medium text-dgPurple">Start Today</span>
             </Link>
           </div>
-          <div className="h-48 max-w-[540px] border-l-2 border-dgLightPurple flex flex-col  justify-evenly pl-14">
+          <div className="h-48 max-w-[540px] border-l-2 border-dgLightPurple flex flex-col  justify-evenly lg:pl-14 md:pl-10 pl-6">
             <h5 className="text-xl font-bold text-dgDarkPurple">Goal</h5>
             <p className="text-base text-dgDarkPurple_Opacity">
               Our goals encompass fostering a vibrant learning community,
