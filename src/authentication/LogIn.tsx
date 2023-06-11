@@ -58,13 +58,21 @@ const LogIn = () => {
             <p className="w-fit py-3">Continue with GitHub</p>
           </button>
 
-          <p className="text-dgDarkPurple text-base mb-6">
+          <p className="text-dgDarkPurple text-base mb-16">
             Don't have an account?{" "}
             <Link
-              to="/auth/signup"
+              to={uriPaths.SIGN_UP}
               className="inline-block text-dgPurple font-bold text-base"
             >
               Create one
+            </Link>
+          </p>
+          <p className="text-dgDarkPurple text-base">
+            <Link
+              to={uriPaths.HOME}
+              className="inline-block text-dgPurple font-bold text-base"
+            >
+              Back Home
             </Link>
           </p>
         </div>

@@ -55,13 +55,21 @@ const SignUp = () => {
             </div>
             <p className="w-fit py-3">Sign Up with GitHub</p>
           </button>
-          <p className="text-dgDarkPurple text-base mb-6">
+          <p className="text-dgDarkPurple text-base mb-16">
             Already have an account?{" "}
             <Link
-              to="/auth/login"
+              to={uriPaths.LOG_IN}
               className="inline-block text-dgPurple font-bold text-base"
             >
               Log In
+            </Link>
+          </p>
+          <p className="text-dgDarkPurple text-base">
+            <Link
+              to={uriPaths.HOME}
+              className="inline-block text-dgPurple font-bold text-base"
+            >
+              Back Home
             </Link>
           </p>
         </div>

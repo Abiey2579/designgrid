@@ -59,7 +59,7 @@ const Navbar = (props: {
   };
 
   return (
-    <Popover className="relative bg-dgWhite z-20 border-b border-dgBorder">
+    <Popover className="relative bg-dgWhite z-20 border-b border-slate-300">
       <div className="lg:px-24 md:px-10 pl-3 pr-6 ">
         <div className="flex items-center justify-between py-1 md:justify-start md:space-x-10 h-20">
           <div className="flex justify-start lg:w-0 lg:flex-1">
