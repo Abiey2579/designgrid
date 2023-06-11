@@ -183,7 +183,7 @@ const Frontend = () => {
         />
       )}
       {preventView === false ? (
-        <div className="flex">
+        <div className="lg:flex md:flex block">
           {userToc !== undefined ? (
             <Sidebar
               sidebarControl={showSidebar}

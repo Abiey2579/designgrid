@@ -153,7 +153,7 @@ const DirectionButton: React.FC<DirectionButtonProps> = (props) => {
           close={() => setPreviousErrorToast(false)}
         />
       )}
-      <div className="w-full lg:px-10 md:px-7 px-5 py-5 flex lg:flex-row md:flex-row sm:flex-row gap-5 flex-col justify-between items-center">
+      <div className="w-full lg:px-10 md:px-7 px-5 pt-5 pb-10 flex lg:flex-row md:flex-row sm:flex-row gap-5 flex-col justify-between items-center">
         <div
           onClick={handlePreviousLesson}
           className="min-w-[240px] cursor-pointer select-none h-16 bg-dgWhite border flex flex-col gap-1 border-slate-300 rounded px-4 py-2"
