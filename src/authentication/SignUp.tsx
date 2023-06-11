@@ -32,7 +32,7 @@ const SignUp = () => {
         />
       )}
       <div className="w-screen h-screen flex lg:justify-between md:justify-between justify-center items-center">
-        <div className="lg:px-24 md:px-10 px-6 ">
+        <div className="lg:px-24 md:px-10 px-3 ">
           <h2 className="text-dgDarkPurple font-bold text-3xl mb-6">Sign Up</h2>
           <p className="text-dgDarkPurple text-base mb-4 w-[300px]">
             By signing up you agree to be receiving our newsletters and updates.
