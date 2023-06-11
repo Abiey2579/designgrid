@@ -246,130 +246,136 @@ const UpdateProfile = () => {
               profilePicture={profileImage}
             />
           )}
-          <div className="lg:px-24 md:px-10 px-3 max-w-4xl mx-auto my-16">
-            <h1 className="font-bold text-dgDarkPurple text-2xl mb-5">
-              Profile
-            </h1>
-            <div className="flex items-center gap-5 mb-14">
-              <div className=" border-2 border-dgPurple border-spacing-1 p-1 rounded-full">
-                <div
-                  className="profile-picture w-[132px] h-[132px] bg-center bg-no-repeat bg-cover rounded-full"
-                  style={{
-                    backgroundImage: `url(${profileImage ?? imagePreview})`,
-                  }}
-                ></div>
-              </div>
+          {userData ? (
+            <div className="lg:px-24 md:px-10 px-3 max-w-4xl mx-auto my-16">
+              <h1 className="font-bold text-dgDarkPurple text-2xl mb-5">
+                Profile
+              </h1>
+              <div className="flex items-center gap-5 mb-14">
+                <div className=" border-2 border-dgPurple border-spacing-1 p-1 rounded-full">
+                  <div
+                    className="profile-picture w-[132px] h-[132px] bg-center bg-no-repeat bg-cover rounded-full"
+                    style={{
+                      backgroundImage: `url(${profileImage ?? imagePreview})`,
+                    }}
+                  ></div>
+                </div>
 
-              <div className="flex md:flex-row flex-col gap-5">
-                <input
-                  type="file"
-                  style={{ display: "none" }}
-                  ref={fileInputRef}
-                  onChange={(e) => handleFileChange(e)}
-                  multiple={false}
-                />
-                <button
-                  onClick={handleButtonClick}
-                  className="bg-dgPurple select-none rounded border-0 outline-0 px-4 py-2 text-base font-medium text-dgLightPurple"
-                >
-                  {saveProfilePictureSpinner === true ? (
-                    <Spinner className="w-4 h-4 fill-dgPurple text-dgWhite" />
-                  ) : (
-                    "Change"
-                  )}
-                </button>
+                <div className="flex md:flex-row flex-col gap-5">
+                  <input
+                    type="file"
+                    style={{ display: "none" }}
+                    ref={fileInputRef}
+                    onChange={(e) => handleFileChange(e)}
+                    multiple={false}
+                  />
+                  <button
+                    onClick={handleButtonClick}
+                    className="bg-dgPurple select-none rounded border-0 outline-0 px-4 py-2 text-base font-medium text-dgLightPurple"
+                  >
+                    {saveProfilePictureSpinner === true ? (
+                      <Spinner className="w-4 h-4 fill-dgPurple text-dgWhite" />
+                    ) : (
+                      "Change"
+                    )}
+                  </button>
+                </div>
               </div>
+              <h1 className="font-bold text-dgDarkPurple text-2xl mb-5">
+                General
+              </h1>
+              <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-5 mb-8">
+                <div>
+                  <span className="mb-1 block">First Name</span>
+                  <input
+                    type="text"
+                    readOnly
+                    value={
+                      userData !== undefined ? userData.name.split(" ")[0] : ""
+                    }
+                    className="border border-slate-400 rounded font-medium outline-0 px-3 py-2 md:min-w-[340px] w-full text-dgDarkPurple "
+                  />
+                </div>
+                <div>
+                  <span className="mb-1 block">Last Name</span>
+                  <input
+                    type="text"
+                    readOnly
+                    value={
+                      userData !== undefined
+                        ? userData.name
+                            .split(" ")
+                            .slice(1, userData.name.split(" ").length)
+                            .join(" ")
+                        : ""
+                    }
+                    className="border border-slate-400 rounded font-medium outline-0 px-3 py-2 md:min-w-[340px] w-full text-dgDarkPurple "
+                  />
+                </div>
+                <div>
+                  <span className="mb-1 block">Country *</span>
+                  <select
+                    onChange={(e) => setCountry(e.target.value)}
+                    value={country}
+                    className="border border-slate-400 rounded font-medium outline-0 px-3 py-[10px] md:min-w-[340px] w-full text-dgDarkPurple"
+                  >
+                    <option value="">Choose</option>
+                    <option value="Nigeria">Nigeria</option>
+                    <option value="Cameroon">Cameroon</option>
+                    <option value="Chad">Chad</option>
+                    <option value="Rwanda">Rwanda</option>
+                    <option value="Uganda">Uganda</option>
+                  </select>
+                </div>
+                <div>
+                  <span className="mb-1 block">Date of Birth *</span>
+                  <input
+                    onChange={(e) => setDOB(e.target.value)}
+                    value={DOB}
+                    type="date"
+                    className="border border-slate-400 rounded font-medium outline-0 px-3 py-2 md:min-w-[340px] w-full text-dgDarkPurple "
+                  />
+                </div>
+              </div>
+              <h1 className="font-bold text-dgDarkPurple text-2xl mb-5">
+                Security
+              </h1>
+              <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-5 mb-8">
+                <div>
+                  <span className="mb-1 block">Email</span>
+                  <input
+                    type="email"
+                    readOnly
+                    value={userData !== undefined ? userData.email : ""}
+                    className="border border-slate-400 rounded font-medium outline-0 px-3 py-2 md:min-w-[340px] w-full text-dgDarkPurple "
+                  />
+                </div>
+                <div>
+                  <span className="mb-1 block">Phone Number *</span>
+                  <input
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    value={phoneNumber}
+                    type="text"
+                    className="border border-slate-400 rounded font-medium outline-0 px-3 py-2 md:min-w-[340px] w-full text-dgDarkPurple "
+                  />
+                </div>
+              </div>
+              <button
+                onClick={() => handleUpdateProfile()}
+                className="bg-dgPurple select-none rounded border-0 outline-0 px-4 py-2 text-base font-medium text-dgLightPurple"
+              >
+                {saveChangesSpinner ? (
+                  <Spinner className="w-4 h-4 fill-dgPurple text-dgWhite" />
+                ) : (
+                  "Save changes"
+                )}
+              </button>
             </div>
-            <h1 className="font-bold text-dgDarkPurple text-2xl mb-5">
-              General
-            </h1>
-            <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-5 mb-8">
-              <div>
-                <span className="mb-1 block">First Name</span>
-                <input
-                  type="text"
-                  readOnly
-                  value={
-                    userData !== undefined ? userData.name.split(" ")[0] : ""
-                  }
-                  className="border border-slate-400 rounded font-medium outline-0 px-3 py-2 md:min-w-[340px] w-full text-dgDarkPurple "
-                />
-              </div>
-              <div>
-                <span className="mb-1 block">Last Name</span>
-                <input
-                  type="text"
-                  readOnly
-                  value={
-                    userData !== undefined
-                      ? userData.name
-                          .split(" ")
-                          .slice(1, userData.name.split(" ").length)
-                          .join(" ")
-                      : ""
-                  }
-                  className="border border-slate-400 rounded font-medium outline-0 px-3 py-2 md:min-w-[340px] w-full text-dgDarkPurple "
-                />
-              </div>
-              <div>
-                <span className="mb-1 block">Country *</span>
-                <select
-                  onChange={(e) => setCountry(e.target.value)}
-                  value={country}
-                  className="border border-slate-400 rounded font-medium outline-0 px-3 py-[10px] md:min-w-[340px] w-full text-dgDarkPurple"
-                >
-                  <option value="">Choose</option>
-                  <option value="Nigeria">Nigeria</option>
-                  <option value="Cameroon">Cameroon</option>
-                  <option value="Chad">Chad</option>
-                  <option value="Rwanda">Rwanda</option>
-                  <option value="Uganda">Uganda</option>
-                </select>
-              </div>
-              <div>
-                <span className="mb-1 block">Date of Birth *</span>
-                <input
-                  onChange={(e) => setDOB(e.target.value)}
-                  value={DOB}
-                  type="date"
-                  className="border border-slate-400 rounded font-medium outline-0 px-3 py-2 md:min-w-[340px] w-full text-dgDarkPurple "
-                />
-              </div>
+          ) : (
+            <div className="w-screen h-screen flex justify-center items-center">
+              <Spinner className="w-10 fill-dgPurple text-dgLightPurple" />
             </div>
-            <h1 className="font-bold text-dgDarkPurple text-2xl mb-5">
-              Security
-            </h1>
-            <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-5 mb-8">
-              <div>
-                <span className="mb-1 block">Email</span>
-                <input
-                  type="email"
-                  readOnly
-                  value={userData !== undefined ? userData.email : ""}
-                  className="border border-slate-400 rounded font-medium outline-0 px-3 py-2 md:min-w-[340px] w-full text-dgDarkPurple "
-                />
-              </div>
-              <div>
-                <span className="mb-1 block">Phone Number *</span>
-                <input
-                  onChange={(e) => setPhoneNumber(e.target.value)}
-                  value={phoneNumber}
-                  type="text"
-                  className="border border-slate-400 rounded font-medium outline-0 px-3 py-2 md:min-w-[340px] w-full text-dgDarkPurple "
-                />
-              </div>
-            </div>
-            <button
-              onClick={() => handleUpdateProfile()}
-              className="bg-dgPurple select-none rounded border-0 outline-0 px-4 py-2 text-base font-medium text-dgLightPurple"
-            >
-              {saveChangesSpinner ? (
-                <Spinner className="w-4 h-4 fill-dgPurple text-dgWhite" />
-              ) : (
-                "Save changes"
-              )}
-            </button>
-          </div>
+          )}
         </React.Fragment>
       ) : (
         <div className="w-screen h-screen flex justify-center items-center">

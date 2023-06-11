@@ -128,8 +128,12 @@ const Dashboard = () => {
               profilePicture={profileImage}
             />
           )}
-          {userToc && (
+          {userToc ? (
             <Content profilePicture={profileImage} tableOfContent={userToc} />
+          ) : (
+            <div className="w-screen h-screen flex justify-center items-center">
+              <Spinner className="w-10 fill-dgPurple text-dgLightPurple" />
+            </div>
           )}
         </React.Fragment>
       ) : (
