@@ -3,7 +3,7 @@ import { CheckBadgeIcon } from "@heroicons/react/24/solid";
 
 const Topic = (props: TopicProps) => {
   return (
-    <div className="bg-dgWhite border border-slate-300 h-[146px] min-w-[240px] rounded p-5">
+    <div className="bg-dgWhite border border-slate-300 min-h-[146px] h-auto min-w-[240px] rounded p-5">
       {/* PROGRESS TRACKERS */}
       <div className="flex justify-between items-center">
         <div className="text-xs tracking-wider font-medium mb-1 text-dgDarkPurple flex gap-2">
