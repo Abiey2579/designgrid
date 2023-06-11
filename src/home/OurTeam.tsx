@@ -11,7 +11,7 @@ import LinkedIn from "../assets/svgs/sm-linkedin.svg";
 
 const OurTeam = () => {
   return (
-    <div className="lg:px-24 md:px-10 px-6 md:my-20 my-16 flex flex-col">
+    <div className="lg:px-24 md:px-10 px-3 md:my-20 my-16 flex flex-col">
       <div className="max-w-[527px] m-auto text-center">
         <h1 className="text-dgDarkPurple lg:text-5xl md:text-5xl text-4xl font-bold mb-6">
           Meet the Team

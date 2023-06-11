@@ -4,7 +4,7 @@ import OurValuesImage from "../assets/images/our-values.jpg";
 
 const OurValues = () => {
   return (
-    <div className="lg:px-24 md:px-10 px-6 md:my-20 my-16">
+    <div className="lg:px-24 md:px-10 px-3 md:my-20 my-16">
       <p className="text-dgDarkPurple_Opacity text-base font-bold tracking-widest">
         OUR VALUES
       </p>

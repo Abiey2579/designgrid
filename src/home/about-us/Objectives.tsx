@@ -5,7 +5,7 @@ import {
 } from "@heroicons/react/24/solid";
 const Objectives = () => {
   return (
-    <div className="lg:px-24 md:px-10 px-6 md:my-20 my-16 flex flex-col">
+    <div className="lg:px-24 md:px-10 px-3 md:my-20 my-16 flex flex-col">
       <div className="mb-6">
         <p className="text-dgDarkPurple_Opacity text-base font-bold tracking-widest">
           MISSION & GOAL

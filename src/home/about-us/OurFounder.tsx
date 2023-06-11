@@ -4,7 +4,7 @@ import OurFounderImage from "../../assets/images/about-founder.jpg";
 
 const OurFounder = () => {
   return (
-    <div className="lg:px-24 md:px-10 px-6 lg:mb-24 md:my-16 my-12">
+    <div className="lg:px-24 md:px-10 px-3 lg:mb-24 md:my-16 my-12">
       <div className="grid gap-5 lg:grid-cols-2 md:grid-cols-1 grid-cols-1">
         <div
           className="w-full h-full lg:flex md:hidden hidden rounded bg-center bg-no-repeat bg-cover mt-12"

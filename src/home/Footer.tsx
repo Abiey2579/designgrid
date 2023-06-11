@@ -9,7 +9,7 @@ import { EnvelopeIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 
 const Footer = () => {
   return (
-    <footer className="lg:px-24 md:px-10 px-6 bg-dgDarkPurple py-20 flex lg:flex-row md:flex-col flex-col md:gap-10 gap-8 justify-between">
+    <footer className="lg:px-24 md:px-10 px-3 bg-dgDarkPurple py-20 flex lg:flex-row md:flex-col flex-col md:gap-10 gap-8 justify-between">
       <div>
         <h3 className="text-dgLightPurple text-2xl font-semibold mb-10">
           DesignGrid

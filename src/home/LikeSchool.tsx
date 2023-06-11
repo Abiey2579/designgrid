@@ -1,7 +1,7 @@
 import { TrophyIcon, BookOpenIcon, UsersIcon } from "@heroicons/react/24/solid";
 const LikeSchool = () => {
   return (
-    <div className="lg:px-24 md:px-10 px-6 md:my-20 my-16 flex flex-col">
+    <div className="lg:px-24 md:px-10 px-3 md:my-20 my-16 flex flex-col">
       <div>
         <h1 className="text-dgDarkPurple lg:text-5xl md:text-5xl text-4xl font-bold mb-6">
           Like School, <br /> Unlike any School
