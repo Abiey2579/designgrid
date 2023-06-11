@@ -39,7 +39,7 @@ const NAV_ITEMS = [
 const Navbar = () => {
   return (
     <Popover className="relative bg-dgWhite z-50">
-      <div className="lg:px-24 md:px-10 px-3 ">
+      <div className="lg:px-24 md:px-10 pl-3 pr-6 ">
         <div className="flex items-center justify-between py-1 md:justify-start md:space-x-10 h-20">
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <h4 className="text-xl font-bold text-dgDarkPurple">

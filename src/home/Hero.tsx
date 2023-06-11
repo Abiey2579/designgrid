@@ -9,8 +9,8 @@ const Hero = () => {
   return (
     <div className="my-20">
       {/* HERO SECTION */}
-      <div className="lg:px-24 md:px-10 px-6 text-center lg:mb-16 md:mb-12 mb-10">
-        <h1 className="lg:text-[80px] lg:leading-tight md:text-6xl text-5xl text-dgDarkPurple lg:text-center md:text-center text-left font-black lg:max-w-[740px] md:max-w-full m-auto lg:mb-6 md:mb-5 mb-4">
+      <div className="lg:px-24 md:px-10 px-3 text-center lg:mb-16 md:mb-12 mb-10">
+        <h1 className="lg:text-[80px] lg:leading-tight md:text-6xl text-6xl text-dgDarkPurple lg:text-center md:text-center text-left font-black lg:max-w-[740px] md:max-w-full m-auto lg:mb-6 md:mb-5 mb-4">
           <span className="text-dgPurple">Building</span>{" "}
           <span> the future of</span>
           <span className="text-dgPurple"> Frontend</span>
