@@ -4,31 +4,44 @@
 
 body {
   margin: 0;
-  font-family: "Product Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
     "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+  background-color: #f3effe;
+  padding: 2px 4px;
+  border-radius: 2px;
+  cursor: pointer;
+  color: #7026ed;
+  font-weight: 500;
 }
 
-.FrontendMarkdown::-webkit-scrollbar,
-.SmartScroll::-webkit-scrollbar,
+.FrontendMarkdown::-webkit-scrollbar {
+  width: 12px;
+}
+
 .SidebarMenu::-webkit-scrollbar {
   display: none;
-  width: 8px;
 }
 
 .FrontendMarkdown::-webkit-scrollbar-thumb,
-.SmartScroll::-webkit-scrollbar-thumb,
 .SidebarMenu::-webkit-scrollbar-thumb {
   background: rgb(203 213 225);
   border-radius: 4px;
+  outline: none;
+  border: none;
 }
+
+/* .FrontendMarkdown::-webkit-scrollbar-track {
+
+} */
 
 p,
 span,
@@ -37,7 +50,7 @@ a,
 input,
 ul,
 ol {
-  font-family: "Catamaran" !important;
+  font-family: "Catamaran", sans-serif !important;
 }
 
 h1,
@@ -46,9 +59,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Product Sans" !important;
+  font-family: "Montserrat", sans-serif !important;
 }
 
 ::placeholder {
-  font-family: "Catamaran" !important;
+  font-family: "Catamaran", sans-serif !important;
 }

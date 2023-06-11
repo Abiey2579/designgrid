@@ -42,9 +42,27 @@ const OurTeam = () => {
               commitment to excellence.
             </p>
             <div className="flex gap-2">
-              <img src={Facebook} alt="Facebook Logo" />
-              <img src={Twitter} alt="Twitter Logo" />
-              <img src={LinkedIn} alt="LinkedIn Logo" />
+              <a
+                href="https://web.facebook.com/profile.php?id=100081529721472"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={Facebook} alt="Facebook Logo" />
+              </a>
+              <a
+                href="https://twitter.com/mbyahya_"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={Twitter} alt="Twitter Logo" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/yahaya-muhammad-bello-488159188/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={LinkedIn} alt="LinkedIn Logo" />
+              </a>
             </div>
           </div>
         </div>
@@ -67,8 +85,20 @@ const OurTeam = () => {
               complex technology.
             </p>
             <div className="flex gap-2">
-              <img src={Facebook} alt="Facebook Logo" />
-              <img src={Twitter} alt="Twitter Logo" />
+              <a
+                href="https://web.facebook.com/openai.research"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={Facebook} alt="Facebook Logo" />
+              </a>
+              <a
+                href="https://twitter.com/OpenAI"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={Twitter} alt="Twitter Logo" />
+              </a>
             </div>
           </div>
         </div>
@@ -83,7 +113,7 @@ const OurTeam = () => {
             </p>
             <Link to={uriPaths.ABOUT}>
               <h3 className="mb-2 text-2xl font-bold tracking-tight text-dgDarkPurple mb-2">
-                Google Bard AI
+                Google Bard
               </h3>
             </Link>
             <p className="mb-3 text-sm font-normal text-dgDarkPurple_Opacity">
@@ -91,8 +121,20 @@ const OurTeam = () => {
               organizational excellence.
             </p>
             <div className="flex gap-2">
-              <img src={Facebook} alt="Facebook Logo" />
-              <img src={Twitter} alt="Twitter Logo" />
+              <a
+                href="https://web.facebook.com/groups/546335827451194/?_rdc=1&_rdr"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={Facebook} alt="Facebook Logo" />
+              </a>
+              <a
+                href="https://twitter.com/GoogleAI"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={Twitter} alt="Twitter Logo" />
+              </a>
             </div>
           </div>
         </div>

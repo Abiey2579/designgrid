@@ -40,7 +40,7 @@ const Content = (props: {
           </span>
         </Link>
       </div>
-      <h1 className="font-semibold text-dgDarkPurple text-xl mb-5">
+      <h1 className="font-bold text-dgDarkPurple text-2xl mb-5">
         Frontend Fundamentals
       </h1>
       <div className="grid lg:grid-cols-2 md:grid-cols-1 grid-cols-1 gap-5">

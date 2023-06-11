@@ -31,7 +31,7 @@ const Topic = (props: TopicProps) => {
             <h5>{props.numberOfLessons}</h5>
           </div>
           <div className="text-sm font-medium mb-1 text-dgDarkPurple_Opacity flex">
-            <h5>{props.percent}</h5>
+            <h5>{props.percent.toFixed(0)}</h5>
             <p>%</p>
           </div>
         </div>

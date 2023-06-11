@@ -44,10 +44,22 @@ ol {
   margin-top: 10px;
   background-color: #f3effe;
   text-wrap: wrap !important;
-  padding: 4px 4px 4px 20px;
+  padding: 4px 20px;
   color: #241f38;
   border-left-color: #7026ed;
   border-left-width: 4px;
+}
+
+.Markdown p img {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  background-color: #f3effe;
+  text-wrap: wrap !important;
+  padding: 4px 20px;
+  color: #241f38;
+  border-left-color: #7026ed;
+  border-left-width: 4px;
+  width: 100%;
 }
 
 .Markdown ul li p {

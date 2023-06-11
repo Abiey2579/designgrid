@@ -31,7 +31,7 @@ const LikeSchool = () => {
             <BookOpenIcon className="w-6 text-dgPurple" />
           </div>
           <h3 className="text-dgDarkPurple text-xl font-bold mb-4">
-            Learn by Reading Blogs
+            Learn by Reading
           </h3>
           <p className="text-dgDarkPurple_Opacity">
             Stay informed and up-to-date on the latest frontend development

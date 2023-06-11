@@ -79,8 +79,8 @@ export interface FetchedUser {
 }
 
 export interface TopicProps {
-  percent: number | string;
+  percent: number;
   name: string;
-  numberOfLessons: number | string;
-  numberOfCompletedLessons: number | string;
+  numberOfLessons: number;
+  numberOfCompletedLessons: number;
 }

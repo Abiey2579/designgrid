@@ -16,6 +16,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
   const [spin, setSpin] = useState<string>("");
   const [unCompletedLessonError, setUnCompletedLessonError] =
     useState<boolean>(false);
+  const [fetchLessonError, setFetchLessonError] = useState<boolean>(false);
 
   const getSectionProgress = (section: any) => {
     const completedLessons = section.lessons.filter(
@@ -39,6 +40,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
   };
 
   const handleLessonClick = async (lesson: any, key: string) => {
+    window.document.body.style.overflow = "hidden";
     if (lesson.completed) {
       try {
         setSpin(
@@ -61,11 +63,13 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
         setSpin("");
         window.location.reload();
       } catch (err) {
-        console.log(err);
         setSpin("");
+        setFetchLessonError(true);
+        window.document.body.style.overflow = "scroll";
       }
     } else {
       setUnCompletedLessonError(true);
+      window.document.body.style.overflow = "scroll";
     }
   };
 
@@ -76,6 +80,13 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
           title="Follow Lessons in Order"
           key={"Next Lesson Error"}
           close={() => setUnCompletedLessonError(false)}
+        />
+      )}
+      {fetchLessonError && (
+        <ToastWarning
+          title="Couldn't fetch the lesson"
+          key={"Fetch Lesson Error"}
+          close={() => setFetchLessonError(false)}
         />
       )}
       <div
