@@ -15,8 +15,8 @@ const SignUp = () => {
     try {
       await account.createOAuth2Session(
         service,
-        `http://localhost:3000${uriPaths.ONBOARDING_1}`,
-        `http://localhost:3000${uriPaths.SIGN_UP}`
+        `http://designgrid.com.ng${uriPaths.ONBOARDING_1}`,
+        `http://designgrid.com.ng${uriPaths.SIGN_UP}`
       );
     } catch (error) {
       setErrorToast(true);
