@@ -109,7 +109,7 @@ const Blogs = () => {
           {userData && (
             <Navbar userData={userData} profilePicture={profileImage} />
           )}
-          <div className="lg:px-24 md:px-10 px-6 max-w-6xl mx-auto my-16">
+          <div className="lg:px-24 md:px-10 px-3 max-w-6xl mx-auto my-16">
             {/* <h1 className="font-bold text-dgDarkPurple text-2xl mb-5">
               Filter
             </h1>

@@ -134,7 +134,7 @@ const BlogPost = () => {
           {userData && (
             <Navbar userData={userData} profilePicture={profileImage} />
           )}
-          <div className="lg:px-24 md:px-10 px-6 max-w-6xl mx-auto my-10">
+          <div className="lg:px-24 md:px-10 px-3 max-w-6xl mx-auto my-10">
             <div
               className="w-full lg:h-[532px] md:h-[360px] h-[240px] bg-center bg-no-repeat bg-cover rounded-lg mx-auto mb-5"
               style={{ backgroundImage: `url(${blogImage})` }}

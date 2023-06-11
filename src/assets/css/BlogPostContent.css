@@ -50,6 +50,10 @@ ol {
   border-left-width: 4px;
 }
 
+.Markdown pre code {
+  text-wrap: wrap !important;
+}
+
 .Markdown p img {
   margin-bottom: 10px;
   margin-top: 10px;
