@@ -15,8 +15,8 @@ const LogIn = () => {
     try {
       await account.createOAuth2Session(
         service,
-        `https://appwrite.designgrid.com.ng/v1${uriPaths.DASHBOARD}`,
-        `https://appwrite.designgrid.com.ng/v1${uriPaths.LOG_IN}`
+        `https://appwrite.designgrid.com.ng${uriPaths.DASHBOARD}`,
+        `https://appwrite.designgrid.com.ng${uriPaths.LOG_IN}`
       );
     } catch (error) {
       setErrorToast(true);
