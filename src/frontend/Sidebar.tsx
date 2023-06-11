@@ -87,7 +87,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
         />
       )}
       <div
-        className={`min-w-[20%] max-w-[340px] h-screen bg-dgDarkPurple pl-5 pr-5 ${
+        className={`min-w-[20%] max-w-[340px] h-screen bg-dgDarkPurple px-5 ${
           props.sidebarControl
             ? "fixed z-30 h-screen"
             : "lg:block md:hidden hidden"
@@ -108,7 +108,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
           )}
         </div>
 
-        <div className="SidebarMenu max-h-[85vh] overflow-y-scroll border-t border-slate-500">
+        <div className="SidebarMenu max-h-[85vh] lg:pb-0 md:pb-0 pb-14 overflow-y-scroll border-t border-slate-500">
           {sortedTOC.map((key) => {
             const section = props.tableOfContent[key];
             const progress = getSectionProgress(section);

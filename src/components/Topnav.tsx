@@ -37,7 +37,7 @@ const Topnav = (props: TopnavProps) => {
     setSpinSignOut(false);
   };
   return (
-    <nav className="lg:px-10 md:px-7 px-5 flex lg:justify-end md:justify-between justify-between items-center py-4 ">
+    <nav className="lg:px-10 md:px-7 px-3 flex lg:justify-end md:justify-between justify-between items-center py-4 ">
       <Bars3Icon
         onClick={() => props.handleSidebarMenu()}
         className="w-8 cursor-pointer lg:hidden md:block block"

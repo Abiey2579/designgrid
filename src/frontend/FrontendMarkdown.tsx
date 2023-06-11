@@ -8,7 +8,7 @@ import { dark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const FrontendMarkdown = (props: { lessonMarkdown: string }) => {
   return (
-    <div className=" lg:px-10 md:px-7 px-5 py-5 flex-1 bg-dgWhite ">
+    <div className="lg:px-10 md:px-7 px-3 py-5 flex-1 bg-dgWhite ">
       {props.lessonMarkdown !== "" ? (
         <ReactMarkdown
           children={props.lessonMarkdown}

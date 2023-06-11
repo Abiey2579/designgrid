@@ -23,7 +23,7 @@ const Content = (props: {
   });
 
   return (
-    <div className="lg:px-24 md:px-10 px-6 max-w-4xl mx-auto my-16">
+    <div className="lg:px-24 md:px-10 px-3 max-w-4xl mx-auto my-16">
       <h1 className="font-bold text-dgDarkPurple text-2xl mb-5">Dashboard</h1>
       <div className="flex items-center gap-5 mb-14">
         <div className=" border-2 border-dgPurple border-spacing-1 p-1 rounded-full">
