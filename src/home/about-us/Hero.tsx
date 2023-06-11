@@ -8,9 +8,14 @@ const Hero = () => {
     <div className="lg:px-24 md:px-10 px-3 mb-10 flex justify-between items-center">
       <div className="lg:max-w-[500px] md:max-w-full w-screen lg:mt-0 md:mt-20 mt-20 flex flex-col justify-center lg:mx-0 md:mx-auto mx-auto lg:items-start md:items-center items-start">
         <h1 className="text-dgDarkPurple lg:text-[56px] lg:leading-tight md:text-[56px] md:leading-tight text-[44px] leading-[1.1] font-black lg:mb-6 md:mb-5 mb-4 lg:text-left md:text-center text-left">
-          <span className="text-dgPurple font-black">Coding</span> the{" "}
-          <span className="text-dgPurple font-black">Future</span>: One Line at
-          a Time
+          <span className="text-dgPurple font-black lg:text-[56px] md:text-[56px] text-[44px]">
+            Coding
+          </span>{" "}
+          the{" "}
+          <span className="text-dgPurple font-black lg:text-[56px] md:text-[56px] text-[44px]">
+            Future
+          </span>
+          : One Line at a Time
         </h1>
         <p className="lg:mb-6 md:mb-5 mb-4 lg:text-left md:text-center text-left">
           At our core, we believe in the power of coding to shape the future.

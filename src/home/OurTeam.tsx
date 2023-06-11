@@ -23,7 +23,7 @@ const OurTeam = () => {
         </p>
       </div>
       <div className="grid mx-auto justify-evenly lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
-        <div className="max-w-[320px] bg-dgLightPurple rounded">
+        <div className="lg:max-w-[320px] md:max-w-[320px] w-full bg-dgLightPurple rounded">
           <div
             className="min-w-[320px] min-h-[223px] rounded-t bg-center bg-no-repeat bg-cover"
             style={{ backgroundImage: `url(${Founder2})` }}
@@ -66,7 +66,7 @@ const OurTeam = () => {
             </div>
           </div>
         </div>
-        <div className="max-w-[320px] bg-dgLightPurple rounded">
+        <div className="lg:max-w-[320px] md:max-w-[320px] w-full bg-dgLightPurple rounded">
           <div
             className="min-w-[320px] min-h-[223px] rounded-t bg-center bg-no-repeat bg-cover"
             style={{ backgroundImage: `url(${ChatGPT})` }}
@@ -102,7 +102,7 @@ const OurTeam = () => {
             </div>
           </div>
         </div>
-        <div className="max-w-[320px] bg-dgLightPurple rounded">
+        <div className="lg:max-w-[320px] md:max-w-[320px] w-full bg-dgLightPurple rounded">
           <div
             className="min-w-[320px] min-h-[223px] rounded-t bg-center bg-no-repeat bg-cover"
             style={{ backgroundImage: `url(${GoogleBard})` }}
