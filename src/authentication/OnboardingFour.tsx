@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import OnboardProgressBar from "../components/OnboardindProgressBar";
-import { qListAnswers } from "../assets/data/onboardingQuestions";
+import { q1List, q2List, q3List } from "../assets/data/onboardingQuestions";
 import { account } from "../assets/config/appwrite-auth";
 import ToastSuccess from "../components/ToastSuccess";
 import ToastWarning from "../components/ToastWarning";
@@ -12,6 +12,7 @@ import {
   checkIfUserExist,
   checkIfCompletedOnboarding,
 } from "../assets/config/functions";
+import { AnswersProps } from "../assets/Model/model";
 
 const OnboardingFour = () => {
   const [selectedID, setSelectedID] = useState<number>(0);
@@ -22,6 +23,7 @@ const OnboardingFour = () => {
   const [spin, setSpin] = useState<boolean>(false);
   const navigate = useNavigate();
   const [preventView, setPreventView] = useState<boolean>(true);
+  const [answers, setAnswers] = useState<AnswersProps>();
 
   const handleSelectTag = (e: any) => {
     setSelectedID(100);
@@ -55,6 +57,25 @@ const OnboardingFour = () => {
 
   useEffect(() => {
     checkSession();
+    const q1 = sessionStorage.getItem("q1") || "";
+    const q2 = sessionStorage.getItem("q2") || "";
+    const q3 = sessionStorage.getItem("q3") || "";
+
+    const qListAnswers = {
+      1: q1List.find((e) => e.subId === parseInt(q1))?.potentialAnswer || "",
+      2: q2List.find((e) => e.subId === parseInt(q2))?.potentialAnswer || "",
+      3: q3List.find((e) => e.subId === parseInt(q3))?.potentialAnswer || "",
+    };
+
+    if (qListAnswers[1] && qListAnswers[2] && qListAnswers[3]) {
+      setAnswers({
+        answer1: qListAnswers[1],
+        answer2: qListAnswers[2],
+        answer3: qListAnswers[3],
+      });
+    } else {
+      setErrorToast(true);
+    }
   }, []);
 
   const handleFinishOnboarding = async () => {
@@ -64,23 +85,24 @@ const OnboardingFour = () => {
       const session = await account.getSession("current");
 
       if (session) {
-        console.log(qListAnswers);
-        const promise = await finishOnboarding({
-          uid: session.userId,
-          q1: qListAnswers[1],
-          q2: qListAnswers[2],
-          q3: qListAnswers[3],
-          feedback_q1: selectTagValue,
-          feedback_q2: textareaValue,
-        });
+        if (answers) {
+          const promise = await finishOnboarding({
+            uid: session.userId,
+            q1: answers.answer1,
+            q2: answers.answer2,
+            q3: answers.answer3,
+            feedback_q1: selectTagValue,
+            feedback_q2: textareaValue,
+          });
 
-        if (promise) {
-          setSuccessToast(true);
-          setSpin(false);
-          navigate(uriPaths.UPDATE_PROFILE);
-        } else {
-          setErrorToast(true);
-          setSpin(false);
+          if (promise) {
+            setSuccessToast(true);
+            setSpin(false);
+            navigate(uriPaths.UPDATE_PROFILE);
+          } else {
+            setErrorToast(true);
+            setSpin(false);
+          }
         }
       } else {
         setSpin(false);

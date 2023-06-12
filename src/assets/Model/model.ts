@@ -84,3 +84,7 @@ export interface TopicProps {
   numberOfLessons: number;
   numberOfCompletedLessons: number;
 }
+
+export interface AnswersProps {
+  [key: string]: string;
+}
