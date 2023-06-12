@@ -1,7 +1,7 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./home/Home";
-import Frontend from "./frontend/Frontend";
+import Frontend from "./learnpath/Frontend";
 import SignUp from "./authentication/SignUp";
 import LogIn from "./authentication/LogIn";
 import OnboardingOne from "./authentication/OnboardingOne";

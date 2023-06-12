@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import * as uriPaths from "../assets/data/uriPaths";
 import "../assets/css/slider.css";
-import { motion } from "framer-motion";
 import { ScrollingLogos } from "../assets/data/ScrollingLogos";
 
 const Hero = () => {
@@ -13,12 +12,12 @@ const Hero = () => {
         <h1 className="lg:text-7xl md:text-6xl text-6xl text-dgDarkPurple lg:text-center md:text-center text-left font-black lg:max-w-[700px] md:max-w-full m-auto mb-4">
           <span className="text-dgPurple">Building</span>
           <span> the future of</span>
-          <span className="text-dgPurple"> Frontend</span>
+          <span className="text-dgPurple"> Aspiring Devs</span>
         </h1>
         <p className="text-dgDarkPurple_Opacity font-normal text-base max-w-[700px] lg:mb-6 md:mb-5 mb-4 m-auto leading-relaxed  lg:text-center md:text-center text-left">
-          Empower yourself to shape the future of frontend by unlocking your
-          potential and embarking on a transformative journey towards building
-          innovative and impactful web experiences.
+          Embark on a transformative journey towards becoming a skilled frontend
+          developer and unlock your full potential in shaping the future of
+          frontend web development.
         </p>
         <div className="max-w-[700px] flex lg:flex-row md:flex-row flex-col lg:gap-5 md:gap-4 gap-3 block m-auto lg:items-center md:items-center items-start justify-center">
           <Link to={uriPaths.SIGN_UP}>
@@ -38,16 +37,12 @@ const Hero = () => {
 
       {/* OUR LEARNING PATH */}
       <div className="slider relative overflow-hidden w-full bg-dgLightPurple py-10 m-auto mt-14">
-        <ul
-          className={`brands flex items-center w-[${
-            ScrollingLogos.length * 64 * 2
-          }px]`}
-        >
+        <ul className={`brands flex items-center `}>
           {ScrollingLogos.map((logo, index) => (
-            <motion.img
+            <img
               key={index}
               src={logo}
-              alt={`Company Logo ${index + 1}`}
+              alt={`Logo ${index + 1}`}
               className="h-16 w-auto mx-6"
             />
           ))}

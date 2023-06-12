@@ -20,9 +20,10 @@ const OurFounder = () => {
           <div className="h-48 max-w-[540px] border-l-2 border-dgPurple flex flex-col  justify-evenly lg:pl-14 md:pl-10 pl-6">
             <h5 className="text-xl font-bold text-dgDarkPurple">About</h5>
             <p className="text-base text-dgDarkPurple_Opacity">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt tlabore et dolore magna aliqua. Ut enim
-              ad minim, Lorem ipsum dolor sit amet, consectetur
+              Hello there! I'm Yahaya Muhammad Bello, a passionate frontend
+              developer with a mission to empower aspiring developers like you.
+              I am thrilled to welcome you to this exciting journey on our
+              platform.
             </p>
             <Link to={uriPaths.HOME}>
               <span className="font-medium text-dgPurple">Back Home</span>
