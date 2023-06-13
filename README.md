@@ -1,4 +1,4 @@
-![image](https://raw.githubusercontent.com/Abiey2579/designgriddata/master/community/assets/images/logo512.png)
+![image](https://raw.githubusercontent.com/Abiey2579/designgriddata/master/assets/images/DesignGrid-Home.png)
 
 # 👋 Welcome to [**DesignGrid**](https://designgrid.com.ng)
 
