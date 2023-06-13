@@ -16,23 +16,8 @@ import {
 } from "../assets/config/appwrite-auth";
 import { ID, Query } from "appwrite";
 import { AVATAR } from "../assets/data/constants";
-
-type FetchedUser = {
-  $createdAt: string;
-  $id: string;
-  $updatedAt: string;
-  email: string;
-  name: string;
-};
-
-type UserProfileData = {
-  $createdAt: string;
-  $id: string;
-  $updatedAt: string;
-  country?: string;
-  dob?: string;
-  phone_number?: string;
-};
+import { countries } from "../assets/data/countries";
+import { FetchedUser, UserProfileData } from "../assets/Model/model";
 
 const UpdateProfile = () => {
   const [country, setCountry] = useState<string>("");
@@ -320,11 +305,9 @@ const UpdateProfile = () => {
                     className="border border-slate-400 rounded font-medium outline-0 px-3 py-[10px] md:min-w-[340px] w-full text-dgDarkPurple"
                   >
                     <option value="">Choose</option>
-                    <option value="Nigeria">Nigeria</option>
-                    <option value="Cameroon">Cameroon</option>
-                    <option value="Chad">Chad</option>
-                    <option value="Rwanda">Rwanda</option>
-                    <option value="Uganda">Uganda</option>
+                    {countries.map((country) => (
+                      <option value={country.title}>{country.title}</option>
+                    ))}
                   </select>
                 </div>
                 <div>

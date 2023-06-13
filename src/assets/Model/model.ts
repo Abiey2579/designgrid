@@ -88,3 +88,12 @@ export interface TopicProps {
 export interface AnswersProps {
   [key: string]: string;
 }
+
+export interface UserProfileData {
+  $createdAt: string;
+  $id: string;
+  $updatedAt: string;
+  country?: string;
+  dob?: string;
+  phone_number?: string;
+}
