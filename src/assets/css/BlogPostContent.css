@@ -84,3 +84,7 @@ ol {
   margin-bottom: 20px !important;
   border-radius: 4px !important;
 }
+
+.Markdown hr {
+  margin-bottom: 20px;
+}
