@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import OnboardProgressBar from "../components/OnboardindProgressBar";
-import * as uriPaths from "../assets/data/uriPaths";
-import { account } from "../assets/config/appwrite-auth";
-import ToastSuccess from "../components/ToastSuccess";
-import ToastWarning from "../components/ToastWarning";
-import { q1List } from "../assets/data/onboardingQuestions";
-import Spinner from "../components/Spinner";
+import OnboardProgressBar from "../../components/OnboardindProgressBar";
+import * as uriPaths from "../../assets/data/uriPaths";
+import { account } from "../../assets/config/appwrite-auth";
+import ToastSuccess from "../../components/ToastSuccess";
+import ToastWarning from "../../components/ToastWarning";
+import { q1List } from "../../assets/data/onboardingQuestions";
+import Spinner from "../../components/Spinner";
 import {
   createUserProfile,
   checkIfUserExist,
   checkIfCompletedOnboarding,
   enrollFrontend101,
-} from "../assets/config/functions";
+} from "../../assets/config/functions";
 
 const OnboardingOne = () => {
   const [selectedID, setSelectedID] = useState<number>(0);

@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import OnboardProgressBar from "../components/OnboardindProgressBar";
-import { q1List, q2List, q3List } from "../assets/data/onboardingQuestions";
-import { account } from "../assets/config/appwrite-auth";
-import ToastSuccess from "../components/ToastSuccess";
-import ToastWarning from "../components/ToastWarning";
-import Spinner from "../components/Spinner";
-import { finishOnboarding } from "../assets/config/functions";
-import * as uriPaths from "../assets/data/uriPaths";
+import OnboardProgressBar from "../../components/OnboardindProgressBar";
+import { q1List, q2List, q3List } from "../../assets/data/onboardingQuestions";
+import { account } from "../../assets/config/appwrite-auth";
+import ToastSuccess from "../../components/ToastSuccess";
+import ToastWarning from "../../components/ToastWarning";
+import Spinner from "../../components/Spinner";
+import { finishOnboarding } from "../../assets/config/functions";
+import * as uriPaths from "../../assets/data/uriPaths";
 import {
   checkIfUserExist,
   checkIfCompletedOnboarding,
-} from "../assets/config/functions";
-import { AnswersProps } from "../assets/Model/model";
+} from "../../assets/config/functions";
+import { AnswersProps } from "../../assets/Model/model";
 
 const OnboardingFour = () => {
   const [selectedID, setSelectedID] = useState<number>(0);

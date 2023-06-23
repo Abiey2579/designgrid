@@ -32,7 +32,7 @@ const Topnav = (props: TopnavProps) => {
     const promise = await logout();
     if (promise !== null) {
       setSpinSignOut(false);
-      navigate(uriPaths.LOG_IN);
+      navigate(uriPaths.SIGN_IN);
     }
     setSpinSignOut(false);
   };

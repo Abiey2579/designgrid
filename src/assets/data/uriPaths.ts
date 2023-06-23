@@ -15,7 +15,7 @@ export const HOME = "/home";
 
 // AUTHENTICATION
 export const SIGN_UP = "/auth/signup";
-export const LOG_IN = "/auth/login";
+export const SIGN_IN = "/auth/signin";
 export const ONBOARDING_1 = "/auth/onboarding/1";
 export const ONBOARDING_2 = "/auth/onboarding/2";
 export const ONBOARDING_3 = "/auth/onboarding/3";

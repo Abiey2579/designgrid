@@ -47,7 +47,7 @@ const OurFounder = () => {
               providing accessible and comprehensive learning resources, and
               equipping individuals with the tools to thrive in the field.
             </p>
-            <Link to={uriPaths.LOG_IN}>
+            <Link to={uriPaths.SIGN_IN}>
               <span className="font-medium text-dgPurple">Get Started</span>
             </Link>
           </div>

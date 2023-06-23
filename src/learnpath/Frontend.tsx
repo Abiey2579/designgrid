@@ -61,7 +61,7 @@ const Frontend = () => {
           await enrollFrontend101(session.userId);
         } catch (error) {
           await logout();
-          navigate(uriPaths.LOG_IN);
+          navigate(uriPaths.SIGN_IN);
         }
       }
       if (completedOnboarding) {
@@ -102,7 +102,7 @@ const Frontend = () => {
 
       if (!userToc) {
         await logout();
-        navigate(uriPaths.LOG_IN);
+        navigate(uriPaths.SIGN_IN);
         return;
       }
 

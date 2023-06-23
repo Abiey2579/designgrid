@@ -89,7 +89,7 @@ const Dashboard = () => {
 
       if (userToc === false) {
         logout();
-        navigate(uriPaths.LOG_IN);
+        navigate(uriPaths.SIGN_IN);
         return;
       }
 

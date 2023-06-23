@@ -3,11 +3,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./home/Home";
 import Frontend from "./learnpath/Frontend";
 import SignUp from "./authentication/SignUp";
-import LogIn from "./authentication/LogIn";
-import OnboardingOne from "./authentication/OnboardingOne";
-import OnboardingTwo from "./authentication/OnboardingTwo";
-import OnboardingThree from "./authentication/OnboardingThree";
-import OnboardingFour from "./authentication/OnboardingFour";
+import SignIn from "./authentication/SignIn";
+import OnboardingOne from "./authentication/onboarding/OnboardingOne";
+import OnboardingTwo from "./authentication/onboarding/OnboardingTwo";
+import OnboardingThree from "./authentication/onboarding/OnboardingThree";
+import OnboardingFour from "./authentication/onboarding/OnboardingFour";
 import Dashboard from "./dashboard/Dashboard";
 import UpdateProfile from "./dashboard/UpdateProfile";
 import ErrorElement from "./components/ErrorElement";
@@ -51,8 +51,8 @@ const router = createBrowserRouter([
     element: <OnboardingFour />,
   },
   {
-    path: uriPaths.LOG_IN,
-    element: <LogIn />,
+    path: uriPaths.SIGN_IN,
+    element: <SignIn />,
   },
   {
     path: uriPaths.DASHBOARD,
