@@ -38,30 +38,3 @@ code {
   outline: none;
   border: none;
 }
-
-/* .FrontendMarkdown::-webkit-scrollbar-track {
-
-} */
-
-p,
-span,
-button,
-a,
-input,
-ul,
-ol {
-  font-family: "Catamaran", sans-serif !important;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Montserrat", sans-serif !important;
-}
-
-::placeholder {
-  font-family: "Catamaran", sans-serif !important;
-}

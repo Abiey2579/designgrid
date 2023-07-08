@@ -16,6 +16,8 @@ export const HOME = "/home";
 // AUTHENTICATION
 export const SIGN_UP = "/auth/signup";
 export const SIGN_IN = "/auth/signin";
+export const FORGOT_PASSCODE = "/auth/forgotpasscode";
+export const NEW_PASSCODE = "/auth/newpasscode";
 export const ONBOARDING_1 = "/auth/onboarding/1";
 export const ONBOARDING_2 = "/auth/onboarding/2";
 export const ONBOARDING_3 = "/auth/onboarding/3";

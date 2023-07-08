@@ -15,6 +15,8 @@ import Blogs from "./community/Blogs";
 import BlogPost from "./community/BlogPost";
 import * as uriPaths from "./assets/data/uriPaths";
 import AboutUs from "./home/about-us/AboutUs";
+import ForgotPasscode from "./authentication/ForgotPasscode";
+import NewPasscode from "./authentication/NewPasscode";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +35,14 @@ const router = createBrowserRouter([
   {
     path: uriPaths.SIGN_UP,
     element: <SignUp />,
+  },
+  {
+    path: uriPaths.FORGOT_PASSCODE,
+    element: <ForgotPasscode />,
+  },
+  {
+    path: uriPaths.NEW_PASSCODE,
+    element: <NewPasscode />,
   },
   {
     path: uriPaths.ONBOARDING_1,

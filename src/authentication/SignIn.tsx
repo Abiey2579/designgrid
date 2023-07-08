@@ -6,7 +6,10 @@ import ToastWarning from "../components/ToastWarning";
 import { LOCALHOST } from "../assets/data/constants";
 
 import Google from "./assets/svgs/google.svg";
-import GitHub from "./assets/svgs/github.svg";
+import Facebook from "./assets/svgs/facebook.svg";
+import Twitter from "./assets/svgs/twitter.svg";
+import LinkedIn from "./assets/svgs/linkedin.svg";
+
 import AuthenticationNavbar from "./components/Navbar";
 
 const SignIn = () => {
@@ -34,34 +37,78 @@ const SignIn = () => {
       )}
       <AuthenticationNavbar />
       <div className="w-screen lg:h-screen md:h-full flex justify-center lg:items-center md:items-center lg:mt-0 md:mt-0 mt-[25%]">
-        <div className="lg:p-8 md:p-10 px-3 lg:border md:border border-0 border-slate-300 rounded max-w-sm">
-          <h2 className="text-dgDarkPurple font-bold text-3xl mb-6">Sign In</h2>
-          <p className="text-dgDarkPurple text-base mb-4 ">
-            Unlock your potential and embark on a journey of knowledge and
-            growth.
-          </p>
+        <div className="w-[400px]">
+          {/* AUTHENTICATION FORM HEADER */}
+          <div className="w-full text-center">
+            <h2 className="font-bold text-[40px] mb-2">Welcome Back</h2>
+            <p className="mb-8">Sign In to your Course Studio account</p>
+          </div>
 
-          <button
-            onClick={() => handleOAuth("google")}
-            className={`border border-slate-300 text-dgDarkPurple rounded flex w-full outline-0 mb-4`}
-          >
-            <div className="w-20 text-center py-3">
-              <img src={Google} alt="Google" className="w-6 m-auto" />
+          {/* AUTHENTICATION FORM */}
+          <div className="flex flex-col gap-4 mb-8">
+            <input
+              type="email"
+              className="border border-gray-300 rounded-lg w-full pr-6 py-4 outline-0 placeholder:text-gray-700"
+              placeholder="Email ID"
+            />
+            <input
+              type="password"
+              className="border border-gray-300 rounded-lg w-full pr-6 py-4 outline-0 placeholder:text-gray-700"
+              placeholder="Passcode"
+            />
+            <div>
+              <input
+                type="checkbox"
+                name="rememberMe"
+                className="outline-0 p-2 rounded-md border border-gray-300 mr-3"
+              />
+              <label htmlFor="rememberMe">Remember Me</label>
             </div>
-            <p className="w-fit py-3 font-bold">Continue with Google</p>
-          </button>
-          <button
-            onClick={() => handleOAuth("github")}
-            className={`bg-dgDarkPurple text-dgLightPurple rounded flex w-full outline-0 mb-4`}
-          >
-            <div className="w-20 text-center py-3">
-              <img src={GitHub} alt="GitHub" className="w-6 m-auto" />
+            <button
+              type="submit"
+              className="rounded-lg w-full pr-6 py-4 bg-dgPurple text-dgWhite font-bold"
+            >
+              Sign In
+            </button>
+            <div className="flex justify-between">
+              <p>Or Sign In with</p>
+              <Link
+                to={uriPaths.FORGOT_PASSCODE}
+                className="font-bold underline text-dgPurple"
+              >
+                Forgot Passcode?
+              </Link>
             </div>
-            <p className="w-fit py-3 font-bold">Continue with GitHub</p>
-          </button>
+            <div className="flex justify-between">
+              <button
+                onClick={() => handleOAuth("facebook")}
+                className="border border-gray-300 rounded-lg flex w-[80px] h-[56px]"
+              >
+                <img src={Facebook} alt="Facebook" className="w-7 m-auto" />
+              </button>
+              <button
+                onClick={() => handleOAuth("google")}
+                className="border border-gray-300 rounded-lg flex w-[80px] h-[56px]"
+              >
+                <img src={Google} alt="Google" className="w-7 m-auto" />
+              </button>
+              <button
+                onClick={() => handleOAuth("linkedin")}
+                className="border border-gray-300 rounded-lg flex w-[80px] h-[56px]"
+              >
+                <img src={LinkedIn} alt="LinkedIn" className="w-7 m-auto" />
+              </button>
+              <button
+                onClick={() => handleOAuth("twitter")}
+                className="border border-gray-300 rounded-lg flex w-[80px] h-[56px]"
+              >
+                <img src={Twitter} alt="Twitter" className="w-7 m-auto" />
+              </button>
+            </div>
+          </div>
 
-          <p className="text-dgDarkPurple text-base mb-16">
-            Don't have an account?{" "}
+          <p>
+            Are you new here?{" "}
             <Link
               to={uriPaths.SIGN_UP}
               className="inline-block text-dgPurple font-bold text-base"
