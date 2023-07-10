@@ -127,6 +127,25 @@ export const updateProfile = async (
   }
 };
 
+export const getUserProfile = async (uid: string) => {
+  try {
+    const searchResponse = await database.listDocuments(
+      DATABASE_ID,
+      USER_PROFILE_COLLECTION,
+      [Query.equal("uid", uid), Query.limit(1)]
+    );
+
+    const data = searchResponse.documents;
+
+    if (data.length > 0) {
+      const userProfileData = data[0] as Model.UserProfileData;
+      return userProfileData;
+    }
+  } catch (error) {
+    throw new Error((error as Error).message);
+  }
+};
+
 export const logout = async () => {
   try {
     const promise = await account.deleteSessions();
@@ -218,16 +237,33 @@ export const changeActiveLesson = async (uid: string, lessonId: string) => {
   }
 };
 
-/*
+export const updatePaymentStatus = async (uid: string, reference: string) => {
+  try {
+    // Find the document using the unique attribute
+    const searchResponse = await database.listDocuments(
+      DATABASE_ID,
+      USER_PROFILE_COLLECTION,
+      [Query.equal("uid", uid)]
+    );
 
-
-  welcome: [
-    {
-      lesson_id: "",
-      lesson_name: "",
-      active: false,
-      completed: false,
+    if (searchResponse.documents.length === 0) {
+      throw new Error("No document matched this user id");
     }
-  ]
 
-*/
+    const documentId = searchResponse.documents[0].$id;
+
+    const promise = await database.updateDocument(
+      DATABASE_ID,
+      USER_PROFILE_COLLECTION,
+      documentId,
+      {
+        paid: "true",
+        reference: reference,
+      }
+    );
+
+    return promise;
+  } catch (error) {
+    throw new Error((error as Error).message);
+  }
+};

@@ -10,6 +10,7 @@ import {
   checkIfCompletedOnboarding,
   getUserTOC,
   logout,
+  getUserProfile,
 } from "../assets/config/functions";
 import {
   storage,
@@ -17,22 +18,20 @@ import {
 } from "../assets/config/appwrite-auth";
 import ToastWarning from "../components/ToastWarning";
 import { AVATAR } from "../assets/data/constants";
-import { UserTOCProps } from "../assets/Model/model";
+import {
+  UserTOCProps,
+  FetchedUser,
+  UserProfileData,
+} from "../assets/Model/model";
 
 const Dashboard = () => {
   const [preventView, setPreventView] = useState<boolean>(true);
   const navigate = useNavigate();
-  type FetchedUser = {
-    $createdAt: string;
-    $id: string;
-    $updatedAt: string;
-    email: string;
-    name: string;
-  };
   const [userData, setUserData] = useState<FetchedUser>();
   const [profileImage, setProfileImage] = useState<string>("");
-  const [profileImageError, setProfileImageError] = useState<boolean>(false);
+  const [errorToast, setErrorToast] = useState<string>("");
   const [userToc, setUserToc] = useState<UserTOCProps>();
+  const [userProfile, setUserProfile] = useState<UserProfileData>();
 
   const checkSession = async () => {
     try {
@@ -77,8 +76,8 @@ const Dashboard = () => {
       } else {
         setProfileImage(AVATAR);
       }
-    } catch (err) {
-      setProfileImageError(true);
+    } catch (error) {
+      setErrorToast((error as Error).message);
     }
   };
 
@@ -95,7 +94,18 @@ const Dashboard = () => {
 
       setUserToc(userToc);
     } catch (error) {
-      console.log(error);
+      setErrorToast((error as Error).message);
+    }
+  };
+
+  const fetchUserProfile = async () => {
+    try {
+      const session = await account.getSession("current");
+      const promise = await getUserProfile(session.userId);
+
+      setUserProfile(promise);
+    } catch (error) {
+      setErrorToast((error as Error).message);
     }
   };
 
@@ -104,6 +114,7 @@ const Dashboard = () => {
     await checkUser();
     await getProfilePicture();
     await getToc();
+    await fetchUserProfile();
   };
 
   useEffect(() => {
@@ -113,11 +124,8 @@ const Dashboard = () => {
 
   return (
     <React.Fragment>
-      {profileImageError && (
-        <ToastWarning
-          title="Error Fetching Profile Picture"
-          close={() => setProfileImageError(false)}
-        />
+      {errorToast && (
+        <ToastWarning title={errorToast} close={() => setErrorToast("")} />
       )}
       {preventView === false ? (
         <React.Fragment>
@@ -128,8 +136,13 @@ const Dashboard = () => {
               profilePicture={profileImage}
             />
           )}
-          {userToc ? (
-            <Content profilePicture={profileImage} tableOfContent={userToc} />
+          {userToc && userData && userProfile ? (
+            <Content
+              userData={userData}
+              userProfile={userProfile}
+              profilePicture={profileImage}
+              tableOfContent={userToc}
+            />
           ) : (
             <div className="w-screen h-[85vh] flex justify-center items-center">
               <Spinner className="w-10 fill-dgPurple text-dgLightPurple" />

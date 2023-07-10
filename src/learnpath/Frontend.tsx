@@ -167,6 +167,7 @@ const Frontend = () => {
     await checkUser();
     await getProfilePicture();
     await getToc();
+    // CHECK FOR PAYMENT
   };
 
   useEffect(() => {
@@ -200,6 +201,7 @@ const Frontend = () => {
               userData={userData}
               profilePicture={profileImage}
             />
+
             <div className="flex flex-col FrontendMarkdown max-h-[88.4vh] overflow-y-scroll">
               <FrontendMarkdown lessonMarkdown={fetchedLesson} />
               {userToc && (

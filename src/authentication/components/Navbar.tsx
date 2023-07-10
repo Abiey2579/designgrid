@@ -25,9 +25,7 @@ const AuthenticationNavbar = () => {
 
           <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
             <Link to={uriPaths.HOME}>
-              <span
-                className={`bg-dgPurple inline-block px-6 py-3 font-medium text-dgLightPurple rounded text-base`}
-              >
+              <span className="bg-dgPurple inline-block px-6 py-3 font-medium text-dgLightPurple rounded-lg">
                 Home
               </span>
             </Link>

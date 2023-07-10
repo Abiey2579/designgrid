@@ -96,4 +96,15 @@ export interface UserProfileData {
   country?: string;
   dob?: string;
   phone_number?: string;
+  paid?: string;
+}
+
+export interface PaymentReference {
+  message: string;
+  redirecturl: string;
+  reference: string;
+  status: string;
+  trans: string;
+  transaction: string;
+  trxref: string;
 }
