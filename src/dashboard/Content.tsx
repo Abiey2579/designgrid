@@ -37,7 +37,7 @@ const Content = (props: {
     reference: new Date().getTime().toString(),
     email: props.userData.email,
     amount: 399900,
-    publicKey: "pk_test_669cb9d89a7e87de71b05861bcbcd6436ba24245",
+    publicKey: "pk_live_efab49ea5ebdab25e646184ee1a21f24851c0607",
   };
 
   const handlePaystackSuccessAction = async (reference: PaymentReference) => {
@@ -82,24 +82,26 @@ const Content = (props: {
               }}
             ></div>
           </div>
-          <Link to={uriPaths.UPDATE_PROFILE}>
-            <span className="bg-dgPurple rounded border-0 outline-0 px-4 py-2 text-base font-medium text-dgLightPurple">
-              Update profile
-            </span>
-          </Link>
-          {props.userProfile.paid === "true" ? (
-            <p
-              className="text-dgPurple font-bold underline cursor-pointer select-none"
-              onClick={() => setSuccessToast("Congrats 🎉🎉🎉, you've paid")}
-            >
-              🎉 You've Paid
-            </p>
-          ) : (
-            <PaystackButton
-              className="text-dgPurple font-bold underline"
-              {...componentProps}
-            />
-          )}
+          <div className="flex lg:flex-row md:flex-row flex-col gap-5">
+            <Link to={uriPaths.UPDATE_PROFILE}>
+              <span className="bg-dgPurple rounded border-0 outline-0 px-4 py-2 text-base font-medium text-dgLightPurple">
+                Update profile
+              </span>
+            </Link>
+            {props.userProfile.paid === "true" ? (
+              <p
+                className="text-dgPurple font-bold underline cursor-pointer select-none py-2 "
+                onClick={() => setSuccessToast("Congrats 🎉🎉🎉, you've paid")}
+              >
+                🎉 You've Paid
+              </p>
+            ) : (
+              <PaystackButton
+                className="text-dgPurple font-bold underline py-2"
+                {...componentProps}
+              />
+            )}
+          </div>
         </div>
         <h1 className="font-bold text-dgDarkPurple text-2xl mb-5">
           Web Development 101
