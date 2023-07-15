@@ -1,6 +1,7 @@
 // import {
 export const frontend101TOC = {
-  "1-Welcome": {
+  // COURSE INTRODUCTION
+  "1-Course Introduction": {
     lessons: [
       {
         title: "Course Overview",
@@ -21,70 +22,21 @@ export const frontend101TOC = {
         completed: false,
       },
       {
-        title: "Resource Recommendation",
-        icon: "BookOpenIcon",
-        active: false,
-        completed: false,
-      },
-      {
         title: "Exuding Programmer Mindset",
         icon: "BookOpenIcon",
         active: false,
         completed: false,
       },
       {
-        title: "Join Our Discord Community",
+        title: "Requirements",
         icon: "BookOpenIcon",
         active: false,
         completed: false,
       },
     ],
   },
-  "2-Introduction": {
-    lessons: [
-      {
-        title: "Intro to Web Development",
-        icon: "PlayCircleIcon",
-        active: false,
-        completed: false,
-      },
-      {
-        title: "Intro to Git, GitHub and Gitlab",
-        icon: "PlayCircleIcon",
-        active: false,
-        completed: false,
-      },
-    ],
-  },
-  "3-Course Requirements": {
-    lessons: [
-      {
-        title: "Choosing Browser",
-        icon: "BookOpenIcon",
-        active: false,
-        completed: false,
-      },
-      {
-        title: "Text Editors VS IDEs",
-        icon: "BookOpenIcon",
-        active: false,
-        completed: false,
-      },
-      {
-        title: "Installing Git",
-        icon: "BookOpenIcon",
-        active: false,
-        completed: false,
-      },
-      {
-        title: "Installing Github Desktop",
-        icon: "BookOpenIcon",
-        active: false,
-        completed: false,
-      },
-    ],
-  },
-  "4-Introduction to HTML": {
+  // MODULE 1
+  "2-Introduction to HTML": {
     lessons: [
       {
         title: "Overview: Basic HTML Structure",
@@ -154,7 +106,7 @@ export const frontend101TOC = {
       },
     ],
   },
-  "5-Introduction to CSS": {
+  "3-Introduction to CSS": {
     lessons: [
       {
         title: "Testing Background Color",
@@ -205,14 +157,15 @@ export const frontend101TOC = {
         completed: false,
       },
       {
-        title: "Project: Coming Soon Template",
+        title: "Project: Coming Soon Template 1",
         icon: "CodeBracketIcon",
         active: false,
         completed: false,
       },
     ],
   },
-  "6-Flexbox and Grid": {
+  // MODULE 2
+  "4-Flexbox and Grid": {
     lessons: [
       {
         title: "Flexbox Overview",
@@ -258,7 +211,38 @@ export const frontend101TOC = {
       },
     ],
   },
-  "7-Introduction to JavaScript": {
+  // MODULE 3
+  "5-Getting Into Bootstrap": {
+    lessons: [
+      {
+        title: "Setting Up Bootstrap",
+        icon: "PlayCircleIcon",
+        active: false,
+        completed: false,
+      },
+      {
+        title: "Common Bootstrap Classes",
+        icon: "PlayCircleIcon",
+        active: false,
+        completed: false,
+      },
+      {
+        title: "Flexbox and Grid",
+        icon: "PlayCircleIcon",
+        active: false,
+        completed: false,
+      },
+      ,
+      {
+        title: "Project: Coming Soon Template 2",
+        icon: "PlayCircleIcon",
+        active: false,
+        completed: false,
+      },
+    ],
+  },
+  // MODULE 4
+  "6-Introduction to JavaScript": {
     lessons: [
       {
         title: "Overview: Basic Concepts",
@@ -297,25 +281,19 @@ export const frontend101TOC = {
         completed: false,
       },
       {
-        title: "Clean Code 1: Arrays",
+        title: "Arrays",
         icon: "PlayCircleIcon",
         active: false,
         completed: false,
       },
       {
-        title: "Clean Code 2: Objects",
+        title: "Objects",
         icon: "PlayCircleIcon",
         active: false,
         completed: false,
       },
       {
         title: "Functions",
-        icon: "PlayCircleIcon",
-        active: false,
-        completed: false,
-      },
-      {
-        title: "Basic Object Oriented Programming",
         icon: "PlayCircleIcon",
         active: false,
         completed: false,
@@ -332,15 +310,39 @@ export const frontend101TOC = {
         active: false,
         completed: false,
       },
+    ],
+  },
+  // MODULE 5
+  "7-Introduction to jQuery": {
+    lessons: [
       {
-        title: "Async Programming and APIs",
+        title: "Setting Up jQuery",
+        icon: "PlayCircleIcon",
+        active: false,
+        completed: false,
+      },
+      {
+        title: "jQuery Selectors",
+        icon: "PlayCircleIcon",
+        active: false,
+        completed: false,
+      },
+      {
+        title: "jQuery Animation",
+        icon: "PlayCircleIcon",
+        active: false,
+        completed: false,
+      },
+      {
+        title: "Project: Restaurant Landing Page",
         icon: "PlayCircleIcon",
         active: false,
         completed: false,
       },
     ],
   },
-  "8-Project Phase": {
+  //MODULE 6
+  "8-Final Projects": {
     lessons: [
       {
         title: "Calculator",
@@ -361,35 +363,24 @@ export const frontend101TOC = {
         completed: false,
       },
       {
-        title: "Random Meme Generator",
-        icon: "CodeBracketIcon",
-        active: false,
-        completed: false,
-      },
-      {
-        title: "Restaurant Landing Page",
-        icon: "CodeBracketIcon",
-        active: false,
-        completed: false,
-      },
-      {
-        title: "E-commerce Items Page",
-        icon: "CodeBracketIcon",
-        active: false,
-        completed: false,
-      },
-      {
         title: "Login and Sign Up Page",
+        icon: "CodeBracketIcon",
+        active: false,
+        completed: false,
+      },
+      {
+        title: "User Portfolio",
         icon: "CodeBracketIcon",
         active: false,
         completed: false,
       },
     ],
   },
-  "9-Congratulations": {
+  // CERTIFICATE
+  "9-Course Certificate": {
     lessons: [
       {
-        title: "Choose Your Path Forward",
+        title: "Certificate",
         icon: "BookOpenIcon",
         active: false,
         completed: false,
