@@ -33,7 +33,9 @@ const SignUp = () => {
           {/* AUTHENTICATION FORM HEADER */}
           <div className="w-full text-center">
             <h2 className="font-bold text-[40px] mb-2">Sign Up Now</h2>
-            <p className="mb-8">Sign Up Now to Enroll and Start Learning</p>
+            <p className="mb-8">
+              Ignite Your Learning: Enroll and Begin Your Journey!
+            </p>
           </div>
           {/* AUTHENTICATION FORM */}
           <div className="flex flex-col gap-3 mb-8">
