@@ -1,13 +1,13 @@
-// import {
+// import { UserTOCProps } from "./../Model/model";
+
 export const frontend101TOC = {
-  // COURSE INTRODUCTION
   "1-Course Introduction": {
     lessons: [
       {
         title: "Course Overview",
         icon: "BookOpenIcon",
-        active: true,
-        completed: true,
+        active: false,
+        completed: false,
       },
       {
         title: "Course Structure",
@@ -35,7 +35,6 @@ export const frontend101TOC = {
       },
     ],
   },
-  // MODULE 1
   "2-Introduction to HTML": {
     lessons: [
       {
@@ -164,7 +163,6 @@ export const frontend101TOC = {
       },
     ],
   },
-  // MODULE 2
   "4-Flexbox and Grid": {
     lessons: [
       {
@@ -211,7 +209,6 @@ export const frontend101TOC = {
       },
     ],
   },
-  // MODULE 3
   "5-Getting Into Bootstrap": {
     lessons: [
       {
@@ -232,7 +229,6 @@ export const frontend101TOC = {
         active: false,
         completed: false,
       },
-      ,
       {
         title: "Project: Coming Soon Template 2",
         icon: "PlayCircleIcon",
@@ -241,7 +237,6 @@ export const frontend101TOC = {
       },
     ],
   },
-  // MODULE 4
   "6-Introduction to JavaScript": {
     lessons: [
       {
@@ -312,7 +307,6 @@ export const frontend101TOC = {
       },
     ],
   },
-  // MODULE 5
   "7-Introduction to jQuery": {
     lessons: [
       {
@@ -341,7 +335,6 @@ export const frontend101TOC = {
       },
     ],
   },
-  //MODULE 6
   "8-Final Projects": {
     lessons: [
       {
@@ -376,7 +369,6 @@ export const frontend101TOC = {
       },
     ],
   },
-  // CERTIFICATE
   "9-Course Certificate": {
     lessons: [
       {

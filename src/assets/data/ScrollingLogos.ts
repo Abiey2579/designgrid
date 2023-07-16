@@ -11,18 +11,6 @@ import jQuery from "../languages/jquery.svg";
 import TailwindCSS from "../languages/tailwind-css.svg";
 import Typescript from "../languages/typescript.svg";
 
-const Logos = [
-  Angular,
-  Vue,
-  React,
-  HTML,
-  CSS,
-  Sass,
-  Bootstrap,
-  Javascript,
-  jQuery,
-  TailwindCSS,
-  Typescript,
-];
+const Logos = [HTML, CSS, Bootstrap, Javascript, jQuery];
 
-export const ScrollingLogos = [...Logos, ...Logos];
+export const ScrollingLogos = [...Logos, ...Logos, ...Logos, ...Logos];
