@@ -59,6 +59,7 @@ export const enrollFrontend101 = async (uid: string) => {
     await setDoc(docRef, frontend101TOC, { merge: true });
     return true;
   } catch (error) {
+    throw new Error((error as Error).message);
     return null;
   }
 };

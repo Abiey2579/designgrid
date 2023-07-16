@@ -4,7 +4,7 @@ const Copyright = () => {
   return (
     <div className="bg-dgLightPurple">
       <p className="text-dgDarkPurple text-base font-semibold text-center py-5">
-        Copyright © 2022 All Rights Reserved
+        Copyright © 2023 All Rights Reserved
       </p>
     </div>
   );

@@ -121,61 +121,61 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 
             return (
               <>
-                {/* {isLocked === false && ( */}
-                <React.Fragment key={key}>
-                  <div className="flex items-center justify-between font-semibold text-dgLightPurple text-base my-3 py-1 border-slate-500 border-b">
-                    <span>{key.replace(/[\d-]+/g, "")}</span>
+                {isLocked.locked === false && (
+                  <React.Fragment key={key}>
+                    <div className="flex items-center justify-between font-semibold text-dgLightPurple text-base my-3 py-1 border-slate-500 border-b">
+                      <span>{key.replace(/[\d-]+/g, "")}</span>
 
-                    <h5 className="text-sm flex gap-1 items-center">
-                      {/* TOPIC PROGRESS TRACKER */}
-                      {progress}
-                      {/* TOPIC COMPLETION ICON */}
-                      {isSectionCompleted && (
-                        <CheckBadgeIcon className="w-5 text-dgPurple" />
-                      )}
-                    </h5>
-                  </div>
+                      <h5 className="text-sm flex gap-1 items-center">
+                        {/* TOPIC PROGRESS TRACKER */}
+                        {progress}
+                        {/* TOPIC COMPLETION ICON */}
+                        {isSectionCompleted && (
+                          <CheckBadgeIcon className="w-5 text-dgPurple" />
+                        )}
+                      </h5>
+                    </div>
 
-                  {section.lessons.map((lesson: any) => {
-                    const Icon = IconComponent[lesson.icon];
+                    {section.lessons.map((lesson: any) => {
+                      const Icon = IconComponent[lesson.icon];
 
-                    return (
-                      <span
-                        key={Math.random() * 9999999}
-                        title={lesson.title}
-                        onClick={() => handleLessonClick(lesson, key)}
-                        className={`pl-3 py-3 flex items-center select-none cursor-pointer ${
-                          lesson.active
-                            ? "bg-dgLightPurple_Opacity"
-                            : "hover:bg-dgLightPurple_Opacity"
-                        } rounded mb-1 text-sm block w-full transition-all text-dgLightPurple`}
-                      >
-                        {Icon &&
-                          (spin ===
-                          lesson.title
-                            .replace(/,|:/g, "")
-                            .toLowerCase()
-                            .split(" ")
-                            .join("-") ? (
-                            <Spinner className="w-4 h-4 fill-dgWhite text-dgLightPurple_Opacity mr-2" />
-                          ) : (
-                            <Icon
-                              className={`mr-2 w-4 ${
-                                lesson.completed && !lesson.active
-                                  ? "text-dgPurple"
-                                  : "text-dgLightPurple"
-                              }`}
-                            />
-                          ))}
+                      return (
+                        <span
+                          key={Math.random() * 9999999}
+                          title={lesson.title}
+                          onClick={() => handleLessonClick(lesson, key)}
+                          className={`pl-3 py-3 flex items-center select-none cursor-pointer ${
+                            lesson.active
+                              ? "bg-dgLightPurple_Opacity"
+                              : "hover:bg-dgLightPurple_Opacity"
+                          } rounded mb-1 text-sm block w-full transition-all text-dgLightPurple`}
+                        >
+                          {Icon &&
+                            (spin ===
+                            lesson.title
+                              .replace(/,|:/g, "")
+                              .toLowerCase()
+                              .split(" ")
+                              .join("-") ? (
+                              <Spinner className="w-4 h-4 fill-dgWhite text-dgLightPurple_Opacity mr-2" />
+                            ) : (
+                              <Icon
+                                className={`mr-2 w-4 ${
+                                  lesson.completed && !lesson.active
+                                    ? "text-dgPurple"
+                                    : "text-dgLightPurple"
+                                }`}
+                              />
+                            ))}
 
-                        {lesson.title.length > 30
-                          ? lesson.title.substring(0, 30) + "..."
-                          : lesson.title}
-                      </span>
-                    );
-                  })}
-                </React.Fragment>
-                {/* )} */}
+                          {lesson.title.length > 30
+                            ? lesson.title.substring(0, 30) + "..."
+                            : lesson.title}
+                        </span>
+                      );
+                    })}
+                  </React.Fragment>
+                )}
               </>
             );
           })}

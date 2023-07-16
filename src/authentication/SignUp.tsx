@@ -15,8 +15,8 @@ const SignUp = () => {
     try {
       await account.createOAuth2Session(
         service,
-        `${DOMAIN}${uriPaths.ONBOARDING_1}`,
-        `${DOMAIN}${uriPaths.SIGN_UP}`
+        `${LOCALHOST}${uriPaths.ONBOARDING_1}`,
+        `${LOCALHOST}${uriPaths.SIGN_UP}`
       );
     } catch (error) {
       setErrorToast("An unexpected error occured");

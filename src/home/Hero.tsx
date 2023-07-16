@@ -9,14 +9,14 @@ const Hero = () => {
     <div className="my-20">
       {/* HERO SECTION */}
       <div className="lg:px-24 md:px-10 px-3 text-center lg:mb-16 md:mb-12 mb-10">
-        <h1 className="lg:text-6xl md:text-6xl text-6xl text-dgDarkPurple lg:text-center md:text-center text-left font-black lg:max-w-[700px] md:max-w-full m-auto mb-4">
+        <h1 className="lg:text-6xl md:text-6xl text-6xl text-dgDarkPurple lg:text-center md:text-center text-left font-black lg:max-w-[700px] md:max-w-full m-auto mb-4 leading-relaxed">
           <span className="text-dgPurple">Building</span>
           <span> the future of</span>
           <span className="text-dgPurple"> Aspiring Devs</span>
         </h1>
         <p className="text-dgDarkPurple_Opacity font-normal text-base max-w-[700px] lg:mb-6 md:mb-5 mb-4 m-auto leading-relaxed  lg:text-center md:text-center text-left">
           Embark on a transformative journey towards becoming a skilled frontend
-          developer and unlock your full potential in shaping the future of
+          web developer and unlock your full potential in shaping the future of
           frontend web development.
         </p>
         <div className="max-w-[700px] flex lg:flex-row md:flex-row flex-col lg:gap-5 md:gap-4 gap-3 block m-auto lg:items-center md:items-center items-start justify-center">
@@ -27,11 +27,11 @@ const Hero = () => {
               Get Started
             </span>
           </Link>
-          <Link to={uriPaths.LEARNING_PATH}>
+          <a href={uriPaths.LEARNING_PATH} target="_blank">
             <span className="bg-dgLightPurple px-6 py-3 inline-block font-medium text-dgDarkPurple rounded text-base">
-              Explore Learning Path
+              Join Whatsapp Group
             </span>
-          </Link>
+          </a>
         </div>
       </div>
 

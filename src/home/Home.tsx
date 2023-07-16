@@ -19,7 +19,7 @@ const Home = () => {
       <LikeSchool />
       <LearningSystem />
       <OurValues />
-      <OurTeam />
+      {/* <OurTeam /> */}
       <Footer />
       <Copyright />
     </React.Fragment>
