@@ -9,7 +9,7 @@ const Hero = () => {
     <div className="my-20">
       {/* HERO SECTION */}
       <div className="lg:px-24 md:px-10 px-3 text-center lg:mb-16 md:mb-12 mb-10">
-        <h1 className="lg:text-6xl md:text-6xl text-6xl text-dgDarkPurple lg:text-center md:text-center text-left font-black lg:max-w-[700px] md:max-w-full m-auto mb-4 leading-relaxed">
+        <h1 className="lg:text-7xl md:text-6xl text-6xl text-dgDarkPurple lg:text-center md:text-center text-left font-black lg:max-w-[700px] md:max-w-full leading-none m-auto mb-4">
           <span className="text-dgPurple">Building</span>
           <span> the future of</span>
           <span className="text-dgPurple"> Aspiring Devs</span>
@@ -43,7 +43,7 @@ const Hero = () => {
               key={index}
               src={logo}
               alt={`Logo ${index + 1}`}
-              className="h-16 w-auto mx-6"
+              className="h-16 w-auto mx-6 logos"
             />
           ))}
         </ul>

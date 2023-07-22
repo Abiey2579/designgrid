@@ -12,7 +12,6 @@ import Spinner from "../components/Spinner";
 import ToastWarning from "../components/ToastWarning";
 import { SidebarProps, IconComponentsProps } from "../assets/Model/model";
 import { tocLock } from "../assets/TOC/tocLock";
-import { frontend101TOC } from "../assets/TOC/frontend101TOC";
 
 const Sidebar: React.FC<SidebarProps> = (props) => {
   const [spin, setSpin] = useState<string>("");
@@ -114,67 +113,208 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
           {sortedTOC.map((key) => {
             const section = props.tableOfContent[key];
             const isLocked = tocLock[key];
-            console.log(tocLock[key]);
             const progress = getSectionProgress(section);
             const isSectionCompleted =
               parseInt(progress) === section.lessons.length;
 
             return (
               <>
+                {/* WHERE THE MODULE IS RELEASED OR NOT */}
                 {isLocked.locked === false && (
-                  <React.Fragment key={key}>
-                    <div className="flex items-center justify-between font-semibold text-dgLightPurple text-base my-3 py-1 border-slate-500 border-b">
-                      <span>{key.replace(/[\d-]+/g, "")}</span>
+                  <>
+                    {/* SHOW INCLUDING PREMIUM MODULES */}
+                    {props.userRegistration === true ? (
+                      <React.Fragment key={key}>
+                        <div className="flex items-center justify-between font-semibold text-dgLightPurple text-base my-3 py-1 border-slate-500 border-b">
+                          <span>{key.replace(/[\d-]+/g, "")}</span>
 
-                      <h5 className="text-sm flex gap-1 items-center">
-                        {/* TOPIC PROGRESS TRACKER */}
-                        {progress}
-                        {/* TOPIC COMPLETION ICON */}
-                        {isSectionCompleted && (
-                          <CheckBadgeIcon className="w-5 text-dgPurple" />
-                        )}
-                      </h5>
-                    </div>
+                          <h5 className="text-sm flex gap-1 items-center">
+                            {/* TOPIC PROGRESS TRACKER */}
+                            {progress}
+                            {/* TOPIC COMPLETION ICON */}
+                            {isSectionCompleted && (
+                              <CheckBadgeIcon className="w-5 text-dgPurple" />
+                            )}
+                          </h5>
+                        </div>
 
-                    {section.lessons.map((lesson: any) => {
-                      const Icon = IconComponent[lesson.icon];
+                        {section.lessons.map((lesson: any) => {
+                          const Icon = IconComponent[lesson.icon];
 
-                      return (
-                        <span
-                          key={Math.random() * 9999999}
-                          title={lesson.title}
-                          onClick={() => handleLessonClick(lesson, key)}
-                          className={`pl-3 py-3 flex items-center select-none cursor-pointer ${
-                            lesson.active
-                              ? "bg-dgLightPurple_Opacity"
-                              : "hover:bg-dgLightPurple_Opacity"
-                          } rounded mb-1 text-sm block w-full transition-all text-dgLightPurple`}
-                        >
-                          {Icon &&
-                            (spin ===
-                            lesson.title
-                              .replace(/,|:/g, "")
-                              .toLowerCase()
-                              .split(" ")
-                              .join("-") ? (
-                              <Spinner className="w-4 h-4 fill-dgWhite text-dgLightPurple_Opacity mr-2" />
+                          return (
+                            <span
+                              key={Math.random() * 9999999}
+                              title={lesson.title}
+                              onClick={() => handleLessonClick(lesson, key)}
+                              className={`pl-3 py-3 flex items-center select-none cursor-pointer ${
+                                lesson.active
+                                  ? "bg-dgLightPurple_Opacity"
+                                  : "hover:bg-dgLightPurple_Opacity"
+                              } rounded mb-1 text-sm block w-full transition-all text-dgLightPurple`}
+                            >
+                              {Icon &&
+                                (spin ===
+                                lesson.title
+                                  .replace(/,|:/g, "")
+                                  .toLowerCase()
+                                  .split(" ")
+                                  .join("-") ? (
+                                  <Spinner className="w-4 h-4 fill-dgWhite text-dgLightPurple_Opacity mr-2" />
+                                ) : (
+                                  <Icon
+                                    className={`mr-2 w-4 ${
+                                      lesson.completed && !lesson.active
+                                        ? "text-dgPurple"
+                                        : "text-dgLightPurple"
+                                    }`}
+                                  />
+                                ))}
+
+                              {lesson.title.length > 30
+                                ? lesson.title.substring(0, 30) + "..."
+                                : lesson.title}
+                            </span>
+                          );
+                        })}
+                      </React.Fragment>
+                    ) : (
+                      // SHOW ONLY FREE MODULE
+
+                      <>
+                        {props.isPartial === true ? (
+                          <>
+                            {key === "1-Course Introduction" ||
+                            key === "2-Introduction to HTML" ||
+                            key === "3-Introduction to CSS" ||
+                            key === "4-Getting Into Bootstrap" ||
+                            key === "5-Introduction to JavaScript" ? (
+                              <React.Fragment key={key}>
+                                <div className="flex items-center justify-between font-semibold text-dgLightPurple text-base my-3 py-1 border-slate-500 border-b">
+                                  <span>{key.replace(/[\d-]+/g, "")}</span>
+
+                                  <h5 className="text-sm flex gap-1 items-center">
+                                    {/* TOPIC PROGRESS TRACKER */}
+                                    {progress}
+                                    {/* TOPIC COMPLETION ICON */}
+                                    {isSectionCompleted && (
+                                      <CheckBadgeIcon className="w-5 text-dgPurple" />
+                                    )}
+                                  </h5>
+                                </div>
+
+                                {section.lessons.map((lesson: any) => {
+                                  const Icon = IconComponent[lesson.icon];
+
+                                  return (
+                                    <span
+                                      key={Math.random() * 9999999}
+                                      title={lesson.title}
+                                      onClick={() =>
+                                        handleLessonClick(lesson, key)
+                                      }
+                                      className={`pl-3 py-3 flex items-center select-none cursor-pointer ${
+                                        lesson.active
+                                          ? "bg-dgLightPurple_Opacity"
+                                          : "hover:bg-dgLightPurple_Opacity"
+                                      } rounded mb-1 text-sm block w-full transition-all text-dgLightPurple`}
+                                    >
+                                      {Icon &&
+                                        (spin ===
+                                        lesson.title
+                                          .replace(/,|:/g, "")
+                                          .toLowerCase()
+                                          .split(" ")
+                                          .join("-") ? (
+                                          <Spinner className="w-4 h-4 fill-dgWhite text-dgLightPurple_Opacity mr-2" />
+                                        ) : (
+                                          <Icon
+                                            className={`mr-2 w-4 ${
+                                              lesson.completed && !lesson.active
+                                                ? "text-dgPurple"
+                                                : "text-dgLightPurple"
+                                            }`}
+                                          />
+                                        ))}
+
+                                      {lesson.title.length > 30
+                                        ? lesson.title.substring(0, 30) + "..."
+                                        : lesson.title}
+                                    </span>
+                                  );
+                                })}
+                              </React.Fragment>
                             ) : (
-                              <Icon
-                                className={`mr-2 w-4 ${
-                                  lesson.completed && !lesson.active
-                                    ? "text-dgPurple"
-                                    : "text-dgLightPurple"
-                                }`}
-                              />
-                            ))}
+                              ""
+                            )}
+                          </>
+                        ) : (
+                          <>
+                            {key === "1-Course Introduction" ||
+                            key === "2-Introduction to HTML" ||
+                            key === "3-Introduction to CSS" ? (
+                              <React.Fragment key={key}>
+                                <div className="flex items-center justify-between font-semibold text-dgLightPurple text-base my-3 py-1 border-slate-500 border-b">
+                                  <span>{key.replace(/[\d-]+/g, "")}</span>
 
-                          {lesson.title.length > 30
-                            ? lesson.title.substring(0, 30) + "..."
-                            : lesson.title}
-                        </span>
-                      );
-                    })}
-                  </React.Fragment>
+                                  <h5 className="text-sm flex gap-1 items-center">
+                                    {/* TOPIC PROGRESS TRACKER */}
+                                    {progress}
+                                    {/* TOPIC COMPLETION ICON */}
+                                    {isSectionCompleted && (
+                                      <CheckBadgeIcon className="w-5 text-dgPurple" />
+                                    )}
+                                  </h5>
+                                </div>
+
+                                {section.lessons.map((lesson: any) => {
+                                  const Icon = IconComponent[lesson.icon];
+
+                                  return (
+                                    <span
+                                      key={Math.random() * 9999999}
+                                      title={lesson.title}
+                                      onClick={() =>
+                                        handleLessonClick(lesson, key)
+                                      }
+                                      className={`pl-3 py-3 flex items-center select-none cursor-pointer ${
+                                        lesson.active
+                                          ? "bg-dgLightPurple_Opacity"
+                                          : "hover:bg-dgLightPurple_Opacity"
+                                      } rounded mb-1 text-sm block w-full transition-all text-dgLightPurple`}
+                                    >
+                                      {Icon &&
+                                        (spin ===
+                                        lesson.title
+                                          .replace(/,|:/g, "")
+                                          .toLowerCase()
+                                          .split(" ")
+                                          .join("-") ? (
+                                          <Spinner className="w-4 h-4 fill-dgWhite text-dgLightPurple_Opacity mr-2" />
+                                        ) : (
+                                          <Icon
+                                            className={`mr-2 w-4 ${
+                                              lesson.completed && !lesson.active
+                                                ? "text-dgPurple"
+                                                : "text-dgLightPurple"
+                                            }`}
+                                          />
+                                        ))}
+
+                                      {lesson.title.length > 30
+                                        ? lesson.title.substring(0, 30) + "..."
+                                        : lesson.title}
+                                    </span>
+                                  );
+                                })}
+                              </React.Fragment>
+                            ) : (
+                              ""
+                            )}
+                          </>
+                        )}
+                      </>
+                    )}
+                  </>
                 )}
               </>
             );

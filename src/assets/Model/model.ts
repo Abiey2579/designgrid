@@ -64,6 +64,8 @@ export interface SidebarProps {
   handleSidebarMenu: Function;
   tableOfContent: UserTOCProps;
   handleFetchLesson: Function;
+  userRegistration: boolean;
+  isPartial: boolean;
 }
 
 export interface IconComponentsProps {
@@ -96,7 +98,8 @@ export interface UserProfileData {
   country?: string;
   dob?: string;
   phone_number?: string;
-  paid?: string;
+  paid?: boolean;
+  partial?: boolean;
 }
 
 export interface PaymentReference {

@@ -62,7 +62,7 @@ export const frontend101TOC = {
         completed: false,
       },
       {
-        title: "Lists: Ordered, Unordered and Detailed",
+        title: "Lists: Ordered and Unordered List",
         icon: "PlayCircleIcon",
         active: false,
         completed: false,
@@ -98,7 +98,7 @@ export const frontend101TOC = {
         completed: false,
       },
       {
-        title: "Project: Landing Page",
+        title: "Project: HTML Page",
         icon: "CodeBracketIcon",
         active: false,
         completed: false,
@@ -150,66 +150,20 @@ export const frontend101TOC = {
         completed: false,
       },
       {
-        title: "Box Model",
+        title: "Flexbox and Grid",
         icon: "PlayCircleIcon",
         active: false,
         completed: false,
       },
       {
-        title: "Project: Coming Soon Template 1",
+        title: "Project: Coffee Shop Website 1",
         icon: "CodeBracketIcon",
         active: false,
         completed: false,
       },
     ],
   },
-  "4-Flexbox and Grid": {
-    lessons: [
-      {
-        title: "Flexbox Overview",
-        icon: "PlayCircleIcon",
-        active: false,
-        completed: false,
-      },
-      {
-        title: "Main and Cross Axis",
-        icon: "PlayCircleIcon",
-        active: false,
-        completed: false,
-      },
-      {
-        title: "Flexbox properties",
-        icon: "PlayCircleIcon",
-        active: false,
-        completed: false,
-      },
-      {
-        title: "Grid in action",
-        icon: "PlayCircleIcon",
-        active: false,
-        completed: false,
-      },
-      {
-        title: "Main and Cross Axis",
-        icon: "PlayCircleIcon",
-        active: false,
-        completed: false,
-      },
-      {
-        title: "Grid properties",
-        icon: "PlayCircleIcon",
-        active: false,
-        completed: false,
-      },
-      {
-        title: "Project: E-commerce page",
-        icon: "CodeBracketIcon",
-        active: false,
-        completed: false,
-      },
-    ],
-  },
-  "5-Getting Into Bootstrap": {
+  "4-Getting Into Bootstrap": {
     lessons: [
       {
         title: "Setting Up Bootstrap",
@@ -230,21 +184,15 @@ export const frontend101TOC = {
         completed: false,
       },
       {
-        title: "Project: Coming Soon Template 2",
+        title: "Project: Coffee Shop Website 2",
         icon: "PlayCircleIcon",
         active: false,
         completed: false,
       },
     ],
   },
-  "6-Introduction to JavaScript": {
+  "5-Introduction to JavaScript": {
     lessons: [
-      {
-        title: "Overview: Basic Concepts",
-        icon: "PlayCircleIcon",
-        active: false,
-        completed: false,
-      },
       {
         title: "Variables and Data Types",
         icon: "PlayCircleIcon",
@@ -270,24 +218,6 @@ export const frontend101TOC = {
         completed: false,
       },
       {
-        title: "Types of Errors in JS",
-        icon: "PlayCircleIcon",
-        active: false,
-        completed: false,
-      },
-      {
-        title: "Arrays",
-        icon: "PlayCircleIcon",
-        active: false,
-        completed: false,
-      },
-      {
-        title: "Objects",
-        icon: "PlayCircleIcon",
-        active: false,
-        completed: false,
-      },
-      {
         title: "Functions",
         icon: "PlayCircleIcon",
         active: false,
@@ -305,9 +235,15 @@ export const frontend101TOC = {
         active: false,
         completed: false,
       },
+      {
+        title: "Project: Login and Sign Up Page",
+        icon: "PlayCircleIcon",
+        active: false,
+        completed: false,
+      },
     ],
   },
-  "7-Introduction to jQuery": {
+  "6-Introduction to jQuery": {
     lessons: [
       {
         title: "Setting Up jQuery",
@@ -328,14 +264,14 @@ export const frontend101TOC = {
         completed: false,
       },
       {
-        title: "Project: Restaurant Landing Page",
+        title: "Project: Todo List App",
         icon: "PlayCircleIcon",
         active: false,
         completed: false,
       },
     ],
   },
-  "8-Final Projects": {
+  "7-Final Projects": {
     lessons: [
       {
         title: "Calculator",
@@ -355,21 +291,9 @@ export const frontend101TOC = {
         active: false,
         completed: false,
       },
-      {
-        title: "Login and Sign Up Page",
-        icon: "CodeBracketIcon",
-        active: false,
-        completed: false,
-      },
-      {
-        title: "User Portfolio",
-        icon: "CodeBracketIcon",
-        active: false,
-        completed: false,
-      },
     ],
   },
-  "9-Course Certificate": {
+  "8-Course Certificate": {
     lessons: [
       {
         title: "Certificate",

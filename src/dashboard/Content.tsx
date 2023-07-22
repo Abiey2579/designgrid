@@ -36,8 +36,8 @@ const Content = (props: {
   const config = {
     reference: new Date().getTime().toString(),
     email: props.userData.email,
-    amount: 399900,
-    publicKey: "pk_live_efab49ea5ebdab25e646184ee1a21f24851c0607",
+    amount: 2500 * 100,
+    publicKey: "pk_test_2976e7cbe3bbfd115e690eb0d7c2b5ef4b7ec71c",
   };
 
   const handlePaystackSuccessAction = async (reference: PaymentReference) => {
@@ -88,7 +88,7 @@ const Content = (props: {
                 Update profile
               </span>
             </Link>
-            {props.userProfile.paid === "true" ? (
+            {props.userProfile.paid === true ? (
               <p
                 className="text-dgPurple font-bold underline cursor-pointer select-none py-2 "
                 onClick={() => setSuccessToast("Congrats 🎉🎉🎉, you've paid")}

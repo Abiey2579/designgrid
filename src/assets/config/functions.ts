@@ -59,7 +59,6 @@ export const enrollFrontend101 = async (uid: string) => {
     await setDoc(docRef, frontend101TOC, { merge: true });
     return true;
   } catch (error) {
-    throw new Error((error as Error).message);
     return null;
   }
 };
@@ -171,7 +170,7 @@ export const checkIfUserExist = async (uid: string) => {
       return false;
     }
   } catch (error) {
-    return false;
+    return error;
   }
 };
 
@@ -258,7 +257,7 @@ export const updatePaymentStatus = async (uid: string, reference: string) => {
       USER_PROFILE_COLLECTION,
       documentId,
       {
-        paid: "true",
+        paid: true,
         reference: reference,
       }
     );

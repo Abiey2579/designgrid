@@ -14,23 +14,33 @@ import {
   getUserTOC,
 } from "../assets/config/functions";
 import { logout } from "../assets/config/functions";
-import {
-  storage,
-  PROFILE_PICTURE_BUCKET,
-} from "../assets/config/appwrite-auth";
 import ToastWarning from "../components/ToastWarning";
 import { AVATAR } from "../assets/data/constants";
 import DirectionButton from "./DirectionButtons";
 import { UserTOCProps, FetchedUser } from "../assets/Model/model";
 
+import {
+  database,
+  storage,
+  PROFILE_PICTURE_BUCKET,
+  USER_PROFILE_COLLECTION,
+  DATABASE_ID,
+} from "../assets/config/appwrite-auth";
+import { ID, Query } from "appwrite";
+import { UserProfileData } from "../assets/Model/model";
+import { frontend101TOC } from "../assets/TOC/frontend101TOC";
+
 const Frontend = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [userData, setUserData] = useState<FetchedUser>();
-  const [preventView, setPreventView] = useState(true);
+  const [preventView, setPreventView] = useState(false);
   const [profileImage, setProfileImage] = useState("");
   const [profileImageError, setProfileImageError] = useState(false);
-  const [userToc, setUserToc] = useState<UserTOCProps>();
+  const [userToc, setUserToc] = useState<UserTOCProps>(frontend101TOC);
   const [fetchedLesson, setFetchedLesson] = useState("");
+  const [userRegistration, setUserRegistration] = useState<boolean>(false);
+  const [isPartial, setIsPartial] = useState<boolean>(true);
+
   const navigate = useNavigate();
 
   const toggleSidebar = () => {
@@ -41,6 +51,21 @@ const Frontend = () => {
     try {
       await account.getSession("current");
       const user = await account.get();
+
+      const searchResponse = await database.listDocuments(
+        DATABASE_ID,
+        USER_PROFILE_COLLECTION,
+        [Query.equal("uid", user.$id), Query.limit(1)]
+      );
+
+      const data = searchResponse.documents;
+
+      if (data.length > 0) {
+        const userProfileData = data[0] as UserProfileData;
+        setUserRegistration(userProfileData?.paid ?? false);
+        setIsPartial(userProfileData?.partial ?? false);
+      }
+
       setUserData(user);
       setPreventView(false);
     } catch (err) {
@@ -172,7 +197,7 @@ const Frontend = () => {
 
   useEffect(() => {
     window.document.body.style.overflowY = "hidden";
-    fetchData();
+    // fetchData();
   }, []);
 
   return (
@@ -191,11 +216,13 @@ const Frontend = () => {
               handleSidebarMenu={toggleSidebar}
               tableOfContent={userToc}
               handleFetchLesson={fetchLesson}
+              userRegistration={userRegistration}
+              isPartial={isPartial}
             />
           ) : (
             ""
           )}
-          <div className="flex-1 max-h-screen">
+          {/* <div className="flex-1 max-h-screen">
             <Topnav
               handleSidebarMenu={toggleSidebar}
               userData={userData}
@@ -211,7 +238,7 @@ const Frontend = () => {
                 />
               )}
             </div>
-          </div>
+          </div> */}
         </div>
       ) : (
         <div className="w-screen h-screen flex justify-center items-center">
