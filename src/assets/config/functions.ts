@@ -237,7 +237,10 @@ export const changeActiveLesson = async (uid: string, lessonId: string) => {
   }
 };
 
-export const updatePaymentStatus = async (uid: string, reference: string) => {
+export const updateFullPaymentStatus = async (
+  uid: string,
+  reference: string
+) => {
   try {
     // Find the document using the unique attribute
     const searchResponse = await database.listDocuments(
@@ -258,6 +261,40 @@ export const updatePaymentStatus = async (uid: string, reference: string) => {
       documentId,
       {
         paid: true,
+        reference: reference,
+      }
+    );
+
+    return promise;
+  } catch (error) {
+    throw new Error((error as Error).message);
+  }
+};
+
+export const updatePartialPaymentStatus = async (
+  uid: string,
+  reference: string
+) => {
+  try {
+    // Find the document using the unique attribute
+    const searchResponse = await database.listDocuments(
+      DATABASE_ID,
+      USER_PROFILE_COLLECTION,
+      [Query.equal("uid", uid)]
+    );
+
+    if (searchResponse.documents.length === 0) {
+      throw new Error("No document matched this user id");
+    }
+
+    const documentId = searchResponse.documents[0].$id;
+
+    const promise = await database.updateDocument(
+      DATABASE_ID,
+      USER_PROFILE_COLLECTION,
+      documentId,
+      {
+        partial: true,
         reference: reference,
       }
     );

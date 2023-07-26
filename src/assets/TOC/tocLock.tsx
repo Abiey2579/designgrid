@@ -10,29 +10,29 @@ export const tocLock: tocLockProps = {
   },
   // MODULE 1
   "2-Introduction to HTML": {
-    locked: false,
+    locked: true,
   },
   "3-Introduction to CSS": {
-    locked: false,
+    locked: true,
   },
   // MODULE 2
   "4-Getting Into Bootstrap": {
-    locked: false,
+    locked: true,
   },
   // MODULE 3
   "5-Introduction to JavaScript": {
-    locked: false,
+    locked: true,
   },
   // MODULE 4
   "6-Introduction to jQuery": {
-    locked: false,
+    locked: true,
   },
   //MODULE 5
   "7-Final Projects": {
-    locked: false,
+    locked: true,
   },
   // CERTIFICATE
   "8-Course Certificate": {
-    locked: false,
+    locked: true,
   },
 };

@@ -14,11 +14,6 @@ import {
   getUserTOC,
 } from "../assets/config/functions";
 import { logout } from "../assets/config/functions";
-import ToastWarning from "../components/ToastWarning";
-import { AVATAR } from "../assets/data/constants";
-import DirectionButton from "./DirectionButtons";
-import { UserTOCProps, FetchedUser } from "../assets/Model/model";
-
 import {
   database,
   storage,
@@ -26,9 +21,13 @@ import {
   USER_PROFILE_COLLECTION,
   DATABASE_ID,
 } from "../assets/config/appwrite-auth";
-import { ID, Query } from "appwrite";
+import { Query } from "appwrite";
 import { UserProfileData } from "../assets/Model/model";
 import { frontend101TOC } from "../assets/TOC/frontend101TOC";
+import ToastWarning from "../components/ToastWarning";
+import { AVATAR } from "../assets/data/constants";
+import DirectionButton from "./DirectionButtons";
+import { UserTOCProps, FetchedUser } from "../assets/Model/model";
 
 const Frontend = () => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -36,10 +35,10 @@ const Frontend = () => {
   const [preventView, setPreventView] = useState(false);
   const [profileImage, setProfileImage] = useState("");
   const [profileImageError, setProfileImageError] = useState(false);
-  const [userToc, setUserToc] = useState<UserTOCProps>(frontend101TOC);
+  const [userToc, setUserToc] = useState<UserTOCProps>();
   const [fetchedLesson, setFetchedLesson] = useState("");
   const [userRegistration, setUserRegistration] = useState<boolean>(false);
-  const [isPartial, setIsPartial] = useState<boolean>(true);
+  const [isPartial, setIsPartial] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -174,7 +173,7 @@ const Frontend = () => {
   const fetchLesson = async (topic: string, lesson: string) => {
     try {
       if (topic === "" && lesson === "") {
-        topic = "welcome";
+        topic = "course-introduction";
         lesson = "course-overview";
       }
       const uri = `https://raw.githubusercontent.com/Abiey2579/designgriddata/master/learnpath/frontend101/${topic}/${lesson}.md`;
@@ -183,6 +182,7 @@ const Frontend = () => {
 
       setFetchedLesson(markdownText);
     } catch (err) {
+      await fetchLesson("", "");
       console.log(err);
     }
   };
@@ -197,7 +197,7 @@ const Frontend = () => {
 
   useEffect(() => {
     window.document.body.style.overflowY = "hidden";
-    // fetchData();
+    fetchData();
   }, []);
 
   return (
@@ -214,7 +214,7 @@ const Frontend = () => {
             <Sidebar
               sidebarControl={showSidebar}
               handleSidebarMenu={toggleSidebar}
-              tableOfContent={userToc}
+              tableOfContent={frontend101TOC}
               handleFetchLesson={fetchLesson}
               userRegistration={userRegistration}
               isPartial={isPartial}

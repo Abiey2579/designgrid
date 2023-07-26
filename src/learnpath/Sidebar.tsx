@@ -179,7 +179,6 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                       </React.Fragment>
                     ) : (
                       // SHOW ONLY FREE MODULE
-
                       <>
                         {props.isPartial === true ? (
                           <>
@@ -268,7 +267,6 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 
                                 {section.lessons.map((lesson: any) => {
                                   const Icon = IconComponent[lesson.icon];
-
                                   return (
                                     <span
                                       key={Math.random() * 9999999}
@@ -299,7 +297,6 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                                             }`}
                                           />
                                         ))}
-
                                       {lesson.title.length > 30
                                         ? lesson.title.substring(0, 30) + "..."
                                         : lesson.title}

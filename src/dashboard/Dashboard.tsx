@@ -25,7 +25,7 @@ import {
 } from "../assets/Model/model";
 
 const Dashboard = () => {
-  const [preventView, setPreventView] = useState<boolean>(true);
+  const [preventView, setPreventView] = useState<boolean>(false);
   const navigate = useNavigate();
   const [userData, setUserData] = useState<FetchedUser>();
   const [profileImage, setProfileImage] = useState<string>("");

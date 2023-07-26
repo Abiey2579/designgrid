@@ -1,25 +1,23 @@
-// import { UserTOCProps } from "./../Model/model";
-
 export const frontend101TOC = {
   "1-Course Introduction": {
     lessons: [
       {
         title: "Course Overview",
         icon: "BookOpenIcon",
-        active: false,
-        completed: false,
+        active: true,
+        completed: true,
       },
       {
         title: "Course Structure",
         icon: "BookOpenIcon",
         active: false,
-        completed: false,
+        completed: true,
       },
       {
         title: "How to Navigate the course",
         icon: "BookOpenIcon",
         active: false,
-        completed: false,
+        completed: true,
       },
       {
         title: "Exuding Programmer Mindset",
@@ -28,7 +26,7 @@ export const frontend101TOC = {
         completed: false,
       },
       {
-        title: "Requirements",
+        title: "Course Requirements",
         icon: "BookOpenIcon",
         active: false,
         completed: false,
@@ -98,7 +96,7 @@ export const frontend101TOC = {
         completed: false,
       },
       {
-        title: "Project: HTML Page",
+        title: "Project: HTML",
         icon: "CodeBracketIcon",
         active: false,
         completed: false,
@@ -156,7 +154,7 @@ export const frontend101TOC = {
         completed: false,
       },
       {
-        title: "Project: Coffee Shop Website 1",
+        title: "Projects: HTML and CSS",
         icon: "CodeBracketIcon",
         active: false,
         completed: false,
@@ -178,13 +176,13 @@ export const frontend101TOC = {
         completed: false,
       },
       {
-        title: "Flexbox and Grid",
+        title: "Flexbox In Bootstrap",
         icon: "PlayCircleIcon",
         active: false,
         completed: false,
       },
       {
-        title: "Project: Coffee Shop Website 2",
+        title: "Project: Coffee Shop Website",
         icon: "PlayCircleIcon",
         active: false,
         completed: false,

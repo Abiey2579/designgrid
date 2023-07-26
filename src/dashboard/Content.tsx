@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 import * as uriPaths from "../assets/data/uriPaths";
 import { UserTOCProps, PaymentReference } from "../assets/Model/model";
 import { PaystackButton } from "react-paystack";
-import { updatePaymentStatus } from "../assets/config/functions";
+import {
+  updateFullPaymentStatus,
+  updatePartialPaymentStatus,
+} from "../assets/config/functions";
 import { FetchedUser, UserProfileData } from "../assets/Model/model";
 import ToastWarning from "../components/ToastWarning";
 import ToastSuccess from "../components/ToastSuccess";
@@ -33,17 +36,35 @@ const Content = (props: {
     return aNum - bNum;
   });
 
-  const config = {
+  const fullPaymentConfig = {
     reference: new Date().getTime().toString(),
     email: props.userData.email,
     amount: 2500 * 100,
     publicKey: "pk_test_2976e7cbe3bbfd115e690eb0d7c2b5ef4b7ec71c",
   };
 
+  const partialPaymentConfig = {
+    reference: new Date().getTime().toString(),
+    email: props.userData.email,
+    amount: props.userProfile.partial === true ? 1000 * 100 : 1500 * 100,
+    publicKey: "pk_test_2976e7cbe3bbfd115e690eb0d7c2b5ef4b7ec71c",
+  };
+
   const handlePaystackSuccessAction = async (reference: PaymentReference) => {
     try {
-      await updatePaymentStatus(props.userData.$id, reference.reference);
+      await updateFullPaymentStatus(props.userData.$id, reference.reference);
       setSuccessToast("Congrats 🎉🎉🎉, you've paid");
+
+      window.location.reload();
+    } catch (error) {
+      setErrorToast((error as Error).message);
+    }
+  };
+
+  const handlePartialSuccessAction = async (reference: PaymentReference) => {
+    try {
+      await updatePartialPaymentStatus(props.userData.$id, reference.reference);
+      setSuccessToast("Congrats 🎉🎉🎉, you've made partial payment");
 
       window.location.reload();
     } catch (error) {
@@ -55,11 +76,27 @@ const Content = (props: {
     console.log("closed");
   };
 
-  const componentProps = {
-    ...config,
-    text: "Pay Now",
+  const fullPaymentBtnProps = {
+    ...fullPaymentConfig,
+    text: "Full Payment",
     onSuccess: (reference: PaymentReference) =>
       handlePaystackSuccessAction(reference),
+    onClose: handlePaystackCloseAction,
+  };
+
+  const partialPaymentBtnProps = {
+    ...partialPaymentConfig,
+    text:
+      props.userProfile.partial === true
+        ? "Complete Your Payment"
+        : "Half Payment",
+    onSuccess: (reference: PaymentReference) => {
+      if (props.userProfile.partial === true) {
+        handlePaystackSuccessAction(reference);
+      } else {
+        handlePartialSuccessAction(reference);
+      }
+    },
     onClose: handlePaystackCloseAction,
   };
 
@@ -96,10 +133,25 @@ const Content = (props: {
                 🎉 You've Paid
               </p>
             ) : (
-              <PaystackButton
-                className="text-dgPurple font-bold underline py-2"
-                {...componentProps}
-              />
+              <>
+                {props.userProfile.partial === true ? (
+                  <PaystackButton
+                    className="text-dgPurple font-bold underline py-2"
+                    {...partialPaymentBtnProps}
+                  />
+                ) : (
+                  <>
+                    <PaystackButton
+                      className="text-dgPurple font-bold underline py-2"
+                      {...fullPaymentBtnProps}
+                    />
+                    <PaystackButton
+                      className="text-dgPurple font-bold underline py-2"
+                      {...partialPaymentBtnProps}
+                    />
+                  </>
+                )}
+              </>
             )}
           </div>
         </div>
