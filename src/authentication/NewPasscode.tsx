@@ -1,12 +1,9 @@
 import { Link } from "react-router-dom";
 import * as uriPaths from "../assets/data/uriPaths";
 
-import AuthenticationNavbar from "./components/Navbar";
-
 const NewPasscode = () => {
   return (
     <>
-      <AuthenticationNavbar />
       <div className="w-screen lg:h-screen md:h-full flex justify-center lg:items-center md:items-center lg:mt-0 md:mt-0 mt-[25%]">
         <div className="w-[400px]">
           {/* AUTHENTICATION FORM HEADER */}

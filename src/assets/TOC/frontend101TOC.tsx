@@ -96,7 +96,7 @@ export const frontend101TOC = {
         completed: false,
       },
       {
-        title: "Project: HTML",
+        title: "Project: HTML Page",
         icon: "CodeBracketIcon",
         active: false,
         completed: false,
