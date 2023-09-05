@@ -158,7 +158,7 @@ const Content = (props: {
         <h1 className="font-bold text-dgDarkPurple text-2xl mb-5">
           Web Development 101
         </h1>
-        <div className="grid lg:grid-cols-2 md:grid-cols-1 grid-cols-1 gap-5">
+        <div className="grid lg:grid-cols-2 md:grid-cols-1 grid-cols-1 gap-5 mb-5">
           {sortedTOC.map((topic) => {
             const section = props.tableOfContent[topic];
             const progress = calculateProgress(section.lessons);
@@ -177,6 +177,12 @@ const Content = (props: {
             );
           })}
         </div>
+        <Link
+          to={uriPaths.CERTIFICATE}
+          className="bg-dgPurple rounded border-0 outline-0 px-4 py-2 text-base font-medium text-dgLightPurple"
+        >
+          View Certificate
+        </Link>
       </div>
     </>
   );

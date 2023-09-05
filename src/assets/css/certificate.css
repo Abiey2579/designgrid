@@ -1,0 +1,28 @@
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+  src: url("./memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0B4gaVc.ttf")
+    format("truetype");
+}
+/*
+@font-face {
+  font-family: "Pinyon Script";
+  font-style: normal;
+  font-weight: 400;
+   src: url(https://fonts.gstatic.com/s/pinyonscript/v18/6xKpdSJbL9-e9LuoeQiDRQR8WOXaPw.ttf) format('truetype');
+}
+@font-face {
+  font-family: "Rochester";
+  font-style: normal;
+  font-weight: 400;
+   src: url(https://fonts.gstatic.com/s/rochester/v18/6ae-4KCqVa4Zy6Fif-UC2FHS.ttf) format('truetype');
+} */
+.cursive {
+  /* font-family: "Pinyon Script", cursive; */
+  font-family: "The Nautigal" !important;
+}
+.sans {
+  font-family: "Open Sans" !important;
+}

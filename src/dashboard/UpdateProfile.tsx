@@ -140,15 +140,12 @@ const UpdateProfile = () => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const selectedFile = event.target.files?.[0];
-
     if (selectedFile) {
       setSaveProfilePictureSpinner(true);
       const reader = new FileReader();
-
       reader.onload = async () => {
         setImagePreview(reader.result as string);
       };
-
       reader.readAsDataURL(selectedFile);
 
       // Check if the file already exists

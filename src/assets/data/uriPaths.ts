@@ -8,6 +8,7 @@ export const COMMUNITY_BLOG_POST = "/community/blog/";
 // DASHBOARD
 export const UPDATE_PROFILE = "/dashboard/profile/update";
 export const DASHBOARD = "/dashboard";
+export const CERTIFICATE = "/dashboard/certificate";
 
 // HOME
 export const ABOUT = "/about";

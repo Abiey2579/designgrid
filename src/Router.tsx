@@ -17,6 +17,7 @@ import * as uriPaths from "./assets/data/uriPaths";
 import AboutUs from "./home/about-us/AboutUs";
 import ForgotPasscode from "./authentication/ForgotPasscode";
 import NewPasscode from "./authentication/NewPasscode";
+import Certificate from "./dashboard/Certificate";
 
 const router = createBrowserRouter([
   {
@@ -83,6 +84,10 @@ const router = createBrowserRouter([
   {
     path: uriPaths.ABOUT,
     element: <AboutUs />,
+  },
+  {
+    path: uriPaths.CERTIFICATE,
+    element: <Certificate />,
   },
 ]);
 
